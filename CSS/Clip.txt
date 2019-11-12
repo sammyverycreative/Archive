@@ -1,0 +1,52 @@
+=CSS (e.g.)
+--deprecated--
+/*.element {
+  clip: rect(10px, 20px, 30px, 40px);
+}*/
+
+.element {
+  clip-path: rect(10px, 20px, 30px, 40px);
+
+  /*clip-path: inset(10px 20px 30px 40px);*/
+  /* Also can take single values to make all sides the same, or 2 values (vert/horz), or 3 values (top/horz/bottom). */
+}
+
+.clip-circle {
+  clip-path: circle(60px at center);
+  /* OLD VALUE example: circle(245px, 140px, 50px); */
+  /* Yep, even the new clip-path has deprecated stuff. */
+}
+.clip-ellipse {
+  clip-path: ellipse(60px 40px at 75px 30px);
+  /* OLD VALUE example: ellipse(245px, 80px, 75px, 30px); */
+}
+.clip-polygon {
+  clip-path: polygon(5% 5%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%);
+  /* Note that percentages work as well as px */
+}
+
+.clip-examples {
+  clip-path: rectangle(x, y, width, height, rounded-x, rounded-y)
+          
+  clip-path: inset-rectangle(from top, from right, from bottom, from left, rounded-x, rounded-y)
+  /* Looks like this is what rect() used to be like with clip */
+  /* Will replace inset(), I suppose */
+
+  clip-path: polygon(a, bunch, of, points)
+  clip-path: circle(radius at x, y)
+  clip-path: ellipse(radius-x, radius-y at x, y)
+}
+
+img {
+  width: 150px;
+  -webkit-mask-image: -webkit-gradient(
+    linear, left top, right bottom, 
+    color-stop(0.00,  rgba(0,0,0,1)),
+    color-stop(0.35,  rgba(0,0,0,1)),
+    color-stop(0.50,  rgba(0,0,0,0)),
+    color-stop(0.65,  rgba(0,0,0,0)),
+    color-stop(1.00,  rgba(0,0,0,0)));
+}
+
+=SOURCE
+https://www.css-tricks.com/clipping-masking-css

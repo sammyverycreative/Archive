@@ -1,0 +1,16 @@
+=HTML
+<a href="#" class="fancybox-close fancybox-close-small"></a>
+
+=CSS
+.fancybox-close,
+.fancybox-close-small {
+    display: block !important;
+}
+.fancybox-close-small:hover {
+    background: transparent !important;
+}
+
+=JS
+$('a.fancybox-close').click(function(){
+	$(this).fancybox.close();
+});

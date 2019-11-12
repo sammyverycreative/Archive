@@ -1,0 +1,7 @@
+if (localStorage.getItem('popState') != 'shown') {
+        $('.popup').delay(2000).fadeIn();
+        localStorage.setItem('popState','shown')
+}
+
+==
+Source: http://diveintohtml5.info/storage.html

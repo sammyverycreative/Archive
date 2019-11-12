@@ -1,0 +1,5 @@
+function change_up($fields) { 
+    $fields['comment_notes_before'] = '<p class="comment-notes">YOUR TEXT HERE</p>'; 
+    return $fields; 
+}
+add_filter('comment_form_defaults','change_up');

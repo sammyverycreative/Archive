@@ -1,0 +1,3 @@
+jQuery(document).ready(function($){
+	$('#number').change(function(){$(this).parents('form').submit();});
+});

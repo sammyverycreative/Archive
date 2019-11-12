@@ -1,0 +1,14 @@
+jQuery(document).ready(function($) {
+	// AOS
+	AOS.init({
+        disable: function() {
+            var maxWidth = 768;
+            return window.innerWidth < maxWidth;
+        }
+    });
+});
+
+$(window).on('load', function() {
+	// AOS
+	AOS.refresh();
+});

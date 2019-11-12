@@ -1,0 +1,1 @@
+<?php $website = esc_url(site_url()); header("Location: ".$website); die(); ?>

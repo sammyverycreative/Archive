@@ -1,0 +1,162 @@
+=CHECKBOX
+.wpcf7-radio .wpcf7-list-item-label {
+    color: #ffc400;
+}
+.wpcf7-list-item-label {
+    color: #c8c8c8;
+    width: auto;
+    padding: 0;
+    text-align: initial;
+    font-size: inherit;
+    text-transform: none;
+    display: initial;
+    float: none;
+    line-height: normal;
+    position: relative;
+    cursor: pointer;
+    padding: 0 10px;
+    padding-left: 25px;
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: normal;
+}
+.acceptance .wpcf7-list-item-label:before {
+	content: '';
+    margin-right: 9px;
+    display: inline-block;
+    vertical-align: text-top;
+    width: 12px;
+    height: 12px;
+    border: 1px solid #ff9509;
+    top: 3px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    position: absolute;
+    left: 0px;
+}
+.styled-checkbox:checked + .wpcf7-list-item-label:before {
+    color: #ff9509;
+}
+.acceptance .styled-checkbox:checked + .wpcf7-list-item-label:before {
+    content: '';
+    position: absolute;
+    left: 1px;
+    top: 8px;
+    background: #ff9509;
+    width: 2px;
+    height: 2px;
+    box-shadow: 2px 0 0 #ff9509, 4px 0 0 #ff9509, 4px -2px 0 #ff9509, 4px -4px 0 #ff9509, 4px -6px 0 #ff9509, 4px -8px 0 #ff9509;
+    transform: rotate(45deg);
+}
+.acceptance .styled-checkbox:checked + .wpcf7-list-item-label:after {
+    content: '';
+    margin-right: 9px;
+    display: inline-block;
+    vertical-align: text-top;
+    width: 12px;
+    height: 12px;
+    border: 1px solid #ff9509;
+    top: 3px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    position: absolute;
+    left: 0px;
+}
+.newsletter input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+}
+.newsletter input[type="checkbox"]:checked + .wpcf7-list-item-label:before {
+    content: '';
+    position: absolute;
+    left: 1px;
+    top: 8px;
+    background: #ff9509;
+    width: 2px;
+    height: 2px;
+    box-shadow: 2px 0 0 #ff9509, 4px 0 0 #ff9509, 4px -2px 0 #ff9509, 4px -4px 0 #ff9509, 4px -6px 0 #ff9509, 4px -8px 0 #ff9509;
+    transform: rotate(45deg);
+}
+.newsletter input[type="checkbox"] + .wpcf7-list-item-label:after {
+    content: '';
+    margin-right: 9px;
+    display: inline-block;
+    vertical-align: text-top;
+    width: 12px;
+    height: 12px;
+    border: 1px solid #ff9509;
+    top: 3px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    position: absolute;
+    left: 0px;
+}
+
+=RADIO
+span.wpcf7-list-item {
+    margin: 0 !important;
+}
+span.wpcf7-list-item-label {
+    /*margin: 0 1em 0 0 !important;*/
+    margin: 0 20px 5px 0 !important;
+}
+.radios-wrapper input[type="radio"] {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+.radios-wrapper .wpcf7-list-item .wpcf7-list-item-label:before {
+    content: "";
+    display: inline-block;
+    width: 17px;
+    height: 15px;
+    position: absolute;
+    left: 0px;
+    top: 2px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    vertical-align: -3px;
+    background-image: url(../images/radio-bg.svg);
+    background-size: 100% auto;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    z-index: 1;
+}
+.radios-wrapper .wpcf7-list-item .wpcf7-list-item-label:after {
+    content: "";
+    display: inline-block;
+    width: 17px;
+    height: 15px;
+    position: absolute;
+    left: 0px;
+    top: 2px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    vertical-align: -3px;
+    background-image: url(../images/radio-bg.svg);
+    background-size: 100% auto;
+    background-position: 0 -16px;
+    background-repeat: no-repeat;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    z-index: 2;
+    opacity: 0;
+}
+.radios-wrapper input:checked + .wpcf7-list-item-label:before {
+    opacity: 1;
+}
+.radios-wrapper input:checked + .wpcf7-list-item-label:after {
+    opacity: 1;
+}

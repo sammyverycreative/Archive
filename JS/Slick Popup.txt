@@ -1,0 +1,5 @@
+setTimeout(function() {
+	if ($('.popup-slider').length) {
+		$('.popup-slider')[0].slick.refresh();
+	}
+}, 50);

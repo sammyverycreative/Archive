@@ -1,0 +1,12 @@
+<?php
+function todo_notice() {
+ ?>
+ <div class="updated">
+  <p>TO DO:</p>
+  <p>Reactivate ACF licence after moving site!</p>
+  <p>Remove me from <?php echo __FILE__;?></p>
+ </div>
+ <?php
+}
+add_action( 'admin_notices', 'todo_notice' );
+?>

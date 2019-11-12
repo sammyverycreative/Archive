@@ -1,0 +1,11 @@
+<?php 
+$main_category = get_queried_object();
+$ctg = $main_category->name;
+$slug = $main_category->slug;
+
+//args
+$args = array(
+		'category_name' => $main_category->slug,
+		...
+	);
+?>

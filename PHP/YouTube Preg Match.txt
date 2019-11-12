@@ -1,0 +1,1 @@
+<?php preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $variable_of_url, $matches, PREG_OFFSET_CAPTURE, 3); ?>

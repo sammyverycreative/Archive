@@ -1,0 +1,5 @@
+[contact-form-7 id="1234" title="Contact form 1" html_id="contact-form-1234" html_class="form contact-form"]
+
+-or-
+
+<?php echo do_shortcode('[contact-form-7 id="1234" title="Contact form 1" html_id="contact-form-1234" html_class="form contact-form"]'); ?>

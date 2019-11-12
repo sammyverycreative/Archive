@@ -1,0 +1,1 @@
+<?php if ( $paged ) {echo  _e(' - Page ', THEME_TEXT_DOMAIN). $paged; } ?>

@@ -1,0 +1,18 @@
+$(function() {
+  $('.search-filters').on("submit", function(e) {
+    e.preventDefault();
+    var locatie = $('input[name=location]').val();
+    var destinatie = $('input[name=destination]').val();
+    var time = $('input[name=time]').val();
+    if (location != '' && destination != '' && time != '') {
+        if (locatie != destinatie) {
+            //var rTime = timeInput.replace(',', '');
+            //var time = rTime.split('%20');
+            //var timp = new Date(time[2], time[1], time[0]);
+            website = $('.site-url').attr('data-href');
+            var url = website+'/theUrl/'+location+'-'+destination+'-'+time;
+            window.location.replace(url);
+        }
+    }
+  });
+});

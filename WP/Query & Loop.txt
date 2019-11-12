@@ -1,0 +1,104 @@
+=#1
+<?php global $wp_query;
+$paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
+query_posts( array_merge( $wp_query->query_vars, array( 
+                                                    'post_type' => 'post',
+                                                    'ignore_sticky_posts' => true,
+                                                    'posts_per_page' => 10,
+                                                    'orderby' => 'date',
+                                                    'order'=> 'DSC',
+                                                    'paged' => $paged
+                                                ) ) );?>
+<?php if (have_posts()) : $x = 0; ?>
+    <?php while (have_posts()) : the_post(); $x++; ?>
+        <?php $id = get_the_ID(); ?>
+        [...]
+    <?php endwhile; ?>
+<?php endif; ?>
+<div class="post-navigation"><?php
+global $wp_query;
+$big = 999999999; 
+echo paginate_links( array(
+    'base'          => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+    'format'        => '?paged=%#%',
+    'current'       => max( 1, get_query_var('paged') ),
+    'total'         => $wp_query->max_num_pages,
+    'type'          => 'list',
+    'prev_next'     => True,
+    'prev_text' => '<i class="fa fa-long-arrow-left" aria-hidden="true"></i>',
+    'next_text' => '<i class="fa fa-long-arrow-right" aria-hidden="true"></i>'
+) );
+wp_reset_query();
+?></div>
+
+=#2
+<?php 
+/* Width DEFAULT pagination */
+/*
+global $the_query;
+$paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
+*/
+// args
+$args = array(
+	'post_type' => 'post',
+	'tax_query' => array(
+		'relation' => 'OR',
+		array(
+			'taxonomy' => 'category',
+			'field'    => 'slug',
+			'terms'    => array( 'quotes' ),
+		),
+		array(
+			'taxonomy' => 'post_format',
+			'field'    => 'slug',
+			'terms'    => array( 'post-format-quote' ),
+		),
+	),
+	/*'paged' => $paged*/
+);
+// the query
+$the_query = new WP_Query( $args ); ?>
+<?php if ( $the_query->have_posts() ) : ?>
+	<!-- the loop -->
+	<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+		<h2><?php the_title(); ?></h2>
+	<?php endwhile; ?>
+	<!-- end of the loop -->
+	<!-- pagination -->
+	<?php if ($the_query->max_num_pages > 1) { // check if the max number of pages is greater than 1  ?>
+	  <nav class="prev-next-posts">
+	    <div class="prev-posts-link">
+	      <?php echo get_next_posts_link( 'Older Entries', $the_query->max_num_pages ); // display older posts link ?>
+	    </div>
+	    <div class="next-posts-link">
+	      <?php echo get_previous_posts_link( 'Newer Entries' ); // display newer posts link ?>
+	    </div>
+	  </nav>
+	<?php } ?>
+	<?php wp_reset_postdata(); ?>
+<?php else : ?>
+	<p><?php _e( 'Sorry, no posts matched your criteria.' ); ?></p>
+<?php endif; ?>
+<?php /*
+<div class="post-navigation"><?php
+global $the_query;
+$big = 999999999; 
+echo paginate_links( array(
+    'base'          => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+    'format'        => '?paged=%#%',
+    'current'       => max( 1, get_query_var('paged') ),
+    'total'         => $the_query->max_num_pages,
+    'type'          => 'list',
+    'prev_next'     => True,
+    'prev_text' => '<i class="fa fa-long-arrow-left" aria-hidden="true"></i>',
+    'next_text' => '<i class="fa fa-long-arrow-right" aria-hidden="true"></i>'
+) );
+wp_reset_query();
+?></div>
+*/ ?>
+
+--
+NOTE: For post types what doesn't have archive page, use below args.
+
+'has_archive'	=> false,		
+'rewrite'	=> false,

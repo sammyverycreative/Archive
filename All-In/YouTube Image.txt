@@ -1,0 +1,37 @@
+(1)
+<?php
+// Get YouTube Video ID
+$link = get_field('field_here');  
+$ytID = substr($link, strpos($link, "=") + 1);    
+?>
+<img src="https://img.youtube.com/vi/<?php echo $ytID; ?>/0.jpg" alt="<?php bloginfo('name'); ?>" width="375">
+
+(2)
+<?php
+// Get YouTube Video ID
+$link = get_field('field_here');
+$ytID = get_string_between($link, 'embed/', '?');
+?>
+<img src="https://img.youtube.com/vi/<?php echo $ytID; ?>/0.jpg" alt="<?php bloginfo('name'); ?>" width="375">
+
+(3)
+<?php
+// Get YouTube Video ID
+$vURL = get_field('field_here');
+preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $vURL, $match);
+$ytID = $match[1];
+?>
+<img src="https://img.youtube.com/vi/<?php echo $ytID; ?>/0.jpg" alt="<?php bloginfo('name'); ?>" width="375">
+
+NOTE: Beside 0.jpg, you can use maxresdefault/sddefault/mqdefault/hqdefault.jpg
+
+(4)
+<script>
+function GetYouTubeThumbnail(link, sizeMax = false) {
+	let yti = link.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
+	let thumbnailUrl = `http://i3.ytimg.com/vi/${yti[1]}/hqdefault.jpg`;
+	let thumbnailUrlMax = `http://i3.ytimg.com/vi/${yti[1]}/maxresdefault.jpg`;
+
+	return (sizeMax ? thumbnailUrl : thumbnailUrlMax);
+}
+</script>

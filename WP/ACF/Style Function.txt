@@ -1,0 +1,33 @@
+function my_head_input()
+{
+	?>
+	<style type="text/css">
+
+		/* ... */
+
+	</style>
+
+	<script type="text/javascript">
+	(function($){
+
+		/* ... */
+
+	})(jQuery);
+	</script>
+	<?php
+}
+add_action('acf_head-input', 'my_head_input');
+
+?>
+
+-or-
+function my_acf_admin_head() {
+    ?>
+    <style type="text/css">
+
+    /* css here */
+
+    </style>
+    <?php
+}
+add_action('acf/input/admin_head', 'my_acf_admin_head');

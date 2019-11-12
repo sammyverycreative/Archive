@@ -1,0 +1,91 @@
+.wpcf7 .ajax-loader,
+.wpcf7-not-valid-tip {
+    display: none !important;
+}
+.wpcf7-not-valid {
+    border: 1px solid red !important;
+}
+
+.wpcf7 input[type="text"]:hover, 
+.wpcf7 input[type="text"]:focus, 
+.wpcf7 input[type="email"]:hover, 
+.wpcf7 input[type="email"]:focus, 
+.wpcf7 input[type="password"]:hover, 
+.wpcf7 input[type="password"]:focus, 
+.wpcf7 input[type="search"]:hover, 
+.wpcf7 input[type="search"]:focus, 
+.wpcf7 input[type="tel"]:hover, 
+.wpcf7 input[type="tel"]:focus, 
+.wpcf7 input[type="url"]:hover, 
+.wpcf7 input[type="url"]:focus, 
+.wpcf7 input[type="number"]:hover, 
+.wpcf7 input[type="number"]:focus, 
+.wpcf7 input[type="date"]:hover, 
+.wpcf7 input[type="date"]:focus, 
+.wpcf7 input[type="time"]:hover, 
+.wpcf7 input[type="time"]:focus, 
+.wpcf7 input[type="datetime"]:hover, 
+.wpcf7 input[type="datetime"]:focus, 
+.wpcf7 input[type="datetime-local"]:hover, 
+.wpcf7 input[type="datetime-local"]:focus, 
+.wpcf7 input[type="week"]:hover, 
+.wpcf7 input[type="week"]:focus, 
+.wpcf7 input[type="month"]:hover, 
+.wpcf7 input[type="month"]:focus, 
+.wpcf7 textarea:hover, 
+.wpcf7 textarea:focus, 
+.wpcf7 select:hover, 
+.wpcf7 select:focus,
+.wpcf7 input[type="submit"]:hover, 
+.wpcf7 input[type="submit"]:focus {
+    border-color: #000000 !important;
+    outline: 0 !important;
+    transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+}
+.wpcf7 input[type="submit"]:hover, 
+.wpcf7 input[type="submit"]:focus {
+    outline: 0 !important;
+    transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+}
+
+/* Other Fields */
+.wpcf7-validates-as-required {
+/*all required fields*/
+
+}
+
+select option {
+/*select option*/
+
+}
+
+input[type="file"] {
+/*file field*/
+
+}
+/* #END */
+
+div.wpcf7-response-output {
+    margin: 0;
+    padding: 0;
+}
+
+div.wpcf7-validation-errors,
+div.wpcf7-acceptance-missing,
+div.wpcf7-mail-sent-ok {
+    text-align: center;
+    border: 0 !important;
+}
+div.wpcf7-validation-errors,
+div.wpcf7-acceptance-missing {
+    color: red;
+}
+div.wpcf7-mail-sent-ok {
+    color: green;
+}

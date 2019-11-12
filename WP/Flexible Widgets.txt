@@ -1,0 +1,158 @@
+<?php defined( 'ABSPATH' ) or die( 'Direct access is forbidden!' );
+/**
+ * Register our sidebars and widgetized areas.
+ *
+ */
+function custom_register_sidebar_widget() {
+	register_sidebar( array(
+		'name' => 'Custom Templates sidebar',
+		'id' => 'custom_template_sidebar',
+		'before_widget' => '<div id="%1$s" class="sidebar-widget %2$s">',
+		'after_widget' => '</div>',
+		'before_title' => '<div class="category-top"><h3>',
+		'after_title' => '</h3></div>',
+	) );
+}
+add_action( 'widgets_init', 'custom_register_sidebar_widget' );
+
+/**
+ * Register and load the widgets
+ */
+
+function load_widgets() {
+	//register_widget( 'Sidebar1' );
+	register_widget( 'Sidebar2' );
+}
+
+add_action( 'widgets_init', 'load_widgets' );
+
+/**
+ * WIDGET -- Sidebar1
+ */
+
+class Sidebar1 extends WP_Widget {
+
+	public function __construct() {
+		parent::__construct(
+		'sidebar1',
+		'Sidebar 1 ',
+		array( 'description' => 'List the last X approved testimonials', )
+		);
+	}
+
+	public function widget( $args, $instance ) {
+		$count = $instance['count'];
+		$title = $instance['title'];
+		$testimonials = new WP_Query( array( 'posts_per_page' => $count, 'post_type' => 'testimonial' ) );
+		if ($testimonials->have_posts())	:
+		?>
+
+		<div class="recent_posts">
+			<div class="title">
+				<h3><?php echo $title;?></h3>
+			</div>
+			<div class="recent_posts_content">
+				<ul class="testimonials-slider"><?php 
+					while ($testimonials->have_posts())	: $testimonials->the_post(); ?><?php $testID = get_the_ID(); ?> 
+						<li class="each-slide"><?php the_content(); ?>
+							<div class="about-person">
+								<p><?php the_title(); ?> <span><?php if(get_post_meta(get_the_ID(), 'uds_testimonial_position', true)) { echo " - ".get_post_meta(get_the_ID(), 'uds_testimonial_position', true); } ?></span></p>
+								<?php $image = get_post_meta($testID, 'uds_testimonial_image', true);
+									if ( $image ){ 
+										$img = wp_get_attachment_image_src( $image['id'], 'image-75-75' );     ?>
+										<img src="<?php echo $img[0]; ?>" alt="<?php echo get_the_title(); ?>"><?php 
+									} else { ?>
+										<img src="<?php echo get_bloginfo('template_url') . '/images/anonymus.png'; ?>" alt="test_pic">
+								<?php } ?>
+							</div>
+						</li>
+					<?php endwhile; ?>
+				</ul>
+			</div>
+		</div>
+
+	<?php endif;
+	}
+
+
+
+	public function form( $instance ) {
+		$instance = wp_parse_args( (array) $instance, array( 'title' => '', 'count' => '') );
+		$title = strip_tags($instance['title']);
+		$count = strip_tags($instance['count']);
+		?>
+		<p>
+			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title: '); ?></label>
+			<input id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>" />
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id('count'); ?>"><?php _e('How many: '); ?></label>
+			<input id="<?php echo $this->get_field_id('count'); ?>" name="<?php echo $this->get_field_name('count'); ?>" type="number" value="<?php echo esc_attr($count); ?>" />
+		</p>
+		<?php
+	}
+
+	public function update( $new_instance, $old_instance ) {
+		$instance = $old_instance;
+		$new_instance = wp_parse_args( (array) $new_instance, array( 'title' => '', 'count' => '') );
+		$instance['title'] = strip_tags($new_instance['title']);
+		$instance['count'] = strip_tags($new_instance['count']);
+		return $instance;
+
+	}
+
+}
+
+/**
+ * WIDGET --  Sidebar2
+ */
+
+class Sidebar2 extends WP_Widget {
+
+	public function __construct() {
+		parent::__construct(
+		'sidebar2',
+		'Sidebar2',
+		array( 'description' => 'Adds the appointment form', )
+		);
+
+	}
+
+	public function widget( $args, $instance ) {
+		$title = $instance['title'];
+		?>
+
+		<div class="bluearea">
+			<div class="form_title">
+				<h4><?php  echo $title; // _e('Online', THEME_TEXT_DOMAIN); ?></h4>
+				<?php /*?><p><?php // _e('Online', THEME_TEXT_DOMAIN); ?></p>
+				<h4><?php //_e('Appointment Request', THEME_TEXT_DOMAIN); ?></h4><?php */?>
+			</div>
+
+			<div class="">
+				<?php echo do_shortcode('[contact-form-7 id="246" title="Appointment Request"]');?>
+			</div>
+		</div>
+		<?php
+	}
+
+	public function form( $instance ) {
+		$instance = wp_parse_args( (array) $instance, array( 'title' => '') );
+		$title = strip_tags($instance['title']); 
+		?>
+		<p>
+			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title: '); ?></label>
+			<input id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>" />
+		</p>
+		<?php
+	}
+
+	public function update( $new_instance, $old_instance ) {
+		$instance = $old_instance;
+		$new_instance = wp_parse_args( (array) $new_instance, array( 'title' => '') );
+		$instance['title'] = strip_tags($new_instance['title']);
+		return $instance;
+
+	}
+
+}

@@ -1,0 +1,38 @@
+=#1
+jQuery(window).scroll(function($){
+
+	if(jQuery(document).scrollTop() > 20)
+        {
+            jQuery(".top_header_wrapper").addClass("scrolledDown");
+            jQuery(".top_header_wrapper").removeClass("scrolledUp");
+            jQuery("#header hr").hide();
+        }
+        else 
+        {
+            jQuery(".top_header_wrapper").removeClass("scrolledDown");
+            jQuery(".top_header_wrapper").addClass("scrolledUp");
+            jQuery("#header hr").show();
+        }
+
+});
+
+=#2
+$(window).scroll(function() {    
+	    var scroll = $(window).scrollTop();
+
+	    if (scroll >= 500) {
+	        $(".class").addClass("scroll");
+	    } else {
+	        $(".class").removeClass("scroll");
+	    }
+	    /*
+	    //invert the function of a section
+	    if ($('.class-of-section').length) {
+	        if ($('.class-of-section').visible(true)) {
+	            $("body").removeClass("scroll");
+	        } else {
+	            $("body").addClass("scroll");
+	        }
+	    }
+	    */
+});

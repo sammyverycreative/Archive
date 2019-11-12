@@ -1,0 +1,43 @@
+function vc_admin_hide() {
+?>
+	<style>
+		#menu-posts {
+			display: none;
+		}
+		#menu-comments {
+			display: none;
+		}
+		#menu-appearance {
+			display: none;
+		}
+		#toplevel_page_edit-post_type-acf-field-group {
+			display: none;
+		}
+		tr[data-slug="advanced-custom-fields-pro"] {
+			display: none;
+		}
+		tr[data-slug="classic-editor"] {
+			display: none;
+		}
+		tr[data-slug="contact-form-7"] {
+			display: none;
+		}
+		tr[data-slug="contact-form-7-honeypot"] {
+			display: none;
+		}
+		#cb-select-17 {
+			display: none;
+		}
+		#cb-select-19 {
+			display: none;
+		}
+		#post-17 span.trash {
+			display: none;
+		}
+		#post-19 span.trash {
+			display: none;
+		}
+	</style>
+<?php
+}
+add_action('admin_head','vc_admin_hide');

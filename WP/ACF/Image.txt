@@ -1,0 +1,30 @@
+=FUNCTIONS
+add_image_size('nume-dimensiune', 400, 400, true);
+
+=CODE
+<?php $image = get_field(''); // nume camp
+	if( !empty($image) ): ?>
+		<img src="<?php echo $image['url']['sizes']['nume-dimensiune']; ?>" alt="<?php echo $image['alt']; ?>" />
+<?php endif; ?>
+
+-=PLATFORM=-
+NOTE: Use VeryCreative Framework for $vc functions.
+
+<?php global $vc; ?>
+
+<?php $vc->img->print_img(get_field('nume-camp','options'),false/'nume-dimensiune',get_bloginfo('name'),'clasa1 clasa2 clasa3'); ?>
+
+-Featured Images-
+<?php $vc->img->print_featured_img(id,'size'/false,get_bloginfo('name'),'clasa1 clasa2 clasa3'); ?>
+<?php $vc->img->the_featured_img(id,'size'/false); ?>
+<?php $vc->img->featured_img(id,'size'/false); ?>
+
+ex.:
+<div class="slide" style="background-image: url(<?php $vc->img->the_img(get_field('nume-camp','options'),'size'/false); ?>);">
+
+<?php $imagine = $vc->img->get_url(get_field('nume-camp','options'),'size'/false); ?>
+<?php echo $imagine; ?>
+
+-
+<?php $vc->img->print_featured_img(); ?>
+<?php $vc->img->print_featured_img(false,'size','alt','clasa'); ?>

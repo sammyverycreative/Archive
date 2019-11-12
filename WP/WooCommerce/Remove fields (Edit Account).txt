@@ -1,0 +1,31 @@
+function remove_account_shipping_phone_and_email_fields( $shipping_fields ) {
+    // Only on my account 'edit-address'
+    if( is_wc_endpoint_url( 'edit-address' ) ){
+        unset($shipping_fields['shipping_first_name']);
+        unset($shipping_fields['shipping_last_name']);
+        unset($shipping_fields['shipping_company']);
+        unset($shipping_fields['shipping_address_2']);
+        unset($shipping_fields['shipping_country']);
+        unset($shipping_fields['shipping_state']);
+        unset($shipping_fields['shipping_email']);
+        unset($shipping_fields['shipping_phone']);
+    }
+    return $shipping_fields;
+}
+add_filter( 'woocommerce_shipping_fields', 'remove_account_shipping_phone_and_email_fields', 20, 1 );
+
+function remove_account_billing_phone_and_email_fields( $billing_fields ) {
+    // Only on my account 'edit-address'
+    if( is_wc_endpoint_url( 'edit-address' ) ){
+        unset($billing_fields['billing_first_name']);
+        unset($billing_fields['billing_last_name']);
+        unset($billing_fields['billing_company']);
+        unset($billing_fields['billing_address_2']);
+        unset($billing_fields['billing_country']);
+        unset($billing_fields['billing_state']);
+        unset($billing_fields['billing_email']);
+        unset($billing_fields['billing_phone']);
+    }
+    return $billing_fields;
+}
+add_filter( 'woocommerce_billing_fields', 'remove_account_billing_phone_and_email_fields', 20, 1 );

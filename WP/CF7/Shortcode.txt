@@ -1,0 +1,5 @@
+<?php
+	$formid = get_field('c_form');
+	$formsc = '[contact-form-7 id="'.$formid.'" destination-email="xxxxxxx@example.com"]';
+	echo do_shortcode( $formsc );
+?>

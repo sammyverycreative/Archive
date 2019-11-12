@@ -1,0 +1,30 @@
+/* with image */
+.class1 .class2 a {
+    overflow: hidden;
+}
+
+.class1 .class2 a img {
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+.class1 .class2 a:hover img {
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+}
+
+/* with background */
+.class1 {
+	overflow: hidden;
+}
+.class1 .class2 {
+	background-size: 100%;
+	background-position: center center;
+	background-repeat: no-repeat;
+	transition: all 0.3s;
+}
+.class1:hover .class2 {
+	background-size: 110%;
+}

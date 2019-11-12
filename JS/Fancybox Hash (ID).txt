@@ -1,0 +1,7 @@
+var thisHash = window.location.hash;
+$(document).ready(function() {
+ if(window.location.hash) {
+  $(thisHash).fancybox().trigger('click');
+ }
+ $('.fancylink').fancybox();
+}); // ready

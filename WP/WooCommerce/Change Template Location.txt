@@ -1,0 +1,7 @@
+function vc_get_template( $located, $template_name, $args, $template_path, $default_path ) {
+    if ('checkout/form-checkout.php' == $template_name && vc_cart_has_service_item()) {
+        $located = THEME_PATH . '/woocommerce/service-checkout/form.php';
+    }
+    return $located;
+}
+add_filter( 'wc_get_template', 'vc_get_template', 999, 5 );

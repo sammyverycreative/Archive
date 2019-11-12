@@ -1,0 +1,9 @@
+#1
+<?php $chars = array(" ", "/", ".", "-", "(", ")"); $phoneURL = str_replace($chars, '', field); ?>
+
+#2
+<?php function phonenr($args){
+ $str = $args; 
+ $str = preg_replace('/[^+0-9a-zA-Z]/', '', $str); 
+ return $str; 
+} ?>

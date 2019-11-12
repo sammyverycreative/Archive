@@ -1,0 +1,15 @@
+=REPEATER
+$repeater = get_field('repeater');
+$allitems = count($repeater);
+//echo $allitems;
+
+=QUERY
+$allposts = $wp_query->post_count;
+//echo $allposts;
+
+=SEARCH
+<?php
+$allsearch = &new WP_Query("s=$s&showposts=-1"); $key = wp_specialchars($s, 1);
+$allposts = $allsearch->post_count;
+//echo $allposts;
+?>

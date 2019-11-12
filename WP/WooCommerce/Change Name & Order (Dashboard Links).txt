@@ -1,0 +1,28 @@
+function wc_get_account_menu_items() {
+ return apply_filters( 'woocommerce_account_menu_items', array(
+ 'dashboard' => __( 'Dashboard', 'woocommerce' ),
+ 'edit-address' => __( 'Addresses', 'woocommerce' ),
+ 'edit-account' => __( 'Account Details', 'woocommerce' ),
+ 'payment-methods' => __( 'Payment Methods', 'woocommerce' ),
+ 'orders' => __( 'Orders', 'woocommerce' ),
+ 'downloads' => __( 'Downloads', 'woocommerce' ),
+ 'customer-logout' => __( 'Logout', 'woocommerce' ),
+ ) );
+}
+
+-AND/OR-
+
+function woo_my_account_order() {
+	$myorder = array(
+		'dashboard'          => __( 'Dashboard', 'woocommerce' ),
+		'my-custom-endpoint' => __( 'My Stuff', 'woocommerce' ),
+		'edit-address'       => __( 'Addresses', 'woocommerce' ),
+		'edit-account'       => __( 'Change My Details', 'woocommerce' ),
+		'payment-methods'    => __( 'Payment Methods', 'woocommerce' ),
+		'orders'             => __( 'Orders', 'woocommerce' ),
+		'downloads'          => __( 'Download MP4s', 'woocommerce' ),
+		'customer-logout'    => __( 'Logout', 'woocommerce' ),
+	);
+	return $myorder;
+}
+add_filter ( 'woocommerce_account_menu_items', 'woo_my_account_order' );

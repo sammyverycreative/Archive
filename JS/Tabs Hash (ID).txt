@@ -1,0 +1,66 @@
+// Extern Urls to Tabs
+//#tab
+if ( $('.your-page').length ) {
+	var url = window.location.hash;
+	if (url) {
+		//var allTabsItem = $('.tabsjquery .tablinks');
+		//var allTabs = $('.tabcontent');
+		var dataValue = url.replace(/#/g, '');
+		//allTabsItem.removeClass('active');
+		//allTabs.removeClass('active');
+		//$(url).addClass('active');
+		$('[data-value="'+dataValue+'"]').click();
+	}
+}
+
+//#tab/#section
+if ( $('.your-page').length ) {
+	var hash = window.location.hash;
+	hash = hash.replace(/#/g, '');
+	if ( hash ) {
+		if ( hash.indexOf('tab') > -1 ) {
+			var split = hash.split('/');
+			if ( split[0] ) {
+				if ( $('[data-value="'+split[0]+'"]').length ) {
+					$('[data-value="'+split[0]+'"]').click();
+					$('html,body').animate({
+						scrollTop: $('.tabsjquery').offset().top - 80
+					});
+				}
+				if ( split[1] ) {
+					if ( $('#'+split[0]+' #'+split[1]).length ) {
+						var element = document.getElementById(split[1]);
+						element.scrollIntoView();
+					}
+				}
+			}
+		}
+	}
+}
+
+//#tab (in-page)
+$(document).on('click','a.tab-url',function(){
+    location.reload(true); //true = force reload.
+    //Add in-line: onClick="document.location.reload(true)" (if case).
+    var url = window.location.hash;
+	if (url) {
+		var dataValue = url.replace(/#/g, '');
+		$('[data-value="'+dataValue+'"]').click();
+	}
+});
+
+or
+
+$(document).on('click','a.tab-url',function(){
+	var href = $(this).attr('href');
+	var split = href.split('/#');
+	if ( split[1] ) {
+		if ( split[1].indexOf('tab') > -1 ) {
+			$('[data-value="'+split[1]+'"]').click();
+			$('html,body').animate({
+				scrollTop: $('.tabsjquery').offset().top - 80
+			});
+		}
+	}
+	return false;
+});

@@ -1,0 +1,10 @@
+<?php
+/**
+ * Plugin Name: pluginName
+ * Plugin URI: http://www.website.domain
+ * Description: theDescription
+ * Version: 1.0.0
+ * Author: authorName
+ * Author URI: http://www.author-url.domain
+ * License: Comercial
+ */

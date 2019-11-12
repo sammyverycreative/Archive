@@ -1,0 +1,6 @@
+Default: 32x32px
+IE: 32x32px (.ico)
+iPhone: 60x60px
+iPhone Retina: 120x120px
+iPad: 76x76px
+iPad Retina: 152x152px

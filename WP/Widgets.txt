@@ -1,0 +1,34 @@
+function arphabet_widgets_init() {
+
+	register_sidebar( array(
+		'name'          => 'Sidebar 1',
+		'id'            => 'sidebar_1',
+		'before_widget' => '<div>',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2 class="bar">',
+		'after_title'   => '</h2>',
+	) );
+
+	register_sidebar( array(
+		'name'          => 'Sidebar 2',
+		'id'            => 'sidebar_2',
+		'before_widget' => '<div>',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2 class="bar">',
+		'after_title'   => '</h2>',
+	) );
+
+}
+add_action( 'widgets_init', 'arphabet_widgets_init' );
+
+<?php if ( is_active_sidebar( 'sidebar_1' ) ) : ?>
+	<div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
+		<?php dynamic_sidebar( 'sidebar_1' ); ?>
+	</div><!-- #primary-sidebar -->
+<?php endif; ?>
+
+<?php if ( is_active_sidebar( 'sidebar_2' ) ) : ?>
+	<div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
+		<?php dynamic_sidebar( 'sidebar_2' ); ?>
+	</div><!-- #primary-sidebar -->
+<?php endif; ?>

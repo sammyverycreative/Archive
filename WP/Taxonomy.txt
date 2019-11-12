@@ -1,0 +1,12 @@
+<?php
+$term = get_term();
+$id = $term->term_id;
+$name = $term->name;
+$slug = $term->slug;
+$group = $term->term_group;
+$taxID = $term->term_taxonomy_id;
+$tax = $term->taxonomy;
+$desc = $term->description;
+$parentID = $term->parent; //int
+$termCount = $term->count;
+?>

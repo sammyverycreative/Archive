@@ -1,0 +1,50 @@
+=HTML
+<div>Content</div>
+<div>Content</div>
+<div>Content</div>
+<div>Content</div>
+<div>Content</div>
+<div>Content</div>
+<div>Content</div>
+<div>Content</div>
+<div>Content</div>
+<a href="#" id="loadMore">Load More</a>
+
+<p class="totop"> 
+    <a href="#top">Back to top</a> 
+</p>
+
+=CSS
+div {
+    display:none;
+}
+
+=JS
+$(function () {
+    $("div").slice(0, 6).show();
+    $("#loadMore").on('click', function (e) {
+        e.preventDefault();
+        $("div:hidden").slice(0, 6).slideDown();
+        if ($("div:hidden").length == 0) {
+            $("#loadMore").fadeOut('slow');
+        }
+        $('html,body').animate({
+            scrollTop: $(this).offset().top
+        }, 1500);
+    });
+});
+
+$('a[href=#top]').click(function () {
+    $('body,html').animate({
+        scrollTop: 0
+    }, 600);
+    return false;
+});
+
+$(window).scroll(function () {
+    if ($(this).scrollTop() > 50) {
+        $('.totop a').fadeIn();
+    } else {
+        $('.totop a').fadeOut();
+    }
+});

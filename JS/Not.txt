@@ -1,0 +1,8 @@
+$(...).not(...)....;
+
+E.g.:
+
+$('.accordions .accordion').click(function(e) {
+	$('.accordions .accordion').not(this).removeClass('active');
+	$(this).toggleClass('active');
+});

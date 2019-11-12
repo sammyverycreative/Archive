@@ -1,0 +1,27 @@
+<div class="static-page general">
+    <h2><?php the_title(); ?></h2>
+    <?php the_content(); ?>
+    <?php $subpages = get_pages( array( 'posts_per_page' => -1, 'child_of' => get_the_ID(), 'parent' => get_the_ID() ) ); ?>
+    <?php if ($subpages) { ?>
+    <div class="tabs">
+    	<div class="flex">
+    		<div class="col">
+    			<aside>
+			        <ul>
+			        <?php $x = 0; foreach ($subpages as $subpage) { ?>
+			        	<li><a href="#<?php echo $subpage->post_name; ?>" <?php if ($x == 0) { ?>class='active'<?php } ?>><?php echo $subpage->post_title; ?></a></li>
+			        <?php $x++; } ?>
+			        </ul>
+		        </aside>
+    		</div>
+    		<div class="col">
+    			<?php foreach ($subpages as $subpage) { ?>
+    				<div class="tab show" id="<?php echo $subpage->post_name; ?>">
+        				<?php echo apply_filters('the_content', $subpage->post_content); ?>
+		        	</div>
+			<?php } ?>
+		</div>
+	</div>
+    </div>
+    <?php } ?>
+</div>

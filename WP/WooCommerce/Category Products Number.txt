@@ -1,0 +1,14 @@
+<h1>
+<?php woocommerce_page_title(); 
+
+global $wp_query;
+$cat_obj = $wp_query->get_queried_object();
+if($cat_obj)    {
+    $category_name = $cat_obj->name;
+    $category_desc = $cat_obj->description;
+    $category_ID  = $cat_obj->term_id;
+}
+$term = get_term( $category_ID, 'product_cat' ); 
+echo '('. $term->count . ')';
+?>      
+</h1>

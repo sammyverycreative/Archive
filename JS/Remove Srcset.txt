@@ -1,0 +1,17 @@
+function full_page(){
+    var width_window = jQuery(window).width();
+    if(width_window < 1020){
+        jQuery('.the-content img').removeAttr('width').removeAttr('height').removeAttr('srcset').removeAttr('sizes');
+    }
+}
+
+jQuery(document).ready(function($) {
+	full_page();
+});
+
+jQuery(window).on('resize',function() {
+    full_page();
+});
+
+//jQuery(window).load(function($) { full_page(); });
+jQuery(window).on('load', function(){ full_page(); });

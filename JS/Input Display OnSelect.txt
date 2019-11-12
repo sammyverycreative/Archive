@@ -1,0 +1,10 @@
+$('#input_to_show').hide();
+$( function() {
+  $( "#select" ).on( "change", function() {
+    $('#input_to_show').hide();
+    $this = $(this).val();
+    if ($this == "Others") {
+      $('#input_to_show').show();
+    }
+  });
+});

@@ -1,0 +1,3 @@
+.slick-dots li:first-of-type:last-of-type { 
+    display: none;
+}

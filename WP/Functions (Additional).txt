@@ -1,0 +1,18 @@
+// Disable useless things.
+remove_action('wp_head', 'rsd_link');
+remove_action('wp_head', 'wlwmanifest_link');
+remove_action('wp_head', 'wp_shortlink_wp_head');
+remove_action('wp_head', 'wp_generator');
+
+// Remove themes menu.
+add_action('admin_init', 'remove_theme_menus');
+function remove_theme_menus() {
+	global $submenu;
+	unset($submenu['themes.php'][5]);
+	unset($submenu['themes.php'][15]);
+}
+
+// Force NOINDEX during development, can be deleted on live sites.
+if(strpos($_SERVER['SERVER_NAME'], 'link_here1') || strpos($_SERVER['SERVER_NAME'], 'link_here2') || strpos($_SERVER['SERVER_NAME'], 'link_here3')){
+	update_option( 'blog_public', 0 );
+}

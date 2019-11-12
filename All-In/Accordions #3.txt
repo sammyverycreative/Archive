@@ -1,0 +1,158 @@
+=HTML
+<div class="accordion">
+	<ul class="list-unstyled">
+		<li class="accordion open">
+			<div class="question">
+			<h3 stle="color:#E23237;">Angular</h3>
+			<i class="fa fa-chevron-down" aria-hidden="true"></i></div>
+			<div class="answer">
+				<img src="https://d1xwtr0qwr70yv.cloudfront.net/assets/tech/angular2-119739556a386494031ce4ad024f8de9.svg" alt="" />
+				<p><a href="https://angularjs.org/" target="_blank">Angular</a> is the popular enterprise framework that many developers are using to build and maintain complex web applications. Angular’s popularity is immense, and companies using it are as diverse as Domino’s Pizza, Ryanair, iTunes Connect, PayPal Checkout, Google. Angular is an open source framework supported by Google. Angular describes itself as an extension to HTML for building complex web apps. Also if you’re familiar with TypeScript, that’s how Angular 2 was written.</p>
+			</div>
+		</li>
+		<li class="accordion">
+			<div class="question">
+			<h3 style="color:#68DBFB;">React</h3>
+			<i class="fa fa-chevron-down" aria-hidden="true"></i></div>
+			<div class="answer">
+				<img src="https://daynin.github.io/clojurescript-presentation/img/react-logo.png" alt="" />
+				<p><a href="https://facebook.github.io/react/" target="_blank">React</a> is this year’s favorite JavaScript project! Everyone seems to be talking about ReactJS. Every conference I have been to in the last year had at least a couple of talks on React and other libraries in the same family (Flux, Redux) React is open-source and developed mostly by Facebook with contributions from other major tech companies. React describes itself as a JavaScript library for building user interfaces.</p>
+			</div>
+		</li>
+		<li class="accordion">
+			<div class="question">
+			<h3 style="color:#41B883;">Vue</h3>
+			<i class="fa fa-chevron-down" aria-hidden="true"></i></div>
+			<div class="answer">
+				<img src="https://seanwash.gallerycdn.vsassets.io/extensions/seanwash/vue/0.4.2/1477316718597/Microsoft.VisualStudio.Services.Icons.Default" alt="" />
+				<p><a href="https://vuejs.org" target="_blank">Vue</a> is a progressive framework for building user interfaces. Unlike other monolithic frameworks, Vue is designed from the ground up to be incrementally adoptable. The core library is focused on the view layer only, and is very easy to pick up and integrate with other libraries or existing projects. On the other hand, Vue is also perfectly capable of powering sophisticated Single-Page Applications when used in combination with modern tooling and supporting libraries.</p>
+			</div>
+		</li>
+		<li class="accordion">
+			<div class="question">
+			<h3 style="color:#E14A30;">Ember</h3>
+			<i class="fa fa-chevron-down" aria-hidden="true"></i></div>
+			<div class="answer">
+				<img src="https://upload.wikimedia.org/wikipedia/en/6/69/Ember.js_Logo_and_Mascot.png" alt="" />
+				<p><a href="http://emberjs.com/" target="_blank">Ember</a> is an opinionated web app framework focusing on programmer productivity. Ember is relatively popular, and the core team includes smart people like Yehuda Katz, who was part of the Ruby on Rails and jQuery Core Teams. Ember describes itself as “a framework for creating ambitious web applications” that doesn’t waste your time. It is very opinionated and makes many choices for you.</p>
+			</div>
+		</li>
+		<li class="accordion">
+			<div class="question">
+			<h3 style="color:#75347D;">Aurelia</h3>
+			<i class="fa fa-chevron-down" aria-hidden="true"></i></div>
+			<div class="answer">
+				<img src="http://blog.aurelia.io/content/images/2016/06/aurelia-icon-512x512.png" alt="" />
+				<p><a href="http://aurelia.io/" target="_blank">Aurelia</a> is the creation of Rob Eisenberg and team who come mostly from the world of Angular and Durandal. Aurelia though is an open source product is officially managed by Durandal Inc., a startup company that creates libraries, tools and frameworks to support next generation of web development.
+
+Aurelia is just released, in January 2015, and is ready for production use. It extends the capabilities of Durandal and is termed as NextGen version of it by Eisenberg. For the existing developers who work in Durandal or Angular1 and 2, Aurelia comes with a clear migration path.</p>
+			</div>
+		</li>
+	</ul>
+</div>
+
+=CSS
+.accordion {
+	background: #FFF;
+	border-radius: 5px;
+	padding: 30px;
+}
+.question {
+	border-top: 1px solid #EEE;
+	padding: 20px;
+	cursor: pointer;
+	position: relative;
+}
+.question i {
+	position: absolute;
+	right: 20px;
+	top: 0;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) all;
+}
+.answer {
+	max-height: 0;
+	overflow: hidden;
+	transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) all;
+}
+.answer p,
+.answer img {
+	margin: 20px;
+}
+.question h3 {
+	font-size: 20px;
+	margin: 0;
+	color: #C00C00;
+}
+.answer {
+	display: flex;
+	flex-direction: row;
+}
+.accordion li.open .question i {
+	transform: rotate(180deg);
+}
+.accordion li.open .answer {
+	max-height: 300px;
+}
+
+=JS
+//without effect
+/*var accordion = document.querySelector('.accordion');
+var items = accordion.querySelectorAll('li');
+var questions = accordion.querySelectorAll('.question');
+
+function toggleAccordion() {
+	var thisItem = this.parentNode;
+	//this.parentNode.classList.toggle('open');
+
+	items.forEach(function (item) {
+		if (thisItem == item) {
+			item.classList.toggle('open');
+			return;
+		} else
+		{
+			item.classList.remove('open');
+		}
+	});
+
+}
+
+questions.forEach(function (question) {return question.addEventListener('click', toggleAccordion);});*/
+
+//with effect
+$('.accordions .question').click(function() {
+	var parent = $(this).parent();
+	var index = parent.index();
+	var i = -1;
+	var has_opened = false;
+	if ( $('.accordions .open').length ) {
+		has_opened = true;
+	}
+	$('.accordions .accordion').each(function() {
+		i++;
+		if ( i != index ) {
+			$(this).removeClass('open');
+		}
+	});
+	if ( parent.hasClass('open') ) {
+		parent.removeClass('open');
+	} else {
+		parent.addClass('open');
+		if ( has_opened ) {
+			setTimeout(function() {
+				$('html,body').animate({
+					scrollTop: parent.offset().top - 80
+				});
+			},500);
+		} else {
+			$('html,body').animate({
+				scrollTop: parent.offset().top - 80
+			});
+		}
+		
+	}
+	
+	return false;
+});

@@ -1,0 +1,20 @@
+h1 {
+  font-size: 50px;
+  background: -webkit-linear-gradient(#eee, #333);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+h2 {
+	color: transparent;
+	font-size: 50px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	text-transform: uppercase;
+	background: -webkit-linear-gradient( left, red , blue 50% );
+	background: -o-linear-gradient( right, red , blue 50% );
+	background: -moz-linear-gradient( right, red , blue 50% );
+	background: linear-gradient( to right, red , blue 50% ); 
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}

@@ -1,0 +1,11 @@
+add_action( 'wp_enqueue_scripts', 'theme_styles' );
+function theme_styles() {
+    //wp_register_script(...
+    //wp_enqueue_script(...
+}
+
+add_filter('style_loader_tag', 'theme_styles_remove_type_attr', 10, 2);
+add_filter('script_loader_tag', 'theme_styles_remove_type_attr', 10, 2);
+function theme_styles_remove_type_attr($tag, $handle) {
+    return preg_replace( "/type=['\"]text\/(javascript|css)['\"]/", '', $tag );
+}

@@ -1,0 +1,155 @@
+var s1 = $(".section1");
+var pos1 = s1.position();		
+var s2 = $(".section2");
+var pos2 = s2.position();
+$(window).scroll(function() {
+	var windowpos = $(window).scrollTop();
+	if (windowpos >= pos1.top/* & windowpos <=1000*/) {
+		s1.addClass('active');
+	} /*else {
+		s1.removeClass("stick");	
+	}*/
+	if (windowpos >= pos2.top) { s2.addClass('active'); }
+});
+
+-or-
+
+(function($) {
+  $.fn.visible = function(partial) {
+      var $t            = $(this),
+          $w            = $(window),
+          viewTop       = $w.scrollTop(),
+          viewBottom    = viewTop + $w.height(),
+          _top          = $t.offset().top,
+          _bottom       = _top + $t.height(),
+          compareTop    = partial === true ? _bottom : _top,
+          compareBottom = partial === true ? _top : _bottom;
+    return ((compareBottom <= viewBottom) && (compareTop >= viewTop));
+  };
+})(jQuery);
+$(window).scroll(function(event) {
+  /*$(".section").each(function(i, el) {
+    var el = $(el);
+    if (el.visible(true)) {
+      el.addClass("active"); 
+    } else {
+      el.removeClass("active");
+    }
+  });*/
+var s1 = $('.section1');
+if (s1.visible(true)) {
+  s1.addClass('active');
+} else {
+  s1.removeClass('active');
+}
+
+var s2 = $('.section2');
+if (s2.visible(true)) {
+  s2.addClass('active');
+} else {
+  s2.removeClass('active');
+}
+
+});
+
+e.g.:
+if ($('.service-page').length > 0) {
+    let headerHeight;
+    const anchorsHeight = $('.anchors').innerHeight();
+    const anchors = $(".anchors");
+    const posAnchors = anchors.position();
+
+    var a1 = $('.anchor1');
+    if (a1.length) {
+        var s1 = $(a1).attr('data-target');
+        var pos1 = $($(s1)[0]).position();
+    }	
+    var a2 = $('.anchor2');
+    if (a2.length) {
+        var s2 = $(a2).attr('data-target');
+        var pos2 = $($(s2)[0]).position();
+    }
+    var a3 = $('.anchor3');
+    if (a3.length) {
+        var s3 = $(a3).attr('data-target');
+        var pos3 = $($(s3)[0]).position();
+    }
+    var a4 = $('.anchor4');
+    if (a4.length) {
+        var s4 = $(a4).attr('data-target');
+        var pos4 = $($(s4)[0]).position();
+    }
+    var a5 = $('.anchor5');
+    if (a5.length) {
+        var s5 = $(a5).attr('data-target');
+        var pos5 = $($(s5)[0]).position();
+    }
+    var a6 = $('.anchor6');
+    if (a6.length) {
+        var s6 = $(a6).attr('data-target');
+        var pos6 = $($(s6)[0]).position();
+    }
+    var a7 = $('.anchor7');
+    if (a7.length) {
+        var s7 = $(a7).attr('data-target');
+        var pos7 = $($(s7)[0]).position();
+    }
+    var a8 = $('.anchor8');
+    if (a8.length) {
+        var s8 = $(a8).attr('data-target');
+        var pos8 = $($(s8)[0]).position();
+    }
+    var a9 = $('.anchor9');
+    if (a9.length) {
+        var s9 = $(a9).attr('data-target');
+        var pos9 = $($(s9)[0]).position();
+    }
+    var a10 = $('.anchor10');
+    if (a10.length) {
+        var s10 = $(a10).attr('data-target');
+        var pos10 = $($(s10)[0]).position();
+    }
+    var a11 = $('.anchor11');
+    if (a11.length) {
+        var s11 = $(a11).attr('data-target');
+        var pos11 = $($(s11)[0]).position();
+    }
+    var a12 = $('.anchor12');
+    if (a12.length) {
+        var s12 = $(a12).attr('data-target');
+        var pos12 = $($(s12)[0]).position();
+    }
+    var a13 = $('.anchor13');
+    if (a13.length) {
+        var s13 = $(a13).attr('data-target');
+        var pos13 = $($(s13)[0]).position();
+    }
+
+    $(window).scroll(function() { 
+        headerHeight = $('.header-wrap').innerHeight();
+        var windowpos = $(window).scrollTop();
+        if (windowpos >= posAnchors.top - headerHeight) {
+            anchors.addClass('stickyMenu');
+        } else {
+            anchors.removeClass("stickyMenu");	
+        }
+
+        // for (let i=1; i<=11; i++) {
+
+        // }
+
+        if ($($(s1)[0]).length) { let sectionHeight1 = $($(s1)[0]).height() + pos1.top; if ((windowpos >= pos1.top) && (windowpos <= sectionHeight1)) { a1.addClass('active'); } else { a1.removeClass('active'); } }
+        if ($($(s2)[0]).length) { let sectionHeight2 = $($(s2)[0]).height() + pos2.top; if ((windowpos >= pos2.top) && (windowpos <= sectionHeight2)) { a2.addClass('active'); } else { a2.removeClass('active'); } }
+        if ($($(s3)[0]).length) { let sectionHeight3 = $($(s3)[0]).height() + pos3.top; if ((windowpos >= pos3.top) && (windowpos <= sectionHeight3)) { a3.addClass('active'); } else { a3.removeClass('active'); } }
+        if ($($(s4)[0]).length) { let sectionHeight4 = $($(s4)[0]).height() + pos4.top; if ((windowpos >= pos4.top) && (windowpos <= sectionHeight4)) { a4.addClass('active'); } else { a4.removeClass('active'); } }
+        if ($($(s5)[0]).length) { let sectionHeight5 = $($(s5)[0]).height() + pos5.top; if ((windowpos >= pos5.top) && (windowpos <= sectionHeight5)) { a5.addClass('active'); } else { a5.removeClass('active'); } }
+        if ($($(s6)[0]).length) { let sectionHeight6 = $($(s6)[0]).height() + pos6.top; if ((windowpos >= pos6.top) && (windowpos <= sectionHeight6)) { a6.addClass('active'); } else { a6.removeClass('active'); } }
+        if ($($(s7)[0]).length) { let sectionHeight7 = $($(s7)[0]).height() + pos7.top; if ((windowpos >= pos7.top) && (windowpos <= sectionHeight7)) { a7.addClass('active'); } else { a7.removeClass('active'); } }
+        if ($($(s8)[0]).length) { let sectionHeight8 = $($(s8)[0]).height() + pos8.top; if ((windowpos >= pos8.top) && (windowpos <= sectionHeight8)) { a8.addClass('active'); } else { a8.removeClass('active'); } }
+        if ($($(s9)[0]).length) { let sectionHeight9 = $($(s9)[0]).height() + pos9.top; if ((windowpos >= pos9.top) && (windowpos <= sectionHeight9)) { a9.addClass('active'); } else { a9.removeClass('active'); } }
+        if ($($(s10)[0]).length) { let sectionHeight10 = $($(s10)[0]).height() + pos10.top; if ((windowpos >= pos10.top) && (windowpos <= sectionHeight10)) { a10.addClass('active'); } else { a10.removeClass('active'); } }
+        if ($($(s11)[0]).length) { let sectionHeight11 = $($(s11)[0]).height() + pos11.top; if ((windowpos >= pos11.top) && (windowpos <= sectionHeight11)) { a11.addClass('active'); } else { a11.removeClass('active'); } }
+        if ($($(s12)[0]).length) { let sectionHeight12 = $($(s12)[0]).height() + pos12.top; if ((windowpos >= pos12.top) && (windowpos <= sectionHeight12)) { a12.addClass('active'); } else { a12.removeClass('active'); } }
+        if ($($(s13)[0]).length) { let sectionHeight13 = $($(s13)[0]).height() + pos13.top; if ((windowpos >= pos13.top) && (windowpos <= sectionHeight13)) { a13.addClass('active'); } else { a13.removeClass('active'); } }
+    });
+}

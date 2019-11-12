@@ -1,0 +1,114 @@
+function bidirectional_update($value, $post_id, $field, $key_b){
+ $user = strpos($post_id, 'user_') !== FALSE ? (int)str_replace('user_','',$post_id) : false;
+
+ if($user){
+  $post_id = $user;
+ }
+
+ $field_a = acf_get_field($field['key']);
+
+ $field_b = acf_get_field($key_b);
+
+ $name_a = $field_a['name'];
+ $name_b = $field_b['name'];
+
+ if($user){
+  $old_values = get_user_meta($post_id, $name_a, true);
+ }else{
+  $old_values = get_post_meta($post_id, $name_a, true);
+ }
+
+ if (!is_array($old_values)) {
+  if (empty($old_values)) {
+   $old_values = array();
+  } else {
+   $old_values = array($old_values);
+  }
+ }
+
+ $new_values = $value;
+
+ if (!is_array($new_values)) {
+  if (empty($new_values)) {
+   $new_values = array();
+  } else {
+   $new_values = array($new_values);
+  }
+ }
+
+ $add = $new_values;
+
+ $delete = array_diff($old_values, $new_values);
+
+ $add = array_values($add);
+ $delete = array_values($delete);
+
+ if (!count($add) && !count($delete)) {
+  return $value;
+ }
+
+ for ($i=0; $i<count($delete); $i++) {
+  if($field_a['type'] == 'user'){
+   $related_values = get_user_meta($delete[$i], $name_b, true);
+  }else{
+   $related_values = get_post_meta($delete[$i], $name_b, true);
+  }
+
+  if (!is_array($related_values)) {
+   if (empty($related_values)) {
+    $related_values = array();
+   } else {
+    $related_values = array($related_values);
+   }
+  }
+
+  $related_values = array_diff($related_values, array($post_id));
+
+  if($field_a['type'] == 'user'){
+   update_user_meta($delete[$i], $name_b, $related_values);
+   update_user_meta($delete[$i], '_'.$name_b, $key_b);
+  }else{
+   update_post_meta($delete[$i], $name_b, $related_values);
+   update_post_meta($delete[$i], '_'.$name_b, $key_b);
+  }
+ }
+
+ for ($i=0; $i<count($add); $i++) {
+
+  if($field_a['type'] == 'user'){
+   $related_values = get_user_meta($add[$i], $name_b, true);
+  }else{
+   $related_values = get_post_meta($add[$i], $name_b, true);
+  }
+
+  if (!is_array($related_values)) {
+   if (empty($related_values)) {
+    $related_values = array();
+   } else {
+    $related_values = array($related_values);
+   }
+  }
+  if (!in_array($post_id, $related_values)) {
+   $related_values[] = $post_id;
+  }
+
+  if($field_a['type'] == 'user'){
+   update_user_meta($add[$i], $name_b, $related_values);
+   update_user_meta($add[$i], '_'.$name_b, $key_b);
+  }else{
+   update_post_meta($add[$i], $name_b, $related_values);
+   update_post_meta($add[$i], '_'.$name_b, $key_b);
+  }
+
+ }
+
+ return $value;
+}
+
+add_filter('acf/update_value/key=field_583c58aa67362', function($value, $post_id, $field) {
+ return bidirectional_update($value, $post_id, $field, 'field_583c57d352968');
+}, 10, 3);
+
+add_filter('acf/update_value/key=field_583c57d352968', function($value, $post_id, $field) {
+ return bidirectional_update($value, $post_id, $field, 'field_583c58aa67362');
+}, 10, 3);

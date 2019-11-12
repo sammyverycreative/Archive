@@ -1,0 +1,136 @@
+=HTML
+<div class="burger">
+	<a href="#menu-open" class="menu-toggle top-menu"><span></span></a>
+</div>
+
+=CSS
+/* menu */
+.menu-toggle {
+  position: relative;
+  display: block;
+  width: 23px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 0;
+  border: none;
+  margin: 0 auto;
+  transition: 0.3s;
+}
+.menu-toggle:before,
+.menu-toggle:after {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    display: block;
+    width: 100%;
+    height: 2px;
+    content: "";
+    background-color: #000;
+    transition: transform 0.3s;
+    transform-origin: 50% 0%;
+}
+.menu-toggle:before {
+  transform: translate(-50%, -7px);
+}
+.menu-toggle:after {
+  transform: translate(-50%, 0);
+}
+.menu-toggle span {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+    transition: 0.3s;
+}
+.menu-open .menu-toggle span {
+    background-color: transparent;
+}
+.menu-open .menu-toggle:before {
+    transform: translate(-50%, 0) rotate(45deg);
+}
+.menu-open .menu-toggle:after {
+    transform: translate(-50%, 0) rotate(-45deg);
+}
+
+.menu-overlay {
+    position: fixed;
+    right: -100%;
+    top: 0;
+    height: 100%;
+    width: 0;
+    background-color: rgba(255, 255, 255, 0.85);
+    overflow-x: hidden;
+    transition: 0.3s;
+    z-index: 1;
+}
+.menu-overlay a {
+    display: block;
+    color: #000;
+    text-decoration: none;
+    padding: 8px;
+    transition: 0.3s;
+}
+.menu-overlay a:hover,
+.menu-overlay a:focus {
+    color: #000;
+}
+.menu-open {
+  overflow: hidden;
+  right: 0;
+  z-index: 1;
+}
+.menu-open .menu-toggle {
+    z-index: 99999;
+}
+.menu-open .menu-overlay {
+    width: 100%;
+    right: 0;
+    z-index: 99998;
+}
+.overlay-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.overlay-content .table {
+    height: 100%;
+}
+.overlay-content .table_cell {
+    vertical-align: middle;
+    padding: 30px;
+}
+.overlay-content .logo {
+    height: 28px;
+    display: block;
+}
+.overlay-content a.logo {
+    height: 35px;
+    display: block;
+    padding: 0;
+    margin-bottom: 90px
+}
+.overlay-content a.logo:hover {
+    opacity: 1;
+}
+.overlay-content .logoimg {
+    height: inherit;
+}
+.the-menu a {
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 12px 0;
+}
+.the-menu a:hover {
+    text-decoration: underline;
+}
+/* /menu */
+
+=JS
+$('.menu-toggle').on('click', function (e) {
+      e.preventDefault();
+      $('body').toggleClass('menu-open');
+});

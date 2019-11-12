@@ -1,0 +1,7 @@
+google.maps.event.trigger(window, 'resize', {});
+
+or
+
+setTimeout(function(){
+	google.maps.event.trigger(map, 'resize');
+}, 50);

@@ -1,0 +1,22 @@
+Phone Call - tel:1-555-1234
+SMS - sms:1-555-1234&body=I can send an SMS.
+E-mail - mailto:e-mail@address.org
+Facebook (Profile) - fb://profile/665731994
+Facebook (Page) - fb://page/330599673620794	
+Twitter - twitter://user?screen_name=origamiengine	
+Google+ - gplus://plus.google.com/+Origamiengine	
+Tumblr - tumblr://x-callback-url/[id]	
+eBay - eBay://launch?itm=360703170135	
+Snapchat - snapchat://?u=username	
+Pintrest - pinterest://user/[id]	
+Instagram - instagram://user?username=[id]	
+Meercat - meerkat://	
+Parascope - pscp://user/[user id]	
+WhatsApp - whatsapp://send?abid=[users name]&text=[message text]
+Viber - viber://pa?chatURI=<URI>&context=<Your Context>&text=<Your Text>
+Line - line://msg/text/Hi there!	
+We Chat - weixin://dl/profile	
+Lnkedin - linkedin://company/origamiengine	
+Kik - ?
+Skype - skype:-skype-name-?chat|call|add|userinfo|voicemail|sendfile		 	
+Yelp - yelp:///biz/[id]

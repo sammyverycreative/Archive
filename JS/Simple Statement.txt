@@ -1,0 +1,6 @@
+$(".sidebar-menu ul.sb-sm li").each(function() {
+	if ($(this).hasClass("active")) {
+		$(this).parent().addClass('active');
+		$(this).parent().parent().addClass('active');
+	}
+});

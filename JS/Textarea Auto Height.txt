@@ -1,0 +1,5 @@
+$($('.contact-form-wrapper').find('textarea')[0]).keydown(function () {
+	const thisTextarea = this;
+	$(thisTextarea).css("height", "auto");
+	$(thisTextarea).css("height", thisTextarea.scrollHeight + 'px');
+});

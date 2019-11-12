@@ -1,0 +1,18 @@
+$(".search-filters input[type='submit']").attr("disabled", "disabled");
+// keyup
+$(".search-filters input[name='location'], .search-filters input[name='destination'], .search-filters input[name='time']").on("keyup", function() {
+    if ($(".search-filters input[name='location']").val() != "" && $(".search-filters input[name='destination']").val() != "" && $(".search-filters input[name='location']").val() != $("input[name='destination']").val() && $("input[name='time']").val() != "") {
+        $(".search-filters input[type='submit']").removeAttr("disabled");
+    } else {
+        $(".search-filters input[type='submit']").attr("disabled", "disabled");
+    }
+});
+
+// change
+$(".search-filters input[name='location'], .search-filters input[name='destination'], .search-filters input[name='time']").on("change", function() {
+    if ($(".search-filters input[name='location']").val() != "" && $(".search-filters input[name='destination']").val() != "" && $(".search-filters input[name='location']").val() != $("input[name='destination']").val() && $("input[name='time']").val() != "") {
+        $(".search-filters input[type='submit']").removeAttr("disabled");
+    } else {
+        $(".search-filters input[type='submit']").attr("disabled", "disabled");
+    }
+});

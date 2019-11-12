@@ -1,0 +1,8 @@
+function todo_notice() {
+ ?>
+ <div class="notice | notice-info (BLUE) / notice-success (GREEN) / updated (GREEN) / notice-warning (ORANGE) / update-nag (ORANGE) / notice-error (RED) / error (RED) | is-dismissible (CLOSE)">
+  <p>[...]</p>
+ </div>
+ <?php
+}
+add_action( 'admin_notices', 'todo_notice' );

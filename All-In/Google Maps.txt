@@ -1,0 +1,131 @@
+=HTML
+<div id="map_wrapper">
+    <div id="map_canvas" class="mapping"></div>
+</div>
+
+=CSS
+#map_wrapper {
+    height: 400px;
+}
+#map_canvas {
+    width: 100%;
+    height: 100%;
+}
+
+=JS
+jQuery(function($) {
+    // Asynchronously Load the map API 
+    var script = document.createElement('script');
+    script.src = "//maps.googleapis.com/maps/api/js?sensor=false&callback=initialize";
+    document.body.appendChild(script);
+});
+
+function initialize() {
+    var map;
+    var bounds = new google.maps.LatLngBounds();
+    var mapOptions = {
+        //center: new google.maps.LatLng(46.11894185009056,24.748534109374987),
+        //zoom: 7,
+        //gestureHandling: 'auto',
+        //fullscreenControl: false,
+        //zoomControl: true,
+        //disableDoubleClickZoom: true,
+        //mapTypeControl: true,
+        //mapTypeControlOptions: {
+        //    style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+        //},
+        //scaleControl: true,
+        //scrollwheel: false,
+        //streetViewControl: true,
+        //draggable : true,
+        //clickableIcons: false,
+	//disableDefaultUI: true,
+        mapTypeId: 'roadmap',
+	//mapTypeId: google.maps.MapTypeId.ROADMAP,
+	//styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"},{"visibility":"on"}]},{"featureType":"landscape","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi.business","elementType":"all","stylers":[{"visibility":"on"},{"hue":"#ff0000"},{"saturation":"-100"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road.local","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"visibility":"on"},{"color":"#a9a9a9"}]}]
+    };
+                    
+    // Display a map on the page
+    map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+    map.setTilt(45);
+        
+    // Multiple Markers
+    var markers = [
+        ['London Eye, London', 51.503454,-0.119562],
+        ['Palace of Westminster, London', 51.499633,-0.124755]
+    ];
+                        
+    // Info Window Content
+    var infoWindowContent = [
+        ['<div class="info_content">' +
+        '<h3>London Eye</h3>' +
+        '<p>The London Eye is a giant Ferris wheel situated on the banks of the River Thames. The entire structure is 135 metres (443 ft) tall and the wheel has a diameter of 120 metres (394 ft).</p>' +        '</div>'],
+        ['<div class="info_content">' +
+        '<h3>Palace of Westminster</h3>' +
+        '<p>The Palace of Westminster is the meeting place of the House of Commons and the House of Lords, the two houses of the Parliament of the United Kingdom. Commonly known as the Houses of Parliament after its tenants.</p>' +
+        '</div>']
+    ];
+        
+    // Display multiple markers on a map
+    var infoWindow = new google.maps.InfoWindow(), marker, i;
+    
+    // Loop through our array of markers & place each one on the map  
+    for( i = 0; i < markers.length; i++ ) {
+        var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+        bounds.extend(position);
+        marker = new google.maps.Marker({
+            position: position,
+            map: map,
+            //animation: google.maps.Animation.DROP,
+            title: markers[i][0],
+            //icon: '<?php echo esc_url(get_template_directory_uri()); ?>/images/marker.png'
+        });
+        
+        // Allow each marker to have an info window    
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+                infoWindow.setContent(infoWindowContent[i][0]);
+                infoWindow.open(map, marker);
+            }
+        })(marker, i));
+
+	// Effects
+	/*function toggleBounce () {
+	    if (marker.getAnimation() != null) {
+	        marker.setAnimation(null);
+	    } else {
+	        marker.setAnimation(google.maps.Animation.BOUNCE);
+	    }
+	}*/
+	/*google.maps.event.addListener(marker, 'click', function() { 
+		//if (marker.getAnimation() != null) {
+		//	marker.setAnimation(null);
+		//} else {
+		//	marker.setAnimation(google.maps.Animation.BOUNCE);
+		//}
+		toggleBounce();
+		setTimeout(toggleBounce, 1500);
+		
+		var pos = map.getZoom();
+		map.setZoom(18);
+		map.setCenter(marker.getPosition());
+		window.setTimeout(function() {
+			map.setZoom(pos);
+		},3000);
+		
+		//var info = markersData[this.index];
+		infoWindow.setContent(html);
+		infoWindow.open(map, marker);
+		//console.log(i);
+        });*/
+
+        // Automatically center the map fitting all markers on the screen
+        map.fitBounds(bounds);
+    }
+
+    // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
+    var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
+        this.setZoom(14);
+        google.maps.event.removeListener(boundsListener);
+    });
+}

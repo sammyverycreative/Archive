@@ -1,0 +1,16 @@
+<a class="twitter-timeline"
+show-replies="true/false"
+chrome="noheader/nofooter/noborders/transparent/noscrollbar"
+theme="dark/light"
+width="1920/auto"
+height="1080"
+tweet-limit="1-20"
+link-color="#2b7bb9"
+border-color="#fff"
+aria-polite="polite/assertive/rude"
+dnt="true/false"
+href="https://twitter.com/USER?ref_src=twsrc%5Etfw"></a>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+=LINK
+https://dev.twitter.com/web/embedded-timelines/parameters

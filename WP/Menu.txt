@@ -1,0 +1,8 @@
+ul.menu {}
+ul li.menu-item,
+ul li.menu-item-object-page {}
+.current-menu-item,
+.current-menu-item a {}
+
+li.menu-item-has-children {}
+ul.sub-menu {}

@@ -1,0 +1,51 @@
+-1-
+function wpdocs_custom_excerpt_length( $length ) {
+    return 20;
+}
+add_filter( 'excerpt_length', 'wpdocs_custom_excerpt_length', 999 );
+
+function wpdocs_excerpt_more( $more ) {
+    return '...';
+}
+add_filter( 'excerpt_more', 'wpdocs_excerpt_more' );
+
+function wpdocs_excerpt_more( $more ) {
+    return sprintf( '<a class="read-more" href="%1$s">%2$s</a>',
+        get_permalink( get_the_ID() ),
+        __( 'Read More', 'textdomain' )
+    );
+}
+add_filter( 'excerpt_more', 'wpdocs_excerpt_more' );
+
+-2-
+function get_excerpt(){
+    $excerpt = get_the_content();
+    //$excerpt = preg_replace(" ([.*?])",'',$excerpt);
+    //$excerpt = strip_shortcodes($excerpt);
+    //$excerpt = strip_tags($excerpt);
+    $excerpt = substr($excerpt, 0, 120);
+    //$excerpt = substr($excerpt, 0, strripos($excerpt, " "));
+    //$excerpt = trim(preg_replace( '/s+/', ' ', $excerpt));
+    $excerpt = $excerpt.'...';
+    return $excerpt;
+}
+
+-3-
+<?php
+$excerpt = get_field('field_here');
+//$excerpt = preg_replace(" ([.*?])",'',$excerpt);
+//$excerpt = strip_shortcodes($excerpt);
+//$excerpt = strip_tags($excerpt);
+$excerpt = substr($excerpt, 0, 120);
+//$excerpt = substr($excerpt, 0, strripos($excerpt, " "));
+//$excerpt = trim(preg_replace( '/s+/', ' ', $excerpt));
+//$excerpt = $excerpt.'...';
+if (strlen(get_field('field_here')) > 120) {
+	$excerpt = $excerpt.'...';
+}
+echo $excerpt;
+?>
+
+-4-
+<?php $post = get_page($id); $content = $post->post_content ; echo wp_trim_words($content, 10, '...'); ?>
+NOTE: Excerpt only with text.

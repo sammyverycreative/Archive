@@ -1,0 +1,32 @@
+.class {
+    mask-image: url(images/the-mask.png);
+    mask-mode: alpha;
+    mask-position: center center;
+    mask-size: auto;                /* initial value */
+    mask-repeat: no-repeat;
+    mask-origin: border-box;        /* initial value */
+    mask-clip: border-box;          /* initial value */
+    mask-composite: add;            /* initial value */
+}
+
+e.g.:
+=HTML
+<img src="http://tympanus.net/codrops-playground/assets/images/cssref/properties/mask/field.jpg" alt="">
+
+=CSS
+body {
+  background-color: #111;
+  color: #555;
+  font-size: 1.1em;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+img {
+  margin: 20px auto;
+  display: block;
+  width: 100%;
+  max-width: 600px;
+  height: 400px;
+  -webkit-mask: url(http://tympanus.net/codrops-playground/assets/images/cssref/properties/mask/mask-image.png) 50% 50% / 350px 350px no-repeat, url(http://tympanus.net/codrops-playground/assets/images/cssref/properties/mask/splatter.png) bottom right / 350px 350px no-repeat;
+  mask: url(http://tympanus.net/codrops-playground/assets/images/cssref/properties/mask/mask-image.png) center center / 350px 350px no-repeat, url(http://tympanus.net/codrops-playground/assets/images/cssref/properties/mask/splatter.png) bottom right / 350px 350px no-repeat;
+}

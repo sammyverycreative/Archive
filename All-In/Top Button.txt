@@ -1,0 +1,42 @@
+=HTML
+<a id="top-btn"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+
+=SCSS
+#top-btn {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    width: 37px;
+    height: 37px;
+    display: none;
+    text-align: center;
+    border-radius: 500px;
+    background-color: #2F3337;
+    z-index: 999;
+    &.show {
+        display: block;
+    }
+    i {
+        color: #fff;
+        font-size: 15px;
+        line-height: 37px;
+    }
+}
+
+#JS
+var btn = $('#top-btn');
+
+$(window).scroll(function() {
+	if ($(window).scrollTop() > 300) {
+	  //btn.addClass('show');
+	  btn.fadeIn();
+	} else {
+  	  //btn.removeClass('show');
+	  btn.fadeOut();
+	}
+});
+
+btn.on('click', function(e) {
+	e.preventDefault();
+	$('html, body').animate({scrollTop:0}, '300');
+});

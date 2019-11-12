@@ -1,0 +1,2 @@
+<?php echo category_description( $category_id ); ?> 
+<?php echo tag_description( $tag_id ); ?> 

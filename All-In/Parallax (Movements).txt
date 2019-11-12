@@ -1,0 +1,45 @@
+=HTML
+<div id="landing-content">
+    <section class="slider"> 
+        <img src="http://i.imgur.com/fVWomWz.png"></img>
+    </section>
+</div>
+
+=CSS
+#landing-content {
+	overflow: hidden;
+	background-image: url(http://i.imgur.com/F2FPRMd.jpg);
+	width: 100%;
+	background-size: 150% 150%;
+	background-repeat: no-repeat;
+	max-height: 500px;
+	border-bottom: solid;
+	border-bottom-color: #628027;
+	border-bottom-width: 5px;
+}
+
+.slider {
+	margin-left: auto;
+	margin-right: auto;
+	overflow: hidden;
+	padding-top: 200px;
+	max-width: 1002px;
+}
+
+.slider img {
+	width: 80%;
+	padding-left: 10%;
+	padding-right: 10%;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+=JS
+$(document).ready(function(){
+  $('#landing-content').mousemove(function(e){
+    var x = -(e.pageX + this.offsetLeft) / 20;
+    var y = -(e.pageY + this.offsetTop) / 20;
+    $(this).css('background-position', x + 'px ' + y + 'px');
+  });    
+});

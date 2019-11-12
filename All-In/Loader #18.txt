@@ -1,0 +1,183 @@
+=HTML
+<div id="loader">
+    <div class="loader-wrap">
+        <div class="loader">
+          <div class="the-loader">
+             <div class="text">Loading</div>
+             <div class="dots">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+             </div>
+          </div>
+	</div>
+    </div>
+</div>
+
+=CSS
+@-webkit-keyframes dots {
+  0% {
+    left: -10px;
+  }
+  20%,100% {
+    left: 10px;
+  }
+}
+@keyframes dots {
+  0% {
+    left: -10px;
+  }
+  20%,100% {
+    left: 10px;
+  }
+}
+@-webkit-keyframes show-dot {
+  0%,20% {
+    width: 0px;
+    height: 0px;
+    margin: 5px;
+    margin-right: 15px;
+  }
+  30%,100% {
+    width: 10px;
+    height: 10px;
+    margin: 0px;
+    margin-right: 10px;
+  }
+}
+@keyframes show-dot {
+  0%,20% {
+    width: 0px;
+    height: 0px;
+    margin: 5px;
+    margin-right: 15px;
+  }
+  30%,100% {
+    width: 10px;
+    height: 10px;
+    margin: 0px;
+    margin-right: 10px;
+  }
+}
+@-webkit-keyframes dot-fall-left {
+  0%, 5% {
+    left: 0px;
+  }
+  100% {
+    left: 200px;
+  }
+}
+@keyframes dot-fall-left {
+  0%, 5% {
+    left: 0px;
+  }
+  100% {
+    left: 200px;
+  }
+}
+@-webkit-keyframes dot-fall-top {
+  0%, 5% {
+    top: 0px;
+  }
+  30%,100% {
+    top: 50vh;
+  }
+}
+@keyframes dot-fall-top {
+  0%, 5% {
+    top: 0px;
+  }
+  30%,100% {
+    top: 50vh;
+  }
+}
+
+#loader {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  z-index: 9999999999;
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
+}
+#loader .loader-wrap,
+#loader .loader-wrap .loader {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+#loader .loader-wrap {
+  display: inline-table;
+}
+#loader .loader {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+body {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  height: 100vh;
+  font-family: "Roboto", sans-serif;
+}
+body .the-loader {
+  display: flex;
+  font-size: 2em;
+}
+body .the-loader .dots {
+  display: flex;
+  position: relative;
+  top: 20px;
+  left: -10px;
+  width: 100px;
+  -webkit-animation: dots 4s ease infinite 1s;
+          animation: dots 4s ease infinite 1s;
+}
+body .the-loader .dots div {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+  border-radius: 100%;
+  background-color: black;
+}
+body .the-loader .dots div:nth-child(1) {
+  width: 0px;
+  height: 0px;
+  margin: 5px;
+  margin-right: 15px;
+  -webkit-animation: show-dot 4s ease-out infinite 1s;
+          animation: show-dot 4s ease-out infinite 1s;
+}
+body .the-loader .dots div:nth-child(4) {
+  background-color: transparent;
+  -webkit-animation: dot-fall-left 4s linear infinite 1s;
+          animation: dot-fall-left 4s linear infinite 1s;
+}
+body .the-loader .dots div:nth-child(4):before {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+  border-radius: 100%;
+  background-color: black;
+  content: '';
+  -webkit-animation: dot-fall-top 4s cubic-bezier(0.46, 0.02, 0.94, 0.54) infinite 1s;
+          animation: dot-fall-top 4s cubic-bezier(0.46, 0.02, 0.94, 0.54) infinite 1s;
+}
+
+=JS
+jQuery(document).ready(function($) {
+	$("#loader").delay(500).fadeOut('slow');
+});
+
+=SOURCE
+https://www.codepen.io/z-/pen/xywaoW

@@ -1,0 +1,5 @@
+=FUNCTIONS
+function project_admin_footer () { 
+    echo __( '<span id="footer-thankyou">Created by <a href="https://www.your-website.domain/" target="_blank" style="color: #000 !important">Your Brand</a></span>', 'project-slug' ); 
+}  
+add_filter('admin_footer_text', 'project_admin_footer');

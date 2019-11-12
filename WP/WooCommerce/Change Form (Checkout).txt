@@ -1,0 +1,203 @@
+=FUNCTIONS
+function vc_service_checkout_fields( $fields ) {
+    if (vc_cart_has_service_item()) {
+        $fields = array(
+            'billing' => array(
+                'billing_fullname' => array(
+                    'label' => 'Full Name',
+                    'placeholder' => '',
+                    'required' => true,
+                    'clear' => true
+                ),
+                'billing_email' => array(
+                    'label' => 'E-mail Address',
+                    'placeholder' => '',
+                    'required' => true,
+                    'clear' => true
+                ),
+                'billing_phone' => array(
+                    'label' => 'Phone Number',
+                    'placeholder' => '',
+                    'required' => true,
+                    'clear' => true
+                )
+            ),
+            'intervention_location' => array(
+                'intervention_address' => array(
+                    'label' => 'Address',
+                    'placeholder' => '',
+                    'required' => true,
+                    'clear' => true
+                ),
+                'intervention_postcode' => array(
+                    'label' => 'Zip Code',
+                    'placeholder' => '',
+                    'required' => true,
+                    'clear' => true
+                ),
+                'intervention_city' => array(
+                    'label' => 'City',
+                    'placeholder' => '',
+                    'required' => true,
+                    'clear' => true,
+                    //'default' => 'New York'
+                ),
+                'intervention_floor' => array(
+                    'label' => 'Intern Code',
+                    'placeholder' => '',
+                    'required' => false,
+                    'clear' => true
+                ),
+            ),
+            'intervention_datetime' => array(
+                'intervention_calendar' => array(
+                    'label' => 'Date',
+                    'placeholder' => '',
+                    'required' => true,
+                    'type' => 'calendar_field',
+                    'block_days' => 0
+                )
+            ),
+            'images' => array(
+                'upload_images' => array(
+                    'label' => 'Attach Images',
+                    'placeholder' => '',
+                    'required' => false,
+                    'clear' => true,
+                    'type' => 'images_upload'
+                )
+            ),
+            'order' => array (
+                'order_comments' => array (
+                        'type' => 'textarea',
+                        'label' => 'Other details',
+                        'placeholder' => ''
+                    )
+
+                )
+        );
+    } else {
+        unset( $fields['billing']['billing_country'] );
+	unset( $fields['billing']['billing_state'] );
+        unset( $fields['billing']['billing_address_2'] );
+        unset( $fields['billing']['billing_company'] );
+        unset( $fields['shipping']['shipping_country'] );
+        unset( $fields['shipping']['shipping_state'] );
+        unset( $fields['shipping']['shipping_address_2'] );
+        unset( $fields['shipping']['shipping_company'] );
+        
+        $fields['billing']['billing_first_name']['label'] = 'First Name';
+        $fields['billing']['billing_last_name']['label'] = 'Last Name';
+        $fields['billing']['billing_email']['label'] = 'E-mail address';
+        $fields['billing']['billing_email']['required'] = true;
+        $fields['billing']['billing_phone']['label'] = 'Phone Number';
+        $fields['billing']['billing_address_1']['label'] = 'Address';
+        $fields['billing']['billing_address_1']['placeholder'] = '';
+        $fields['billing']['billing_city']['label'] = 'City';
+        $fields['billing']['billing_postcode']['label'] = 'Zip Code';
+        
+        $fields['shipping']['shipping_first_name']['label'] = 'First Name';
+        $fields['shipping']['shipping_last_name']['label'] = 'Last Name';
+        $fields['shipping']['shipping_email']['label'] = 'E-mail Address';
+        $fields['shipping']['shipping_email']['required'] = true;
+        $fields['shipping']['shipping_phone']['label'] = 'Phone Number';
+        $fields['shipping']['shipping_address_1']['label'] = 'Address';
+        $fields['shipping']['shipping_address_1']['placeholder'] = '';
+        $fields['shipping']['shipping_city']['label'] = 'City';
+        $fields['shipping']['shipping_postcode']['label'] = 'Zip Code';
+
+        $fields['intervention_datetime'] = array(
+            'intervention_calendar' => array(
+                'label' => 'Date',
+                'placeholder' => '',
+                'required' => true,
+                'type' => 'calendar_field',
+                'block_days' => 2
+            )
+        );
+        $fields['images'] = array(
+            'upload_images' => array(
+                'label' => 'Attach Images',
+                'placeholder' => '',
+                'required' => false,
+                'clear' => true,
+                'type' => 'images_upload'
+            )
+        );
+        
+        $fields['order'] = array(
+            'order_comments' => array(
+                'type' => 'textarea',
+                'label' => 'Other details',
+                'placeholder' => ''
+            )
+        );
+
+        $fields['quiz'] = array(
+            'tva_select' => array(
+                'label' => '',
+                'required' => false,
+                //'class' => array('classHere1'),
+                //'label_class' => array('classHere2'),
+                //'input_class' => array('classHere3'),
+                'type' => 'radio',
+                'options' => array(
+                    //'no_option' => '',
+                    'option_1' => 'TVA 10%',
+                    'option_2' => 'TVA 20%',
+                ),
+            ),
+            'the_type' => array(
+                'label' => '',
+                'required' => false,
+                'type' => 'select',
+                'options' => array(
+                    'no_option' => 'Select option',
+                    'option_1' => 'Option #1',
+                    'option_2' => 'Option #2',
+                    'option_3' => 'Option #3',
+                ),
+            ),
+        );
+    }
+    
+    if (( $data = @get_field('conditions_de_ventes', 'options'))) {
+        $fields['agree'] = array(
+            array(
+                'label' => 'Terms and Conditions',
+                'show_label' => $data,
+                'placeholder' => '',
+                'type' => 'vc_checkbox',
+                'required' => true,
+            )
+        );
+    }
+    return $fields;
+}
+add_filter( 'woocommerce_checkout_fields', 'vc_service_checkout_fields' );
+
+// Fields WRAP
+/*function change_woocommerce_field_markup($field, $key, $args, $value) {
+   $field = '<div class="single-field-wrap">'.$field.'</div>';
+   //if($key === 'quiz')
+   //   $field = '<div class="custom-wrap">'.$field;
+   //else if ($key === 'quiz')
+   //   $field = $field.'</div>';
+    return $field;
+} 
+add_filter("woocommerce_form_field_radio","change_woocommerce_field_markup", 10, 4);*/
+
+=HTML
+<?php if( ( $fields = $this->checkout->get_checkout_fields('billing') ) ): ?>
+    <?php foreach ($fields as $key => $field): ?>
+        <?php /*
+            ob_start();
+            woocommerce_form_field($key, $field, $this->checkout->get_value($key)); 
+            $radios = ob_get_clean();
+            $radios = str_replace('<input','<div class="field-wrap"><input',$radios);
+            $radios = str_replace('</label>','</label></div>',$radios);
+            echo $radios;
+        */ ?>
+        <?php woocommerce_form_field($key, $field, $this->checkout->get_value($key)); ?>
+    <?php endforeach; ?>
+<?php endif; ?>

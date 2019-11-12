@@ -1,0 +1,17 @@
+<?php 
+	$id_post =  get_the_ID();
+	$post_type = get_post_type($id_post);
+
+	if(is_single($id_post)){ 
+?>
+
+<script type="text/javascript">
+jQuery(document).ready(function($){
+	var selector = '.menu-item-object-<?php echo $post_type; ?>';
+	if(jQuery(selector).length) {
+		jQuery(selector).find('a').css('font-weight', 'bold');
+	}
+});
+</script>
+
+<?php } ?>

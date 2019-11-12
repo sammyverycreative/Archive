@@ -1,0 +1,37 @@
+blockquote {
+    position: relative;
+    background: transparent;
+}
+blockquote:before {
+    position: absolute;
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 0;
+    display: block;
+    height: 100%;
+    width: 25px;
+    border-radius: 0;
+    background: #000000;
+}
+blockquote:after {
+    position: absolute;
+    top: 50%;
+    left: 4px;
+    display: block;
+    height: 100%;
+    content: "\201C";
+    color: #FFFFFF;
+    font-size: 55px;
+}
+blockquote p {
+    color: #FFFFFF;
+    font-family: 'Open Sans';
+    font-size: 12px;
+    font-style: italic;
+    line-height: 28px;
+    font-weight: 400;
+    /*padding-left: 25px;*/
+    margin: 0;
+    margin-left: 25px;
+}

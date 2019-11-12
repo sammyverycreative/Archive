@@ -1,0 +1,5 @@
+$(function() {
+  $(".the-form a").on("click", function(e) {
+    $(this).closest('form').submit();
+  });
+});

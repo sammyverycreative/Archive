@@ -1,0 +1,45 @@
+.post-navigation {
+    text-align: center;
+}
+.post-navigation ul.page-numbers {
+    text-align: center;
+    margin: 0 auto;
+}
+.post-navigation ul.page-numbers li {
+    display: inline-block;
+    margin: 0 2.5px;
+}
+.post-navigation ul.page-numbers li:first-child {
+    margin-left: 0;
+}
+.post-navigation ul.page-numbers li:last-child {
+    margin-right: 0;
+}
+.post-navigation ul.page-numbers li span,
+.post-navigation ul.page-numbers li a {
+    display: block;
+    font-size: 14px;
+    line-height: 14px;
+    padding: 5px 10px;
+}
+.post-navigation ul.page-numbers li span.current {
+    color: #54BAEA;
+    border: 2px solid #54BAEA;
+}
+.post-navigation ul.page-numbers li a {
+    border: 2px solid #1a1f21;
+}
+.post-navigation ul.page-numbers li a.prev,
+.post-navigation ul.page-numbers li a.next,
+.post-navigation ul.page-numbers li span.dots {
+    border: 2px solid transparent;
+}
+.post-navigation ul.page-numbers li a.prev:hover,
+.post-navigation ul.page-numbers li a.next:hover/*,
+.post-navigation ul.page-numbers li span.dots:hover*/ {
+    border: 2px solid transparent;
+}
+.post-navigation ul.page-numbers li a:hover {
+    color: #54BAEA;
+    border: 2px solid #54BAEA;
+}

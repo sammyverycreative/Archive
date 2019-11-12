@@ -1,0 +1,61 @@
+=HTML
+<div class="fadeImg" >
+	<img src="images/25sprout.jpg">
+	<img style="display:none;" src="images/alex.jpg">
+	<img style="display:none;" src="images/thundersha.jpg">
+	<img style="display:none;" src="images/cathy.jpg">
+	<img style="display:none;" src="images/david.jpg">
+</div>
+
+=JS
+$next = 1;		// Fixed, do not modfy;
+$current = 0;		// Fixed, do not modfy;
+$interval = 4000;	// You can set single picture show time
+$fadeTime = 800;	// You can set fadeing-transition time
+$imgNum = 5;		// How many pictures do you have
+
+$(document).ready(function(){
+	//NOTE : Div Wrapper should with css: relative
+	//NOTE : img should with css: absolute
+	//NOTE : img Width & Height can change by you
+	$('.fadeImg').css('position','relative');
+	$('.fadeImg img').css({'position':'absolute','width':'332px','height':'500px'});
+
+	nextFadeIn();
+});
+
+function nextFadeIn(){
+	//make image fade in and fade out at one time, without splash vsual
+	$('.fadeImg img').eq($current).delay($interval).fadeOut($fadeTime)
+	.end().eq($next).delay($interval).hide().fadeIn($fadeTime, nextFadeIn);
+	    
+	// if you have 5 images, then (eq) range is 0~4
+	// so we should reset to 0 when value > 4
+	if($next < $imgNum-1){ $next++; } else { $next = 0;}
+	if($current < $imgNum-1){ $current++; } else { $current = 0; }
+};
+
+-or-
+=HTML
+<div id="random-words">
+	<h1 style="display: none;"></h1>
+</div>
+
+=JS
+var classes = [
+    'text1',
+    'text2',
+    'text3',  
+    'text4'
+];
+
+(function displayClass(i) {
+    $('#random-words h1').text(classes[i]).fadeIn(1000, function() {
+        $(this).delay(1500).fadeOut(1000, function() {
+            displayClass((i + 1) % classes.length);
+        });
+    });
+})(0);
+
+=SOURCE
+https://www.stackoverflow.com/questions/30337621/fade-in-fade-out-of-words-in-array-list-using-javascript

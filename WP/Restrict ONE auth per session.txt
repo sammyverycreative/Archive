@@ -1,0 +1,8 @@
+function wp_destroy_all_other_sessions() {
+    $token = wp_get_session_token();
+    if ( $token ) {
+        $manager = WP_Session_Tokens::get_instance( get_current_user_id() );
+        $manager->destroy_others( $token );
+    }
+}
+add_action('init', 'wp_destroy_all_other_sessions');

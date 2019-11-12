@@ -1,0 +1,35 @@
+=LINK
+http://css3.bradshawenterprises.com/transforms
+
+=CODE
+#skew {
+  transform:skew(35deg);
+}
+#scale {
+  transform:scale(1,0.5);
+}
+#rotate {
+  transform:rotate(45deg);
+}
+#translate {
+  transform:translate(10px, 20px);
+}
+#rotate-skew-scale-translate {
+  transform:skew(30deg) scale(1.1,1.1) rotate(40deg) translate(10px, 20px);
+}
+
+=E.G.
+#transDemo4 div {
+  transition:all 2s ease-in-out;
+  perspective: 800px;
+  perspective-origin: 50% 100px;
+}
+#transDemo4:hover #rotateX {
+  transform:rotateX(180deg);
+}
+#transDemo4:hover #rotateY {
+  transform:rotateY(180deg);
+}
+#transDemo4:hover #rotateZ {
+  transform:rotateZ(180deg);
+}

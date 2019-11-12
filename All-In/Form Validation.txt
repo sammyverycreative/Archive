@@ -1,0 +1,119 @@
+=HTML
+<div id="the-errors" class="woocommerce-NoticeGroup woocommerce-NoticeGroup-checkout custom-woo-errors">
+    <ul class="woocommerce-error" role="alert">
+        <li id="error1"><strong>...</strong> ...</li>
+        <li id="error2"><strong>...</strong> ...</li>
+        <li id="error2a"><strong>...</strong> ...</li>
+        <li id="error3">...</li>
+        <li id="error4"><strong>...</strong> ...</li>
+        <li id="error5"><strong>...</strong> ...</li>
+        <li id="error6"><strong>...</strong> ...</li>
+    </ul>
+</div>
+
+<form>
+[...]
+</form>
+
+=CSS
+#the-errors {
+    display: none;
+}
+.custom-woo-errors ul li {
+    display: none;
+}
+.custom-woo-errors ul li.active {
+    display: block;
+}
+
+=JS
+function isValidEmailAddress(emailAddress) {
+    var emailPattern = new RegExp(/^(("[\w-+\s]+")|([\w-+]+(?:\.[\w-+]+)*)|("[\w-+\s]+")([\w-+]+(?:\.[\w-+]+)*))(@((?:[\w-+]+\.)*\w[\w-+]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][\d]\.|1[\d]{2}\.|[\d]{1,2}\.))((25[0-5]|2[0-4][\d]|1[\d]{2}|[\d]{1,2})\.){2}(25[0-5]|2[0-4][\d]|1[\d]{2}|[\d]{1,2})\]?$)/i);
+    return emailPattern.test(emailAddress);
+};
+function isValidPhoneNumber(phoneNumber) {
+    var phonePattern = new RegExp(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im);
+    return phonePattern.test(phoneNumber);
+};
+$('form.checkout button[type="submit"]').on('click',function(e) {
+  /*if ( $('#checkbox').length ) {
+    if ( !$('#checkbox').is(':checked') ) {
+      e.preventDefault();
+      $('#agreement').show();
+    } else {
+      $('#agreement').hide();
+    }
+  }*/
+  if ( $('#checkbox').length ) {
+    if ( !$('#checkbox').is(':checked') ) {
+      e.preventDefault();
+      $('#error3').addClass('active');
+    } else {
+      $('#error3').removeClass('active');
+    }
+  }
+  if ($('#the-errors').length) {
+    var field1 = $('#field1').val();
+    var field2 = $('#field2').val();
+    var radio = $("input:radio[name='radio_field']").is(":checked");
+    if (field1=="" || field2=="" || !isValidEmailAddress(field2) || radio=="" || !$('#checkbox').is(':checked') || select=="" && select=="no_option") {
+      $('#the-errors').show();
+      $('html, body').animate({ scrollTop: $('#the-errors').offset().top - 150 }, 500); 
+    } else {
+      $('#the-errors').hide();
+    }
+    if (field1=="") {
+      e.preventDefault();
+      $('#error1').addClass('active');
+    } else {
+      $('#error1').removeClass('active');
+    }
+    if (field2=="") {
+      e.preventDefault();
+      $('#error2').addClass('active');
+    } else {
+      $('#error2').removeClass('active');
+    }
+    if (!isValidEmailAddress(field2)) {
+        e.preventDefault();
+        $('#error2a').addClass('active');
+    } else {
+        $('#error2a').removeClass('active');
+    }
+    if (field2=="") {
+      e.preventDefault();
+      $('#error2').addClass('active');
+    } else {
+      $('#error2').removeClass('active');
+    }
+    if (radio=="") {
+      e.preventDefault();
+      $('#error5').addClass('active');
+    } else {
+      $('#error5').removeClass('active');
+    }
+    if (select=="" || select=="no_option") {
+      e.preventDefault();
+      $('#error6').addClass('active');
+    } else {
+      $('#error6').removeClass('active');
+    }
+    if ( $('#ship-to-different-address-checkbox').length ) {
+      if ( $('#ship-to-different-address-checkbox').is(':checked') ) {
+        var field4 = $('#field4').val();
+        if (field4=="") {
+          $('#the-errors').show();
+          $('html, body').animate({ scrollTop: pos.top }, 500); 
+        } else {
+          $('#the-errors').hide();
+        }
+        if (field4=="") {
+          e.preventDefault();
+          $('#error4').addClass('active');
+        } else {
+          $('#error4').removeClass('active');
+        }
+      }
+    }
+  }
+});

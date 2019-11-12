@@ -1,0 +1,230 @@
+=FUNCTIONS
+
+// ADD POST
+function add_post() {
+
+    if (isset($_POST['add-form'])) {
+
+        // featured image
+        if ($_FILES) {
+            require_once(ABSPATH . "wp-admin" . '/includes/image.php');
+            require_once(ABSPATH . "wp-admin" . '/includes/file.php');
+            require_once(ABSPATH . "wp-admin" . '/includes/media.php');
+
+            $uploaddir = wp_upload_dir();
+            $file = $_FILES['featured_image' ];
+            $uploadfile = $uploaddir['path'] . '/' . basename( $file['name'] );
+            move_uploaded_file( $file['tmp_name'] , $uploadfile );
+            $filename = basename( $uploadfile );
+            $wp_filetype = wp_check_filetype(basename($filename), null );
+            $attachment = array(
+                'post_mime_type' => $wp_filetype['type'],
+                'post_title' => preg_replace('/\.[^.]+$/', '', $filename),
+                'post_content' => '',
+                'post_status' => 'inherit',
+                'menu_order' => $_i + 1000
+                );
+            $attach_id = wp_insert_attachment( $attachment, $uploadfile );
+        }
+
+        // title
+        $post = array(
+            'post_status' => 'publish',
+            'post_title' => $_POST['title']
+        );
+        $postID = wp_insert_post($post);
+
+        // content
+        $my_post = array(
+            'ID' => $postID,
+            'post_title' => $_POST['title'],
+            'post_name' => sanitize_title($_POST['title'])
+        );
+        $my_post['post_content'] = $_POST['description'];
+        wp_update_post($my_post);
+
+        if ($_FILES) {
+            update_post_meta($postID,'_thumbnail_id',$attach_id);
+            set_post_thumbnail( $postID, $thumbnail_id );
+        }
+
+        wp_set_post_categories( $postID, $_POST['category'] );
+
+        //wp_set_post_tags( $postID, $_POST['ws_tags'] );
+        wp_set_post_terms( $postID, array($_POST['ws-tags']), 'post_tag', false );
+
+        $editUrl = get_permalink(get_field('page_edit-post', 'options')).'/'.$postID;
+        wp_redirect($editUrl); die();
+    }
+
+}
+add_action( 'init', 'add_post' );
+
+// EDIT POST
+function edit_post() {
+
+    $postID = $_POST['post_id'];
+
+    if (isset($_POST['update-post'])) {
+
+        // title & slug
+        $my_post = array(
+            'ID' => $postID,
+            'post_title' => $_POST['title'],
+            'post_name' => sanitize_title($_POST['title'])
+        );
+        $my_post['post_content'] = $_POST['description'];
+        wp_update_post($my_post);
+
+        //category & tags
+        wp_set_post_categories( $postID, $_POST['category'] );
+        //wp_set_post_tags( $postID, $_POST['ws-tags'] );
+        wp_set_post_terms( $postID, array($_POST['ws-tags']), 'post_tag', false );
+
+        //acf
+        update_field('field_5cfe4964cfbcb',$_POST['input1'],$postID);
+        update_field('field_5cfe499bcfbcc',$_POST['input2'],$postID);
+        update_field('field_5cfe49dfcfbcd',$_POST['input3'],$postID);
+
+        // checkboxes
+        $defaults = array(
+            'checkbox1' => 0,
+            'checkbox2' => 0,
+            'checkbox3' => 0,
+        );
+        //$checks = array_merge( $defaults, $_POST['amenities'] );
+        $cArray = array();
+        $array = $_POST['amenities'];
+        if ($array['checkbox1'] == 'on') { $cArray[] = 'checkbox1'; }
+        if ($array['checkbox2'] == 'on') { $cArray[] = 'checkbox2'; }
+        if ($array['checkbox3'] == 'on') { $cArray[] = 'checkbox3'; }
+        update_field('fieldName', $cArray, $postID);
+
+        // explode
+        $period = $_POST['daterange'];
+        $date = explode(" - ", $period);
+        update_field('field_5cfe4d18cfbde',$date[0],$postID);
+        update_field('field_5cfe4d88cfbdf',$date[1],$postID);
+
+        // repeater (images)
+        if ($_FILES) {
+
+            require_once( ABSPATH . 'wp-admin/includes/image.php' );
+            require_once( ABSPATH . 'wp-admin/includes/file.php' );
+            require_once( ABSPATH . 'wp-admin/includes/media.php' );
+
+            // featured image
+            $fi_uploaddir = wp_upload_dir();
+            $fi_file = $_FILES['fi'];
+            $fi_uploadfile = $fi_uploaddir['path'] . '/' . basename($fi_file['name']);
+            move_uploaded_file($fi_file['tmp_name'], $uploadfile);
+            $fi_filename = basename($fi_uploadfile);
+            $fi_wp_filetype = wp_check_filetype(basename($fi_filename), null );
+            $fi_attachment = array(
+                'post_mime_type' => $fi_wp_filetype['type'],
+                'post_title' => preg_replace('/\.[^.]+$/', '', $fi_filename),
+                'post_content' => '',
+                'post_status' => 'inherit',
+                'menu_order' => $_i + 1000
+                );
+            $fi_attach_id = wp_insert_attachment($fi_attachment, $fi_uploadfile);
+            update_post_meta($postID,'_thumbnail_id',$fi_attach_id);
+            set_post_thumbnail($postID, $thumbnail_id);
+
+            // gallery
+            $files = $_FILES['upload_attachment'];
+            $count = 0;
+            $galleryImages = array();
+
+            foreach ($files['name'] as $count => $value) {
+                if ($files['name'][$count]) {
+
+                    $file = array(
+                        'name'     => $files['name'][$count],
+                        'type'     => $files['type'][$count],
+                        'tmp_name' => $files['tmp_name'][$count],
+                        'error'    => $files['error'][$count],
+                        'size'     => $files['size'][$count]
+                    );
+
+                    $upload_overrides = array( 'test_form' => false );
+                    $upload = wp_handle_upload($file, $upload_overrides);
+
+                    // $filename should be the path to a file in the upload directory.
+                    $filename = $upload['file'];
+
+                    // The ID of the post this attachment is for.
+                    $parent_post_id = $postID;
+
+                    // Check the type of tile. We'll use this as the 'post_mime_type'.
+                    $filetype = wp_check_filetype( basename( $filename ), null );
+
+                    // Get the path to the upload directory.
+                    $wp_upload_dir = wp_upload_dir();
+
+                    // Prepare an array of post data for the attachment.
+                    $attachment = array(
+                        'guid'           => $wp_upload_dir['url'] . '/' . basename( $filename ), 
+                        'post_mime_type' => $filetype['type'],
+                        'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ),
+                        'post_content'   => '',
+                        'post_status'    => 'inherit'
+                    );
+
+                    // Insert the attachment.
+                    $attach_id = wp_insert_attachment( $attachment, $filename, $parent_post_id );
+
+                    // Make sure that this file is included, as wp_generate_attachment_metadata() depends on it.
+                    require_once( ABSPATH . 'wp-admin/includes/image.php' );
+
+                    // Generate the metadata for the attachment, and update the database record.
+                    $attach_data = wp_generate_attachment_metadata( $attach_id, $filename );
+                    wp_update_attachment_metadata( $attach_id, $attach_data );
+
+                    array_push($galleryImages, array('image' => $attach_id));
+
+                }
+                
+            }
+            
+            if (!empty($galleryImages)) {
+                // add images to the gallery field
+                update_field('field_5cfe45ecc67a3', $galleryImages, $postID);
+            }
+
+        }
+
+    }
+
+}
+add_action( 'init', 'edit_post' );
+
+// REMOVE POST
+function rem_post() {
+
+    $postID = $_POST['post_id'];
+
+    if (isset($_POST['remove-post'])) {
+        wp_trash_post($postID, true);
+        wp_redirect(esc_url(site_url())); die();
+    }
+
+}
+add_action( 'init', 'rem_post' );
+
+=HTML
+<form id="edit-post" action="" method="post" class="select-block" enctype="multipart/form-data">
+	[...]
+	<label for=""><?php _e('Featured Image', THEME_TEXT_DOMAIN); ?></label>
+	<input type="file" name="fi" class="file" size="50" />
+	<?php wp_nonce_field( 'fi', 'my_image_upload_nonce' ); ?>
+
+	<label for=""><?php _e('Gallery', THEME_TEXT_DOMAIN); ?></label>
+	<input type="file" name="upload_attachment[]" class="files" size="50" multiple="multiple" />
+	<?php wp_nonce_field( 'upload_attachment', 'my_image_upload_nonce' ); ?>
+	[...]
+	<input type="hidden" name="post_id" value="<?php echo $postID; ?>">
+	<input type="hidden" name="update-post" value="send">
+	<input type="submit" value="Save">
+</form>
+NOTE: "enctype" for upload images.

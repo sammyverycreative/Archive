@@ -1,0 +1,4 @@
+get_post_ancestors( int|WP_Post $post )
+
+=SOURCE
+https://developer.wordpress.org/reference/functions/get_post_ancestors

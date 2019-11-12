@@ -1,0 +1,125 @@
+.radios-wrapper {
+    display: inline-block;
+    width: 100%;
+    margin-top: 10px;
+
+    .radio-block {
+        display: inline-block;
+        float: left;
+        margin-right: 20px;
+        margin-bottom: 5px;
+    }
+}
+
+.radio-block {
+    label {
+        margin: 0;
+        height: auto;
+        background: none;
+        line-height: normal;
+        padding: 0 10px;
+        padding-left: 25px;
+        display: inline-block;
+        width: 100%;
+        position: relative;
+        cursor: pointer;
+        letter-spacing: normal;
+        text-transform: none;
+        font-weight: 400;
+        font-size: 1.4rem;
+        color: $yellow-color;
+
+        @include small-mobile {}
+
+
+        span {
+            font-size: 1.4rem;
+            color: $yellow-color;
+            margin-top: 5px;
+            display: inline-block;
+            float: left;
+        }
+    }
+
+    a.read-more {
+        width: auto;
+        margin-left: 0;
+        padding-left: 0;
+
+        img {
+            margin-top: 4px;
+        }
+
+        @include mobile {
+            float: none;
+        }
+    }
+
+    input[type="radio"] {
+        border: 0;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    label:before {
+        content: "";
+        display: inline-block;
+        width: 17px;
+        height: 15px;
+        position: absolute;
+        left: 0px;
+        top: 2px;
+
+        @include rounded(0px);
+
+        vertical-align: -3px;
+        background-image: url(images/radio-bg.svg);
+        background-size: 100% auto;
+        background-position: 0 0;
+        background-repeat: no-repeat;
+        -webkit-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+        z-index: 1;
+
+        @include small-mobile {}
+    }
+
+    label:after {
+        content: "";
+        display: inline-block;
+        width: 17px;
+        height: 15px;
+        position: absolute;
+        left: 0px;
+        top: 2px;
+
+        @include rounded(0px);
+
+        vertical-align: -3px;
+        background-image: url(images/radio-bg.svg);
+        background-size: 100% auto;
+        background-position: 0 -16px;
+        background-repeat: no-repeat;
+        -webkit-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+        z-index: 2;
+        opacity: 0;
+
+        @include small-mobile {}
+    }
+
+    input:hover + label:before {}
+
+    input:checked + label:after {
+        opacity: 1;
+    }
+
+    input:checked + label:before {
+        opacity: 1;
+    }
+}

@@ -1,0 +1,1 @@
+$('classHere').attr('target','_blank');

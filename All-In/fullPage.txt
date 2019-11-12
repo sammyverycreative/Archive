@@ -1,0 +1,74 @@
+=HTML
+<div id="fullpage">
+<header class="fp-auto-height">
+[...]
+</header>
+
+<div class="section">[...]</div>
+<div class="section">[...]</div>
+<div class="section">[...]</div>
+
+<footer class="section fp-auto-height">
+</footer>
+</div>
+
+=CSS
+#fullpage.fullpage-wrapper {
+  @include tablet {
+    transform: none !important;
+  }
+}
+
+@media (max-width: 1240px) {
+  .section {
+    height: 100% !important;
+  }
+}
+@media (max-height: 700px) {
+  .section {
+    height: 100% !important;
+  }
+}
+@media (max-width: 1240px) {
+  .section .fp-tableCell {
+    display: block;
+    max-height: 100%;
+    height: 100% !important;
+  }
+}
+@media (max-height: 700px) {
+  .section .fp-tableCell {
+    display: block;
+    max-height: 100%;
+    height: 100% !important;
+  }
+}
+@media (max-width: 1240px) {
+  .section .fp-table {
+    display: block;
+    height: 100% !important;
+  }
+}
+@media (max-height: 700px) {
+  .section .fp-table {
+    display: block;
+    height: 100% !important;
+  }
+}
+
+=JS
+// fullPage
+$('#fullpage').fullpage({
+    //licenseKey: '',
+    fitToSection: false,
+    scrollBar: false,
+    //scrollOverflow: true,
+    //fixedElements: 'footer',
+    responsiveWidth: 1000,
+    responsiveHeight: 600,
+    //slidesNavigation: false
+});
+
+/*if ($('.slider').length) {
+    $('.slider')[0].slick.refresh();
+}*/

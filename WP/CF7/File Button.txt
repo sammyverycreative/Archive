@@ -1,0 +1,14 @@
+=WP
+[file* vcard id:target class:blue-btn filetypes:doc|docx|pdf]
+<i class="fa fa-address-card" aria-hidden="true"></i> <a href="" id="button">Upload your CV</a>
+
+=JS
+$( "#button" ).click(function() {
+  $( "#target" ).click();
+  return false;
+});
+$('#target').on('change',function(){
+ if($(this).val()){
+  $('#button').text($(this).val().replace("C:\\fakepath\\",''));
+ }
+});

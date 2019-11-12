@@ -1,0 +1,25 @@
+=HTML
+<a href="#" id="decrease" class="inc-btn">-</a>
+<input type="number" value="1" id="inc-field" />
+<a href="#" id="increase" class="inc-btn">+</a>
+
+=JS
+$('a#decrease').on('click',function(e) {
+  e.preventDefault();
+  var value = parseInt(document.getElementById('inc-field').value);
+  value = isNaN(value) ? 1 : value;
+  value < 1 ? value = 1 : '';
+  if (value > 1) {
+    value--;
+  }
+  document.getElementById('inc-field').value = value;
+  $('#inc-field').val(value);
+});
+$('a#increase').on('click',function(e) {
+  e.preventDefault();
+  var value = parseInt(document.getElementById('inc-field').value);
+  value = isNaN(value) ? 1 : value;
+  value++;
+  document.getElementById('inc-field').value = value;
+  $('#inc-field').val(value);
+});

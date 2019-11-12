@@ -1,0 +1,73 @@
+=HTML
+<a href="http://www.YOURURL.com/trackit.php?page=YOURPAGE.php">Record This Link!</a>
+<a href="http://www.YOURURL.com/trackit.php?page=https://www.phpdevtips.com">Record This Link!</a>
+
+=MySQL
+CREATE TABLE `tracking_table` (
+`recid` int(11) unsigned NOT NULL AUTO_INCREMENT,
+`rec_use_page` varchar(220) DEFAULT NULL,
+`rec_use_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+PRIMARY KEY (`recid`)
+);
+
+=PHP: trackit.php
+-- NOTE: Lower PHP version --
+<?php
+//Connect to the database
+mysql_connect("localhost", "root", "root") or die(mysql_error());
+mysql_select_db("tetestdb") or die(mysql_error());
+//Grab the destination page from the link
+$redirect = mysql_real_escape_string($_GET['page']);
+//Insert the destination page and timestamp into your database
+$page_insert = mysql_query("INSERT INTO tracking_table (`rec_use_page`, `rec_use_date`) VALUES ('$redirect', now())") or die(mysql_error());
+//Redirect the user to their intended location
+header("Location: $redirect");
+?>
+
+-- NOTE: PHP v7.0 version --
+<?php
+$con=mysqli_connect("localhost","username","password","dbname");
+// Check connection
+if (mysqli_connect_errno()) {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+}
+$redirect = mysqli_real_escape_string($con, $_GET['page']);
+$page_insert="INSERT INTO tracking_table (`rec_use_page`, `rec_use_date`) VALUES ('$redirect', now())";
+if (!mysqli_query($con,$page_insert)) {
+  die('Error: ' . mysqli_error($con));
+}
+echo "1 record added";
+mysqli_close($con);
+header("Location: $redirect");
+?>
+
+==
+Extract Data Example:
+<?php
+function show_downloads() {
+    $servername = "localhost";
+    $username = "dbusername";
+    $password = "dbpassword";
+    $dbname = "thedb";
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    } 
+    $sql = "SELECT recid FROM tracking_table";
+    $result = $conn->query($sql);
+    //$total = $result->num_rows;
+    if (/*$total*/ $result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            //if ($row['recid'] == $result->num_rows) {
+                echo "<p>Results: <strong>" . $row["recid"]. "</strong></p><br />";
+            //}
+        }
+    } else {
+        echo "<p>Results: <strong>0</strong></p>";
+    }
+    $conn->close();
+}
+?>

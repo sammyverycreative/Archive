@@ -1,0 +1,28 @@
+=Single ARRAY
+<?php 
+$array = array('a', 'b', 'c');
+in_array('b', $array);
+?>
+
+=Multiple ARRAYS
+$array1 = array('1', '2', '3');
+$array2 = array('4', '5', '6');
+$array3 = array('7', '8', '9');
+$arrays = array($array1,$array2,$array3);
+
+function in_multiarray($elem, $array)
+{
+    while (current($array) !== false) {
+        if (current($array) == $elem) {
+            return true;
+        } elseif (is_array(current($array))) {
+            if (in_multiarray($elem, current($array))) {
+                return true;
+            }
+        }
+        next($array);
+    }
+    return false;
+}
+
+in_multiarray('5', $arrays);

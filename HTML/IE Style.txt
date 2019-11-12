@@ -1,0 +1,8 @@
+<!--[if IE]>
+<style>
+    .class {
+        element: style;
+    }
+</style>
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<![endif]-->

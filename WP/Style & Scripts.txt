@@ -1,0 +1,6 @@
+=STYLE
+wp_enqueue_style('style_style', get_template_directory_uri().'/style.css');
+
+=SCRIPT
+wp_register_script('scripts', get_template_directory_uri().'/script.js', array('jquery'), '0.1');
+wp_enqueue_script('scripts', array('jquery'), true);

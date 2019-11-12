@@ -1,0 +1,6 @@
+<?php get_template_part('path-to-file/file-without-extension'); ?>
+
+or
+
+<?php get_template_part('path-to-file/first_part_of_file_name', 'second_part_of_file_name(without-extension)'); ?>
+NOTE: File name need to be first_part_of_file_name-second_part_of_file_name.php, located in "path-to-file" folder.

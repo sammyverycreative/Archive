@@ -1,0 +1,8 @@
+=FUNCTION
+add_filter( 'wpcf7_validate_configuration', '__return_false' );
+
+=WP-CONFIG
+define( 'WPCF7_VALIDATE_CONFIGURATION', false );
+
+=SOURCE
+https://www.contactform7.com/configuration-validator-faq/#from-email-in-site-domain

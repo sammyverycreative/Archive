@@ -1,0 +1,11 @@
+// WooCommerce Support
+add_action( 'after_setup_theme', 'woocommerce_support' );
+function woocommerce_support() {
+    add_theme_support( 'woocommerce' );
+}
+
+// Include Custom CSS
+function theme-slug_woocommerce_scripts() {
+    wp_enqueue_style( 'custom-woocommerce-style', 'get_template_directory_uri().'/css/custom-woocommerce.css'
+}
+add_action( 'wp_enqueue_scripts', 'theme-slug_woocommerce_scripts' );

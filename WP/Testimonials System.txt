@@ -1,0 +1,444 @@
+=HTML
+<?php
+if (isset($_POST['submit']) && isset($_POST['post_nonce_field']) && wp_verify_nonce($_POST['post_nonce_field'], 'post_nonce')) {
+    $post_information = array(
+        'post_title' => wp_strip_all_tags( $_POST['testimonialNom'].', '.$_POST['testimonialVille'] ),
+        //'post_content' => $_POST['testimonialComment'],
+        'post_type' => 'testimonial',
+        //'post_status' => 'draft'
+	'post_status' => 'pending'
+    );
+    $postID = wp_insert_post( $post_information );
+    update_field('field_5ba9dd1665f37', $_POST['testimonialRating'], $postID);
+    update_field('field_5ba9dc7465f36', $_POST['testimonialComment'], $postID);
+    if (isset( $_POST['testimonialEmail'])) { update_field('field_5c88d4f9528c4', $_POST['testimonialEmail'], $postID); }
+    if (isset( $_POST['testimonialPhone'])) { update_field('field_5c88d53d528c5', $_POST['testimonialPhone'], $postID); }
+}
+
+if (isset( $_POST['submit'])) {
+    wp_redirect(home_url());
+    exit;
+}
+?>
+
+<!-- AVERAGE -->
+<?php 
+$testimonialsArray = array();
+$vars = array(
+    'post_type' => 'testimonial',
+    'status' => 'published'
+);
+// the query
+$query = new WP_Query( $vars );
+$allTestimonials = $query->post_count;
+if ( $query->have_posts() ) : ?>
+    <!-- the loop -->
+    <?php while ( $query->have_posts() ) : $query->the_post();
+        $rating = get_field('stars');
+        array_push($testimonialsArray, $rating);
+    endwhile; ?>
+    <!-- end of the loop -->
+    <?php wp_reset_postdata();
+endif;
+$testimonialsSum = array_sum($testimonialsArray);
+$avg = $testimonialsSum / $allTestimonials;
+//$roundAvg = round($avg,0,PHP_ROUND_HALF_UP);
+$roundAvg = round($avg * 2) / 2;
+$avgStars = '';
+$allStars = 5;
+$starsLeft = 5 - $roundAvg;
+for($i=1;$i<=$roundAvg;$i++) {
+    $avgStars .= '<i class="fas fa-star"></i>';
+}
+if (strpos($roundAvg,'.')) {
+    $avgStars .= '<i class="fas fa-star-half-alt"></i>';
+    $i++;
+}
+while ($i<=$allStars) {
+    $avgStars .= '<i class="far fa-star"></i>';
+    $i++;
+}
+?>
+<?php
+$args = array(
+    'status' => 'completed',
+);
+$orders = wc_get_orders( $args );
+$countOrders = count($orders);
+?>
+<div class="average">
+    <div class="stars">
+        <p><?php echo $avgStars; ?></p>
+    </div>
+    <div class="note">
+        <p><?php echo $roundAvg; ?> on average out of <?php echo $countOrders; ?> orders.</p>
+    </div>
+</div>
+<!-- END -->
+
+<?php 
+/* Width DEFAULT pagination */
+/*
+global $the_query;
+$paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
+*/
+// args
+$args = array(
+    'post_type' => 'testimonial',
+    'ignore_sticky_posts' => true,
+    'posts_per_page' => 10,
+    'orderby' => 'date',
+    'order'=> 'DSC',
+    'paged' => $paged
+);
+// the query
+$the_query = new WP_Query( $args ); ?>
+<?php if ( $the_query->have_posts() ) : ?>
+    <!-- the loop -->
+    <div class="testimonials-listing">
+            <?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+                <?php $id = get_the_ID(); ?>
+                    <div class="testimonial-item">
+                        <div class="row">
+                            <div class="col_30">
+                                <div class="t-details">
+                                    <div class="rating"><?php echo vc_generate_rating_stars( (double) get_post_meta( $id, 'stars', true ) ); ?></div>
+                                    <h4><?php the_title(); ?></h4>
+                                    <?php /*<p><?php echo get_the_date('j F Y', $id); ?></p>*/ ?>
+                                </div>
+                            </div>
+                            <div class="col_70">
+                                <div class="t-text">
+                                    <p><?php echo get_post_meta( $id, 'text', true ); ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            <?php endwhile; ?>
+    </div>
+    <!-- end of the loop -->
+    <?php wp_reset_postdata(); ?>
+<?php endif; ?>
+<div class="testimonials-navigation"><?php
+global $the_query;
+$big = 999999999; 
+echo paginate_links( array(
+    'base'          => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+    'format'        => '?paged=%#%',
+    'current'       => max( 1, get_query_var('paged') ),
+    'total'         => $the_query->max_num_pages,
+    'type'          => 'list',
+    'prev_next'     => True,
+    'prev_text' => '<i class="fas fa-angle-left"></i>',
+    'next_text' => '<i class="fas fa-angle-right"></i>'
+) );
+wp_reset_query();
+?></div>
+
+<!-- FORM -->
+<div class="new-testimonial-wrap" id="new-testimonial">
+    <h4>Submit a Testimonial</h4>
+    <form action="" class="testimonial-form" id="testimonialForm" method="POST">
+        <div class="the-input rating-input">
+            <label for="">Rating</label>
+            <span class="star-rating star-5">
+              <input type="radio" name="testimonialRating" value="1" required><i></i>
+              <input type="radio" name="testimonialRating" value="2"><i></i>
+              <input type="radio" name="testimonialRating" value="3"><i></i>
+              <input type="radio" name="testimonialRating" value="4"><i></i>
+              <input type="radio" name="testimonialRating" value="5"><i></i>
+            </span>
+            <div class="rating-error" style="display: none;">
+                <p>You have to select your rating.</p>
+            </div>
+        </div>
+        <div class="the-input comment-input">
+            <label for="">Comment <abbr title="required" class="r">*</abbr></label>
+            <textarea name="testimonialComment" id="testimonialComment" class="required" cols="30" rows="10"><?php if ( isset( $_POST['testimonialComment'] ) ) { if ( function_exists( 'stripslashes' ) ) { echo stripslashes( $_POST['testimonialComment'] ); } else { echo $_POST['testimonialComment']; } } ?></textarea>
+        </div>
+        <div class="details-input">
+            <div class="row the-input">
+                <div class="col_50">
+                    <label for="">Full Name <abbr title="required" class="r">*</abbr></label>
+                    <input type="text" name="testimonialName" id="testimonialName" class="required" value="<?php if ( isset( $_POST['testimonialName'] ) ) echo $_POST['testimonialName']; ?>">
+                </div>
+                <div class="col_50">
+                    <label for="">City <abbr title="required" class="r">*</abbr></label>
+                    <input type="text" name="testimonialVille" id="testimonialVille" class="required" value="<?php if ( isset( $_POST['testimonialVille'] ) ) echo $_POST['testimonialVille']; ?>">
+                </div>
+            </div>
+            <div class="row the-input">
+                <div class="col_50">
+                    <label for="">E-mail Address</label>
+                    <input type="email" name="testimonialEmail" id="testimonialEmail" value="<?php if ( isset( $_POST['testimonialEmail'] ) ) echo $_POST['testimonialEmail']; ?>">
+                </div>
+                <div class="col_50">
+                    <label for="">Phone Number</label>
+                    <input type="text" name="testimonialPhone" id="testimonialPhone" value="<?php if ( isset( $_POST['testimonialPhone'] ) ) echo $_POST['testimonialPhone']; ?>">
+                </div>
+            </div>
+        </div>
+        <div class="submit-input">
+            <?php wp_nonce_field( 'post_nonce', 'post_nonce_field' ); ?>
+            <input type="submit" name="submit" value="Submit">
+        </div>
+    </form>
+</div>
+
+=CSS
+.testimonials-listing .testimonial-item {
+  text-align: center;
+  border-bottom: 1px solid #e1e1e1;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  background: #fff;
+  padding: 30px 20px 20px;
+  margin-bottom: 0;
+}
+@media (max-width: 767px) {
+    .testimonials-listing .testimonial-item { padding: 20px 20px; }
+}
+.testimonials-listing .testimonial-item .rating {
+    margin-bottom: 15px;
+}
+.testimonials-listing .testimonial-item .rating i {
+    display: inline-block;
+    color: #ebb21a;
+    margin: 0 1px;
+}
+.testimonials-listing .testimonial-item p {
+    font-size: 1.4rem;
+    line-height: 24px;
+    margin-bottom: 30px;
+}
+@media (max-width: 767px) {
+    .testimonials-listing .testimonial-item p {
+        font-size: 1.5rem;
+        line-height: 1.66;
+        margin-bottom: 20px;
+    }
+}
+.testimonials-listing .testimonial-item h4 {
+    color: #515151;
+    font-size: 1.6rem;
+    font-weight: 700;
+    /*padding-top: 25px;*/
+    position: relative;
+    margin-bottom: 0;
+}
+/*.testimonials-listing .testimonial-item h4:before {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    content: "";
+    width: 52px;
+    height: 5px;
+    background: #e1e1e1;
+    margin-left: -26px;
+}*/
+.testimonials-listing {
+  margin-bottom: 50px;
+}
+@media (max-width: 1100px) {
+    .testimonials-listing {
+      margin-bottom: 45px !important;
+    }
+}
+.testimonials-listing .rating i {
+    font-size: 14px !important;
+}
+.testimonials-listing .t-details {
+    margin-top: 8px !important;
+}
+.testimonials-listing .t-details h4,
+.testimonials-listing .t-details p {
+    margin: 0;
+}
+.testimonials-listing .t-text {
+    position: relative;
+    text-align: left;
+    padding-left: 70px;
+}
+.testimonials-listing .t-text:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f10e";
+    color: #CCCCCC;
+    font-size: 50px;
+}
+.testimonials-navigation {
+    text-align: center;
+}
+.testimonials-navigation ul.page-numbers li {
+    display: inline-block !important;
+    text-align: center;
+}
+.testimonials-navigation ul.page-numbers li:before {
+    display: none !important;
+}
+.testimonials-navigation ul.page-numbers li span,
+.testimonials-navigation ul.page-numbers li a {
+    padding: 0 2px 2px;
+    color: #3A5897;
+    font-weight: bold;
+    border-bottom: 2px solid transparent;
+}
+.testimonials-navigation ul.page-numbers li a:hover {
+    border-bottom: 2px solid #000;
+}
+.testimonials-navigation ul.page-numbers li span.current {
+    font-weight: bold;
+    border-bottom: 2px solid #000;
+}
+.testimonials-navigation ul.page-numbers li a.prev,
+.testimonials-navigation ul.page-numbers li a.next {
+    border-bottom: 0;
+}
+.testimonials-navigation ul.page-numbers li a.prev:hover,
+.testimonials-navigation ul.page-numbers li a.next:hover {
+    border-bottom: 0;
+    opacity: .75;
+}
+.new-testimonial-wrap .the-input {
+    margin-bottom: 25px;
+}
+.new-testimonial-wrap .details-input label {
+    margin-bottom: 0;
+}
+.new-testimonial-wrap .submit-input {
+    text-align: center;
+}
+.new-testimonial-wrap .star-rating {
+  position: relative;
+  display: block;
+  white-space: nowrap;
+  /*width: 250px;*/
+  height: 20px;
+  overflow: hidden;
+  font-size: 0;
+  background: url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIwIDIwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cG9seWdvbiBmaWxsPSIjREREREREIiBwb2ludHM9IjEwLDAgMTMuMDksNi41ODMgMjAsNy42MzkgMTUsMTIuNzY0IDE2LjE4LDIwIDEwLDE2LjU4MyAzLjgyLDIwIDUsMTIuNzY0IDAsNy42MzkgNi45MSw2LjU4MyAiLz48L3N2Zz4=');
+  background-size: contain;
+}
+.new-testimonial-wrap .star-rating i {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  /*width: 20%;*/
+  height: 100%;
+  z-index: 1;
+  background: url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIwIDIwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cG9seWdvbiBmaWxsPSIjRUJCMjFBIiBwb2ludHM9IjEwLDAgMTMuMDksNi41ODMgMjAsNy42MzkgMTUsMTIuNzY0IDE2LjE4LDIwIDEwLDE2LjU4MyAzLjgyLDIwIDUsMTIuNzY0IDAsNy42MzkgNi45MSw2LjU4MyAiLz48L3N2Zz4=');
+  background-size: contain;
+}
+.new-testimonial-wrap .star-rating input {
+  position: relative;
+  display: inline-block;
+  opacity: 0;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  /*width: 20%;*/
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  z-index: 2;
+}
+.new-testimonial-wrap .star-rating input:hover + i,
+.new-testimonial-wrap .star-rating input:checked + i {
+  opacity: 1;
+}
+.new-testimonial-wrap .star-rating i {
+  width: 20%;
+}
+.new-testimonial-wrap .star-rating i ~ i {
+  width: 40%;
+}
+.new-testimonial-wrap .star-rating i ~ i ~ i {
+  width: 60%;
+}
+.new-testimonial-wrap .star-rating i ~ i ~ i ~ i {
+  width: 80%;
+}
+.new-testimonial-wrap .star-rating i ~ i ~ i ~ i ~ i {
+  width: 100%;
+}
+.new-testimonial-wrap .star-rating.star-5 { width: 100px; }
+.new-testimonial-wrap .star-rating.star-5 input,
+.new-testimonial-wrap .star-rating.star-5 i { width: 20%; }
+.new-testimonial-wrap .star-rating.star-5 i ~ i { width: 40%; }
+.new-testimonial-wrap .star-rating.star-5 i ~ i ~ i { width: 60%; }
+.new-testimonial-wrap .star-rating.star-5 i ~ i ~ i ~ i { width: 80%; }
+.new-testimonial-wrap .star-rating.star-5 i ~ i ~ i ~ i ~i { width: 100%; }
+.new-testimonial-wrap abbr.r {
+    color: red;
+}
+.new-testimonial-wrap label.error {
+    display: none !important;
+}
+.new-testimonial-wrap .rating-error p {
+    color: red;
+    margin-top: 10px;
+}
+.new-testimonial-wrap .required {
+    color: #000 !important;
+}
+.new-testimonial-wrap .required.error {
+    border: 1px solid red;
+}
+
+=JS
+jQuery("#testimonialForm").validate();
+
+$('form.testimonial-form input[type="submit"]').on('click',function(e) {
+  if ($('#new-testimonial').length) {
+    var rating = $('input[name=testimonialRating]:checked').val();
+    if (!rating) {
+      $('.rating-error').show();
+    } else {
+      $('.rating-error').hide();
+    }
+  }
+});
+
+=FUNCTIONS
+###
+#NOTE: You need to embed the validate script: "//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"
+###
+
+function vc_generate_rating_stars( $stars )
+{
+    $string = '';
+    $allStars = 5;
+    $starsLeft = 5 - $stars;
+    for($i=1; $i<=$stars; $i++) {
+        $string .= '<i class="fas fa-star"></i>';
+    }
+    if (strpos($stars,'.')) {
+        $string .= '<i class="fas fa-star-half-alt"></i>';
+        $i++;
+    }
+    while ($i<=$allStars) {
+        $string .= '<i class="far fa-star"></i>';
+        $i++;
+    }
+    return $string;
+}
+
+function testimonials_notice() {
+
+    $allTestimonials = wp_count_posts('testimonial');
+    $publishedTestimonials = $allTestimonials->publish;
+    //$draftTestimonials = $allTestimonials->draft;
+    $pendingTestimonials = $allTestimonials->pending;
+
+    if ($pendingTestimonials > 0) { ?>
+     <div class="notice notice-warning">
+      <p>You have <strong><?php echo $pendingTestimonials; ?> testimonial<?php if ($pendingTestimonials > 1) { echo 's'; } ?></strong> what you have to review.</p>
+     </div>
+    <?php }
+
+}
+add_action('admin_notices', 'testimonials_notice');

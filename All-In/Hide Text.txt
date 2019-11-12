@@ -1,0 +1,10 @@
+=HTML
+<div id="number" data-last="00 000 000">07<span>00 000 000</span></div>
+
+=JAVASCRIPT
+$('#number').toggle(function() {
+    $(this).find('span').text('xx xxx xxx');
+},function() {
+    $(this).find('span').text( $(this).data('last') );
+})
+.click();

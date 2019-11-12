@@ -1,0 +1,42 @@
+<!-- Chrome, Firefox OS and Opera -->
+<meta name="theme-color" content="#fff">
+<!-- Windows Phone -->
+<meta name="msapplication-navbutton-color" content="#fff">
+<!-- iOS Safari -->
+<meta name="apple-mobile-web-app-status-bar-style" content="#fff">
+
+<meta name="description" content="description">
+<meta name="keywords" content="tag1,tag2,tab3">
+<meta name="news_keywords" content="tag1,tag2,tab3">
+<meta name="robots" content="no/index, no/follow, noydir, noodp, noarchive">
+<meta name="revisit-after" content="1 days/1 month/1 year">
+<meta name="abstract" content="short description">
+<meta name="author" content="John Smith">
+<meta name="web_author" content="John Smith">
+<meta name="contact" content="e-mail@address.domain">
+<meta name="reply-to" content="e-mail@address.domain">
+<meta name="copyright" content="Owner">
+<meta name="distribution" content="global/local/iu">
+<meta name="expires" content="tue, 01 Jun 2010">
+<meta name="generator" content="Wordpress /+2.x.x">
+<meta name="googlebot" content="noarchive/nosnippet/noindex/nofollow">
+<meta name="slurp" content="noydir, noodp, noarchive">
+<meta name="language" content="English/en-US">
+<meta name="no-email-collection" content="link or terms">
+<meta name="rating" content="general/mature/restricted/14 years/safe for kids">
+<meta http-equiv="cache-control" content="public/private/no-cache/no-store">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1 ">
+<meta http-equiv="set-cookie" content="name, date (e.g.: account=9983373; path=/; expires=Thursday, 20-May-09 00:15:00 GMT")">
+<meta name="content-disposition" content="inline; filename=openinexcel.csv">
+<meta http-equiv="imagetoolbar" content="yes/no">
+<meta name="msthemecompatible" content="yes/no">
+<meta http-equiv="pics-label" content="interactive/promotion/positive/neutral/negative/demotion">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="refresh" content="30; ,URL=http://...">
+<meta http-equiv="resource-type" content="document">
+<meta http-equiv="content-style-type" content="text/css">
+<meta http-equiv="content-script-type" content="text/javascript">
+<meta http-equiv="window-target" content="_top">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+--
+<meta http-equiv="expires/etc." content="date/etc.">

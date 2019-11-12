@@ -1,0 +1,20 @@
+=#1
+$('.parent-class > span').click(function(e) {
+    $(this).toggleClass('active');
+    $(this).siblings('ul').toggleClass('active');
+});
+
+=#2
+$(function() {
+  $(".parent-class > span").on("click", function(e) {
+    $(this).toggleClass('active');
+    $(this).siblings('ul').toggleClass('active');
+    e.stopPropagation()
+  });
+  $(document).on("click", function(e) {
+    if ($(e.target).is(".parent-class > span") === false) {
+      $(".parent-class > span").removeClass("active");
+      $(".parent-class > ul").removeClass("active");
+    }
+  });
+});

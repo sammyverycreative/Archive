@@ -1,0 +1,30 @@
+if ($('#00N30000000fnmk option:selected').val() == 'USA') {
+	$('#province_field').hide();
+	$('#state_field').fadeIn();
+	$('#state_code option:eq(0)').prop('selected', true);
+} else if ($('#00N30000000fnmk option:selected').val() == 'Canada') {
+	$('#state_field').hide();
+	$('#province_field').fadeIn();
+	$('#state_code option:eq(0)').prop('selected', true);
+} else {
+	$('#state_field').fadeOut();
+	$('#province_field').fadeOut();
+	$('#state_code option:eq(0)').prop('selected', true);
+};
+
+$('#00N30000000fnmk').on('change', function() {
+    if ($('#00N30000000fnmk option:selected').val() == 'USA') {
+        $('#province_field').hide();
+        $('#state_field').fadeIn();
+        $('#state_code option:eq(0)').prop('selected', true);
+    } else if ($('#00N30000000fnmk option:selected').val() == 'Canada') {
+            $('#state_field').hide();
+            $('#province_field').fadeIn();
+            $('#state_code option:eq(0)').prop('selected', true);
+
+    } else {
+         $('#state_field').fadeOut();
+         $('#province_field').fadeOut();
+         $('#state_code option:eq(0)').prop('selected', true);
+    };
+});

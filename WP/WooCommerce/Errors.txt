@@ -1,0 +1,39 @@
+=FUNCTIONS
+function my_woocommerce_add_error( $error ) {
+    if (strpos($error,'required') !== false) {
+        $error = 'Required';
+    }
+    return $error;
+}
+add_filter( 'woocommerce_add_error', 'my_woocommerce_add_error' );
+
+=notices\error.php
+<ul class="woocommerce-error">
+    <?php 
+    $totalReq = count(array_keys($messages, 'Required')); 
+    $removeReq = array_diff($messages, ["Required"]);
+
+    if($totalReq > 1){
+        echo '<li>Please fill in all the <strong>required</strong> fields.</li>';
+    }else{
+        echo '<li>Please fill in the <strong>required</strong> field.</li>';
+    }
+    ?>
+    <?php foreach ( $removeReq as $message ) : ?>
+        <li><?php echo wp_kses_post( $message ); ?></li>
+    <?php endforeach; ?>
+</ul>
+
+OR
+
+=FUNCTION
+function customize_wc_errors( $error ) {
+    if ( strpos( $error, 'Billing ' ) !== false ) {
+        $error = str_replace("Billing ", "", $error);
+    }
+    if ( strpos( $error, 'is a required field' ) !== false ) {
+        $error = str_replace("is a required field", "este un camp obligatoriu", $error);
+    }
+    return $error;
+}
+add_filter( 'woocommerce_add_error', 'customize_wc_errors' );

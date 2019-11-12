@@ -1,0 +1,54 @@
+<?php
+$args = array(
+        'show_option_all'   => '',
+        'show_option_none'  => '',
+        'orderby'           => 'id',
+        'order'             => 'ASC',
+        'show_count'        => 0,
+        'hide_empty'        => 1,
+        'child_of'          => 0,
+        'exclude'           => '',
+        'echo'              => 1,
+        'selected'          => 0,
+        'hierarchical'      => 0,
+        'name'              => 'cat',
+        'id'                => '',
+        'class'             => 'postform',
+        'depth'             => 0,
+        'tab_index'         => 0,
+        'taxonomy'          => 'category',
+        'hide_if_empty'     => false,
+        'option_none_value' => -1,
+        'value_field'       => 'term_id',
+        'required'          => false,
+);
+
+echo wp_dropdown_categories($args);
+?>
+
+OR
+
+=HTML+PHP
+<select name="" id="categories" class="category-select">
+	<?php
+	$categories = get_categories();
+		if ($categories) { ?>
+			<option value="0">Categories</option>
+			<?php foreach ($categories as $category) {
+			echo '<option value="'.get_category_link($category->term_id).'">'.$category->name.'</option>';
+			}
+		}
+	?>
+</select>
+
+=JS
+$(function(){
+  // bind change event to select
+  $('#categories-select').on('change', function () {
+      var url = $(this).val();
+      if (url) {
+          window.location = url;
+      }
+      return false;
+  });
+});

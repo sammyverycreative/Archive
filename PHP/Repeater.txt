@@ -1,0 +1,16 @@
+<?php
+for( $i = 0; $i < 100; $i++ ) {
+   // DO...
+}
+?>
+
+or
+
+<?php $socials = get_field('socials', 'options'); //for ACF
+if ($socials) { ?>
+	<ul class="socials">
+		<?php foreach ($socials as $social) { ?>
+			<li><a href="<?php echo $social['url']; ?>" target="_blank"><?php echo $social['icon']; ?></a></li>
+		<?php } ?>
+	</ul>
+<?php } ?>

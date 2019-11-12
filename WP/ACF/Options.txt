@@ -1,0 +1,24 @@
+=LINK
+https://www.advancedcustomfields.com/resources/register-multiple-options-pages
+
+=FUNCTIONS
+# Register option pages
+if( function_exists('acf_add_options_sub_page') ){
+ acf_add_options_page(array(
+  'page_title' => 'Theme Options',
+  'menu_title' => 'Theme Options',
+  'menu_slug'  => 'theme-options',
+  'capability' => 'manage_options',
+  'icon_url'   => get_template_directory_uri() . '/images/icons/favicon.png'
+ ));
+ acf_add_options_sub_page(array(
+  'parent'     => 'theme-options',
+  'title'      => 'General',
+  'slug'       => 'theme-general',
+  'capability' => 'manage_options'
+ ));
+}
+
+=CODE
+Width echo: <?php the_field('fieldname', 'option'); ?>
+Widthout echo: <?php get_field('fieldname', 'option'); ?>

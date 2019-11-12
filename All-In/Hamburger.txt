@@ -1,0 +1,58 @@
+=HTML
+<div class="mobile-menu-buttons">
+    <a href="#mobile-navigation-menu" class="hamburger mobile-hamburger hamburger--squeeze">
+      <span class="hamburger-box">
+        <span class="hamburger-inner"></span>
+      </span>
+    </a>
+</div>
+
+=CSS
+.hamburger .hamburger-box {
+  top: 0;
+  width: 24px;
+  height: 100%;
+}
+.hamburger .hamburger-box .hamburger-inner {
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background: #5c6b7d;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+}
+.hamburger .hamburger-box .hamburger-inner:before, .hamburger .hamburger-box .hamburger-inner:after {
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background: #5c6b7d;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+}
+.hamburger .hamburger-box .hamburger-inner:before {
+  top: -8px;
+}
+.hamburger .hamburger-box .hamburger-inner:after {
+  bottom: -8px;
+}
+.hamburger.hamburger--squeeze.is-active .hamburger-inner:before {
+  top: 0;
+}
+.hamburger.hamburger--squeeze.is-active .hamburger-inner:after {
+  bottom: 0;
+}
+.mm-opened .hamburger.hamburger--squeeze .hamburger-inner {
+  transition-delay: .12s;
+  transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  transform: rotate(45deg);
+}
+.mm-opened .hamburger.hamburger--squeeze .hamburger-inner:before {
+  top: 0;
+  opacity: 0;
+  transition: top 75ms ease,opacity 75ms ease .12s;
+}
+.mm-opened .hamburger.hamburger--squeeze .hamburger-inner:after {
+  bottom: 0;
+  transition: bottom 75ms ease, transform 75ms cubic-bezier(0.215, 0.61, 0.355, 1) 0.12s;
+  transform: rotate(-90deg);
+}

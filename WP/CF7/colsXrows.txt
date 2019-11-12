@@ -1,0 +1,6 @@
+[textarea your-message 40x10 "your message here ..."]
+
+e.g.:
+40x10
+80x
+x4

@@ -1,0 +1,33 @@
+=HTML
+<div class="select-block right sort-results">
+	<form name="sort_productsperpage" method="POST" enctype="multipart/form-data">
+			<select name="number" id="number" class="custom-select">
+				<option value="<?php echo add_query_arg( 'per-page', '25' ); ?>" <?php if ($_GET['per-page'] == 25) { echo 'selected="true"'; } ?>>25 products per page</option>
+				<option value="<?php echo add_query_arg( 'per-page', '50' ); ?>" <?php if ($_GET['per-page'] == 50) { echo 'selected="true"'; } ?>>50 products per page</option>
+			</select>
+			<input type="hidden" value="sort_ppp" name="action">
+	</form>
+</div>
+
+=FUNCTIONS
+function postperpage_f( $query ) {
+    if( $query->is_main_query() && !is_admin() ) {
+        if ( !empty($_GET['per-page']) ) {
+            $noProducts = intval($_GET['per-page']);
+            if ( $noProducts ) {
+                $query->set( 'posts_per_page', $noProducts );
+            }
+        } else {
+            $query->set( 'posts_per_page', 25 );
+        }
+    }
+}
+add_action( 'pre_get_posts', 'postperpage_f' );
+
+=JS
+$('.products-page #number').on('change',function() {
+    var val = $(this).val();
+    if ( val ) {
+        location.href = val;
+    }
+});

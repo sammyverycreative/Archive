@@ -1,0 +1,69 @@
+<?php $box = get_field('slider_home_page'); //nume repeater ?>
+	<?php if ($box) { ?>
+		<?php foreach ($box as $box1) { ?>  
+			<?php  $field = $box1['slider_description']; ?>   
+			<?php if ($field) { //nume camp din repeater ?>
+			<?php echo $box1['slider_description']; ?>
+		<?php } ?> 
+	<?php } ?>
+<?php } ?>
+
+OR
+
+<?php $slider = get_field('slider');
+if ($slider) { ?>
+	<ul>
+		<?php foreach ($slider as $slide) { ?>
+			<li><?php echo $slide['text']; ?></li>
+		<?php } ?>
+	</ul>
+<?php } ?>
+
+Ex.:
+
+	<div id="testimonials-slider"><!-- Slider ID -->
+				<?php $box = get_field('testimoniale'); ?>
+					<?php if ($box) {?>
+						<?php foreach ($box as $box1) {  ?>  
+
+							<div><!-- Slide Start -->
+								<div class="testimonial-box">
+									<?php $text = $box1['text']; ?>
+											<?php if($text) { ?>
+										<?php echo $text; ?>
+									<?php } ?>
+									<?php $rating = $box1['rating']; ?>
+									<?php if($rating){ ?>
+									<div class="ratting">
+										<?php $rating_left = 5 - intval($rating); ?>
+										<?php for($i = 0; $i<intval($rating); $i++){ ?>
+											<i class="fa fa-star" aria-hidden="true"></i>
+										<?php } ?>
+										<?php for($i = 0; $i<$rating_left; $i++){ ?>
+											<i class="fa fa-star-o" aria-hidden="true"></i>
+										<?php } ?>
+
+									</div>
+									<?php } ?>
+								</div>
+
+								<div class="testimonial-person">
+									<?php $image = $box1['imagine'];
+										 if( !empty($image) ):  ?> 
+										  	<img src="<?php echo $image['sizes']['image_testimonial']; ?>" alt="<?php echo $image['alt']; ?>" class="left"/>
+									<?php endif; ?>
+										
+									<?php $name = $box1['nume'];?>		
+									<?php $company = $box1['firma'];?>
+									<?php $email = $box1['e-mail']; ?>
+									<p class="left">
+										<?php if($name) { echo $name; }?><br> 
+										<?php if($company) {echo $company; }?><br> 
+										<?php if($email) { echo "<a href='mailto:".$email."' title=''>".$email."</a>"; }?></p>
+								</div>
+							</div>
+
+							
+						<?php } ?>
+					<?php } ?>
+	</div>

@@ -1,0 +1,33 @@
+=FUNCTIONS
+<?php
+function shapeSpace_customize_image_sizes($sizes) {
+	unset($sizes['medium_large']); // 768px
+	return $sizes;
+}
+add_filter('intermediate_image_sizes_advanced', 'shapeSpace_customize_image_sizes');
+
+// disable srcset on frontend
+add_filter('max_srcset_image_width', create_function('', 'return 1;'));
+*/ ?>
+
+=VIA PLUGIN
+<?php
+/*
+Plugin Name: Disable Responsive Images Complete
+Plugin URI: https://plugin-planet.com/
+Description: Disables WP's responsive-image feature
+Author URI: https://plugin-planet.com/
+Author: Jeff Starr
+Version: 1.0
+*/
+
+// disable srcset on frontend
+add_filter('max_srcset_image_width', create_function('', 'return 1;'));
+
+// disable 768px image generation
+function shapeSpace_customize_image_sizes($sizes) {
+	unset($sizes['medium_large']);
+	return $sizes;
+}
+add_filter('intermediate_image_sizes_advanced', 'shapeSpace_customize_image_sizes');
+?>

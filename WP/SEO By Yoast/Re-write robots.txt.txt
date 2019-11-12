@@ -1,0 +1,5 @@
+function filter_wpseo_robots( $robotsstr ) { 
+    $robotsstr = 'index,follow'; 
+    return $robotsstr; 
+}; 
+add_filter( 'wpseo_robots', 'filter_wpseo_robots', 10, 1 );

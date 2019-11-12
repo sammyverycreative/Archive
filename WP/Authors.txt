@@ -1,0 +1,26 @@
+<?php 
+$author = $wp_query->get_queried_object();
+$aAIM = $author->aim;
+$aDesc = $author->description;
+$aDN = $author->display_name;
+$aFN = $author->first_name;
+$aID = $author->ID;
+$aJ = $author->jabber;
+$aLN = $author->last_name;
+$aNn = $author->nickname;
+$aE = $author->user_email;
+$aL = $author->user_login;
+$aN = $author->user_nicename;
+$aR = $author->user_registered;
+$aUrl = $author->user_url;
+$aYIM = $author->yim;
+
+//args
+$args = array(
+		'author' => $aID,
+		//'author_name' => $aL,
+		//'author__in' => array( 1, 2, 3 )
+		//'author__not_in' => array( 4, 5, 6 )
+		...
+	);
+?>

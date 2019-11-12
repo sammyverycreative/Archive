@@ -1,0 +1,98 @@
+=CATEGORIES
+|_ALL
+<ul class="categories">
+	<?php
+	$categories = get_categories();
+		if ($categories) {
+			foreach ($categories as $category) {
+			echo '<li><a href="'.get_category_link($category->term_id).'" title="'.sprintf( __("View all posts in %s"), $category->name ).'"'.'>'.$category->name.' ('.$category->count.')</a></li>';
+			}
+		}
+	?>
+</ul>
+
+<?php 
+$terms = get_terms('category');
+if (!empty($terms) && !is_wp_error($terms)) {
+	echo '<ul>';
+	foreach ($terms as $term) {
+		//$term_link = get_term_link($term);
+		echo '<li>'.$term->name.'</li>';
+	}
+	echo '</ul>';
+}
+?>
+
+|_SINGLE
+-for multiple items
+<?php
+$terms = get_the_terms($post->ID, 'category');
+if ($terms && !is_wp_error($terms)) : 
+	$taxonomy_slug_links = array();
+	foreach ($terms as $term) {
+  		$taxonomy_slug_links[] = $term->name;
+	}
+	$taxonomy_slug = join(", ", $taxonomy_slug_links);
+endif; ?>
+-for single item
+<?php
+$terms = get_the_terms($post->ID, 'category');
+if ($terms && !is_wp_error($terms)) : 
+	$single_item = $terms[0];
+	if (!empty($single_item)) {
+		$termID = $single_item->term_id;
+		$termUrl = get_category_link($termID);
+		$termSlug = $single_item->slug;
+		$termName = $single_item->name;
+	}
+endif; ?>
+
+=TAGS
+|_ALL
+<ul class="tags">
+	<?php
+	$tags = get_tags( '<ul><li>', '</li><li>', '</li></ul>' );
+		if ($tags) {
+			foreach ($tags as $tag) {
+			echo '<li><a href="'.get_tag_link( $tag->term_id ).'" title="'.sprintf( __( "View all posts in %s" ), $tag->name ).'"'.'>'.$tag->name.'</a></li> ';
+		}
+	}
+	?>
+</ul>
+
+<?php
+$posttags = get_the_tags();
+$count = 0; 
+if ($posttags) { 
+	echo '<i class="fa fa-tag"></i><span>Tags: </span>';
+	echo '<ul>';
+	foreach($posttags as $tag) {
+		$count++; ?>
+		 <li><a href="<?php echo get_tag_link($tag->term_id); ?>" title=""><?php echo $tag->name; ?><?php //if(sizeof($posttags)) echo ', '; ?></a></li>
+        <?php }
+        echo '</ul>';
+}
+?> 
+|_SINGLE
+<?php 
+$terms = get_the_terms(get_the_ID(), 'post_tag');
+if ($terms && !is_wp_error($terms)) : 
+    $taxonomy_slug_links = array();
+    foreach ($terms as $term) {
+        $taxonomy_slug_links[] = $term->name;
+    }
+    $taxonomy_slug = join(", ", $taxonomy_slug_links);
+endif; ?>
+-or-
+$posttags = get_the_tags(get_the_ID());
+$count = 0; 
+if ($posttags) { 
+	echo '<i class="fa fa-tag"></i><span>Tags: </span>';
+	echo '<ul>';
+	foreach($posttags as $tag) {
+		$count++; ?>
+		 <li><a href="<?php echo get_tag_link($tag->term_id); ?>" title=""><?php echo $tag->name; ?><?php //if(sizeof($posttags)) echo ', '; ?></a></li>
+        <?php }
+        echo '</ul>';
+}
+?> 

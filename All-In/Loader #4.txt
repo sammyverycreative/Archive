@@ -1,0 +1,61 @@
+=HTML
+<div id="loader">
+    <div class="loader-wrap">
+        <div class="loader">
+          <div class="wrapper">
+            <div class="rubik-loader"></div>
+          </div>
+        </div>
+    </div>
+</div>
+
+=CSS
+#loader {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  z-index: 9999999999;
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
+}
+#loader .loader-wrap,
+#loader .loader-wrap .loader {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+#loader .loader-wrap {
+  display: inline-table;
+}
+#loader .loader {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+* {
+  box-sizing: border-box;
+}
+.rubik-loader {
+  width: 64px;
+  height: 64px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background-image: url(http://i.giphy.com/3og0ISeflb7vrNzy2A.gif);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+=JS
+jQuery(document).ready(function($) {
+	$("#loader").delay(500).fadeOut('slow');
+});
+
+=SOURCE
+https://www.codepen.io/FilipVitas/pen/aNLgZz

@@ -1,0 +1,8 @@
+<script src="https://apis.google.com/js/platform.js" async defer>
+  {lang: 'ro (or en)'}
+</script>
+
+<div class="g-person" data-width="299" data-href="//plus.google.com/..." data-rel="author"></div>
+
+=
+Source: https://developers.google.com/+/web/badge

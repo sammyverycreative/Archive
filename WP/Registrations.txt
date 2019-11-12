@@ -1,0 +1,3 @@
+if (get_option('users_can_register')) {
+	[...]
+}

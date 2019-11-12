@@ -1,0 +1,8 @@
+$('.form').hide();
+$( function() {
+	$( "#pick-category" ).on( "change", function() {
+		$('.form').hide();
+		$this = $(this).val();
+	  	$('.forms').find($this).show();
+	});
+} );

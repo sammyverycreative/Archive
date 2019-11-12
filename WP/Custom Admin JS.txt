@@ -1,0 +1,12 @@
+=FUNCTIONS
+function load_custom_wp_admin_script() {
+  wp_register_script( 'custom_wp_admin_js', get_template_directory_uri() . '/js/admin-js.js?t='.time() );
+  wp_enqueue_script( 'custom_wp_admin_js' );
+}
+add_action( 'admin_enqueue_scripts', 'load_custom_wp_admin_script' );
+
+=CUSTOM JS
+jQuery(document).ready(function($) {
+	$('#view-post-btn a').attr("target","_blank");
+	$('#wp-admin-bar-view a').attr("target","_blank");
+})

@@ -1,0 +1,22 @@
+define( 'DISALLOW_FILE_EDIT', true );
+
+-or-
+
+function vc_remove_editor() {
+    if ( !empty($_GET['post']) ) {
+        $id = $_GET['post'];
+        $template = get_post_meta($id, '_wp_page_template', true);
+        switch ( $template ) {
+            case 'templates/terms-and-conditions.php':
+            remove_post_type_support('page', 'editor');
+            break;
+            case 'templates/homepage.php':
+            remove_post_type_support('page', 'editor');
+            break;
+            default :
+            // Don't remove any other template.
+            break;
+        }
+    }
+}
+add_action('init', 'vc_remove_editor');

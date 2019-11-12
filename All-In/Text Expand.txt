@@ -1,0 +1,32 @@
+=HTML
+<div class="wrap">
+    <div class="col_80">
+        <div class="text">
+            [...]
+        </div>
+    </div>
+    <div class="col_20">
+        <div class="more">
+            <a href="#" id="expand-text" class="more-text">+</a>
+        </div>
+    </div>
+</div>
+
+=CSS
+.text {
+    height: 85px;
+    overflow: hidden;
+}
+.text.active {
+    height: auto;
+}
+
+=JS
+$('#expand-text').click(function(e) {
+  $(this).parent().parent().parent().find('.text').toggleClass('active');
+  if ($(this).parent().parent().parent().find('.text').hasClass('active')) {
+    $(this).html('-');
+  } else {
+    $(this).html('+');
+  }
+});

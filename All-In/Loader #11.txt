@@ -1,0 +1,104 @@
+=HTML
+<div id="loader">
+    <div class="loader-wrap">
+        <div class="loader">
+          <span class="the-loader"><span class="loader-inner"></span></span>
+	</div>
+    </div>
+</div>
+
+=CSS
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  
+  25% {
+    transform: rotate(180deg);
+  }
+  
+  50% {
+    transform: rotate(180deg);
+  }
+  
+  75% {
+    transform: rotate(360deg);
+  }
+  
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes loader-inner {
+  0% {
+    height: 0%;
+  }
+  
+  25% {
+    height: 0%;
+  }
+  
+  50% {
+    height: 100%;
+  }
+  
+  75% {
+    height: 100%;
+  }
+  
+  100% {
+    height: 0%;
+  }
+}
+
+#loader {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  z-index: 9999999999;
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
+}
+#loader .loader-wrap,
+#loader .loader-wrap .loader {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+#loader .loader-wrap {
+  display: inline-table;
+}
+#loader .loader {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.the-loader {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  border: 4px solid #000;
+  top: 50%;
+  animation: loader 2s infinite ease;
+}
+
+.loader-inner {
+  vertical-align: top;
+  display: inline-block;
+  width: 100%;
+  background-color: #000;
+  animation: loader-inner 2s infinite ease-in;
+}
+
+=JS
+jQuery(document).ready(function($) {
+	$("#loader").delay(500).fadeOut('slow');
+});
+
+=SOURCE
+https://www.codepen.io/tashfene/pen/raEqrJ

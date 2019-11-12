@@ -1,0 +1,123 @@
+=HTML
+<div id="loader">
+    <div class="loader-wrap">
+        <div class="loader">
+          <h1>
+          	<span>G</span>
+          	<span>o</span>
+          	<span>o</span>
+          	<span>g</span>
+          	<span>l</span>
+          	<span>e</span>
+          </h1>
+
+          <div class="google-loader">
+          	<span></span>
+          	<span></span>
+          	<span></span>
+          	<span></span>
+          </div>
+        </div>
+    </div>
+</div>
+
+=CSS
+@keyframes move {
+  from {
+    transform: translateY(-10px);
+  }
+  to {
+    transform: translateY(5px);
+  }
+}
+
+#loader {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  z-index: 9999999999;
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
+}
+#loader .loader-wrap,
+#loader .loader-wrap .loader {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+#loader .loader-wrap {
+  display: inline-table;
+}
+#loader .loader {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.google-loader {
+  display: block;
+}
+.google-loader span {
+  display: inline-block;
+  margin-top: 10px;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+}
+.google-loader span:not(:first-child) {
+  margin-left: 10px;
+}
+.google-loader span:nth-child(1) {
+  background: #4285F4;
+  animation: move 1s ease-in-out -0.25s infinite alternate;
+}
+.google-loader span:nth-child(2) {
+  background: #DB4437;
+  animation: move 1s ease-in-out -0.5s infinite alternate;
+}
+.google-loader span:nth-child(3) {
+  background: #F4B400;
+  animation: move 1s ease-in-out -0.75s infinite alternate;
+}
+.google-loader span:nth-child(4) {
+  background: #0F9D58;
+  animation: move 1s ease-in-out -1s infinite alternate;
+}
+h1 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 4em;
+  text-align: center;
+  letter-spacing: -8px;
+  margin-top: 0;
+}
+h1 span:first-child {
+  color: #4285F4;
+}
+h1 span:nth-child(2) {
+  color: #DB4437;
+}
+h1 span:nth-child(3) {
+  color: #F4B400;
+}
+h1 span:nth-child(4) {
+  color: #4285F4;
+}
+h1 span:nth-child(5) {
+  color: #0F9D58;
+}
+h1 span:last-child {
+  color: #DB4437;
+  transform: rotate(-20deg);
+  display: inline-block;
+}
+
+=JS
+jQuery(document).ready(function($) {
+	$("#loader").delay(500).fadeOut('slow');
+});
+
+=SOURCE
+https://www.codepen.io/brycesnyder/pen/GpRYWV

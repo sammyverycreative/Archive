@@ -1,0 +1,1 @@
+<?php $slug = sanitize_title(get_field('field_here')); echo $slug; ?>

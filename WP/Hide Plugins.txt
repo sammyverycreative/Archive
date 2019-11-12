@@ -1,0 +1,13 @@
+add_filter( 'all_plugins', 'hide_plugins');
+function hide_plugins($plugins)
+{
+		// Hide WordPress SEO by Yoast Plugin
+		if(is_plugin_active('wordpress-seo/wp-seo.php')) {
+				unset( $plugins['wordpress-seo/wp-seo.php'] );
+		}
+		// Hide Akismet Plugin
+		if(is_plugin_active('akismet/akismet.php')) {
+				unset( $plugins['akismet/akismet.php'] );
+		}
+		return $plugins;
+}

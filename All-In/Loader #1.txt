@@ -1,0 +1,120 @@
+=HTML (header)
+<div id="loader">
+    <div class="loader-wrap">
+        <div class="loader">
+            <div class="small-logo">
+                <?php $loadlogo = get_field('logo', 'options'); ?>
+		<img src="<?php echo $loadlogo['url']; ?>">
+            </div>
+            <span class="l-1"></span>
+            <span class="l-2"></span>
+            <span class="l-3"></span>
+            <span class="l-4"></span>
+            <span class="l-5"></span>
+            <span class="l-6"></span>
+        </div>
+    </div>
+</div>
+
+=CSS
+#loader {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  z-index: 9999999999;
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
+}
+#loader .loader-wrap,
+#loader .loader-wrap .loader {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+#loader .loader-wrap {
+  display: inline-table;
+}
+#loader .loader {
+  display: table-cell;
+  font-size: 18px;
+  font-family: 'Myriad Pro';
+  color: #000000;
+  vertical-align: middle;
+}
+
+#loader .small-logo {
+  width: 150px;
+  height: auto;
+  margin: 0 auto;
+}
+
+#loader .loader span {
+  display: block; 
+  margin: 0 auto;
+}
+#loader .loader span[class*="l-"] {
+  height: 4px; width: 4px;
+  background: #000000;
+  display: inline-block;
+  margin: 12px 2px;
+  
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  
+  -webkit-animation: loader 4s infinite;
+  -webkit-animation-timing-function: cubic-bezier(0.030, 0.615, 0.995, 0.415);
+  -webkit-animation-fill-mode: both;
+  -moz-animation: loader 4s infinite;
+  -moz-animation-timing-function: cubic-bezier(0.030, 0.615, 0.995, 0.415);
+  -moz-animation-fill-mode: both;
+  -ms-animation: loader 4s infinite;
+  -ms-animation-timing-function: cubic-bezier(0.030, 0.615, 0.995, 0.415);
+  -ms-animation-fill-mode: both;
+  animation: loader 4s infinite;
+  animation-timing-function: cubic-bezier(0.030, 0.615, 0.995, 0.415);
+  animation-fill-mode: both;
+}
+#loader .loader span.l-1 {-webkit-animation-delay: 1s;animation-delay: 1s;-ms-animation-delay: 1s;-moz-animation-delay: 1s;}
+#loader .loader span.l-2 {-webkit-animation-delay: 0.8s;animation-delay: 0.8s;-ms-animation-delay: 0.8s;-moz-animation-delay: 0.8s;}
+#loader .loader span.l-3 {-webkit-animation-delay: 0.6s;animation-delay: 0.6s;-ms-animation-delay: 0.6s;-moz-animation-delay: 0.6s;}
+#loader .loader span.l-4 {-webkit-animation-delay: 0.4s;animation-delay: 0.4s;-ms-animation-delay: 0.4s;-moz-animation-delay: 0.4s;}
+#loader .loader span.l-5 {-webkit-animation-delay: 0.2s;animation-delay: 0.2s;-ms-animation-delay: 0.2s;-moz-animation-delay: 0.2s;}
+#loader .loader span.l-6 {-webkit-animation-delay: 0;animation-delay: 0;-ms-animation-delay: 0;-moz-animation-delay: 0;}
+
+@-webkit-keyframes loader {
+  0% {-webkit-transform: translateX(-30px); opacity: 0;}
+  25% {opacity: 1;}
+  50% {-webkit-transform: translateX(30px); opacity: 0;}
+  100% {opacity: 0;}
+}
+
+@-moz-keyframes loader {
+  0% {-moz-transform: translateX(-30px); opacity: 0;}
+  25% {opacity: 1;}
+  50% {-moz-transform: translateX(30px); opacity: 0;}
+  100% {opacity: 0;}
+}
+
+@-keyframes loader {
+  0% {-transform: translateX(-30px); opacity: 0;}
+  25% {opacity: 1;}
+  50% {-transform: translateX(30px); opacity: 0;}
+  100% {opacity: 0;}
+}
+
+@-ms-keyframes loader {
+  0% {-ms-transform: translateX(-30px); opacity: 0;}
+  25% {opacity: 1;}
+  50% {-ms-transform: translateX(30px); opacity: 0;}
+  100% {opacity: 0;}
+}
+
+=JS
+jQuery(document).ready(function($) {
+	$("#loader").delay(500).fadeOut('slow');
+});

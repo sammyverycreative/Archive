@@ -1,0 +1,3 @@
+$('.checklist .menu-item-has-children > a').each(function(){
+  $(this).html($(this).text() + ' <span>(' + $(this).parent().find('> .sub-menu').children().length + ')</span>');
+});

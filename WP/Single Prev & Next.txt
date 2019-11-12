@@ -1,0 +1,78 @@
+<div class="prev_next_links">
+	<div class="to-left"><?php previous_post('&#8592; %', 'Previous Article', 'no'); ?></div>
+	<div class="to-right"><?php next_post('%  &#8594; ',  'Next Article', 'no'); ?></div>
+</div>
+
+=HTML SYMBOLS
+https://websitebuilders.com/tools/html-codes/arrows
+
+--
+Extended version:
+
+<?php
+//$postslist = get_posts('sort_column=menu_order&sort_order=asc');
+$args = array(
+	'posts_per_page'   => 5,
+	'offset'           => 0,
+	'category'         => '',
+	'category_name'    => '',
+	'orderby'          => 'date',
+	'order'            => 'DESC',
+	'include'          => '',
+	'exclude'          => '',
+	'meta_key'         => '',
+	'meta_value'       => '',
+	'post_type'        => 'post',
+	'post_mime_type'   => '',
+	'post_parent'      => '',
+	'author'	   => '',
+	'author_name'	   => '',
+	'post_status'      => 'publish',
+	'suppress_filters' => true,
+	'fields'           => '',
+);
+$postslist = get_posts( $args );
+$posts = array();
+foreach ($postslist as $thePost) {
+   $posts[] += $thePost->ID;
+}
+
+$current = array_search(get_the_ID(), $posts);
+//$prevID = $posts[$current-1];
+//$nextID = $posts[$current+1];
+$prevID = get_next_post();
+$nextID = get_previous_post();
+?>
+
+<div class="navigation">
+<?php if (!empty($prevID)) { ?>
+	<div class="alignleft">
+		<a href="<?php echo get_permalink($prevID); ?>" title="<?php echo get_the_title($prevID); ?>">Previous</a>
+	</div>
+<?php } if (!empty($nextID)) { ?>
+	<div class="alignright">
+		<a href="<?php echo get_permalink($nextID); ?>" title="<?php echo get_the_title($nextID); ?>">Next</a>
+	</div>
+<?php } ?>
+</div><!-- /navigation -->
+
+--
+Other (+post type):
+<div class="navigation">
+    <div class="preview">
+        <?php $prev_post = get_adjacent_post( true, '', true, 'taxonomy_here' ); ?>
+        <?php if (is_a( $prev_post, 'WP_Post')) { ?>
+            <div class="nav-btn" style="background-image: url(<?php echo get_the_post_thumbnail_url($prev_post->ID); ?>);">
+                <a href="<?php echo get_permalink($prev_post->ID); ?>"><?php echo get_the_title($prev_post->ID); ?></a>
+            </div>
+        <?php } ?>
+    </div>
+    <div class="next">
+        <?php $next_post = get_adjacent_post( true, '', false, 'taxonomy_here' ); ?>
+        <?php if (is_a($next_post, 'WP_Post')) { ?>
+            <div class="nav-btn" style="background-image: url(<?php echo get_the_post_thumbnail_url($next_post->ID); ?>);">
+                <a href="<?php echo get_permalink($next_post->ID); ?>"><?php echo get_the_title($next_post->ID); ?></a>
+            </div>
+        <?php } ?>
+    </div>
+</div>

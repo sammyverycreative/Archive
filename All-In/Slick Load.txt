@@ -1,0 +1,7 @@
+=CSS
+.slider {
+   display: none;
+}
+
+=JS
+$('.slider').show();

@@ -1,0 +1,9 @@
+<?php if( have_rows('section') ): 
+	while( have_rows('section') ): the_row(); 
+		// vars
+		$background = get_sub_field('background');
+		$title = get_sub_field('title');
+		$subtitle = get_sub_field('subtitle');
+		?>
+	<?php endwhile; ?>
+<?php endif; ?>

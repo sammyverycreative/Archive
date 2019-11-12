@@ -1,0 +1,77 @@
+// Gallery
+[HTML]
+<a data-fancybox="gallery-slug" href="http://" class="fancybox">
+	<img src="http://" alt="Photo #1">
+</a>
+
+[JS]
+$(".fancybox").fancybox({
+       maxWidth    : 800,
+       maxHeight   : 600,
+       fitToView   : false,
+       width       : '70%',
+       height      : '70%',
+       autoSize    : false,
+
+       openEffect  : 'fade',
+       closeEffect : 'fade',
+       helpers : {
+           thumbs  : {
+               width   : 50,
+               height  : 50,
+               //position: 'bottom'
+           }
+       }
+});
+/* thumbs menu */
+$('[data-fancybox]').fancybox({
+	thumbs : {
+		autoStart : true
+	}
+});
+
+// Inline
+[HTML]
+<a class="inline" data-fancybox data-src="#hidden-content" href="javascript:;">
+	...
+</a>
+<!-- hidden content -->
+<div style="display: none;" id="hidden-content">
+	<p>Inline Content</p>
+</div>
+<!-- /hidden content -->
+
+[JS]
+$(".inline").fancybox();
+
+// iFrame
+[HTML]
+<a data-fancybox data-type="iframe" data-src="http://" href="javascript:;">
+	...
+</a>
+
+[JS]
+$("[data-fancybox]").fancybox({
+	iframe : {
+		css : {
+			width : '600px'
+		}
+	}
+});
+
+// Embed
+[HTML]
+<a data-fancybox href="https://www.youtube.com/watch?v=...">
+	...
+</a>
+
+[JS]
+$('[data-fancybox]').fancybox({
+	youtube : {
+		controls : 0,
+		showinfo : 0
+	},
+	vimeo : {
+		color : 'f00'
+	}
+});

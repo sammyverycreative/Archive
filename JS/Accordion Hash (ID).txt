@@ -1,0 +1,9 @@
+var url = window.location.hash;
+if (url) {
+	var allAccordionItems = $('.accordion .accordion-item');
+	var allAccordions = $('.accordion div.data');
+	allAccordionItems.removeClass('open');
+	allAccordions.slideUp("slow");
+    $('.accordion > '+url).addClass('open');
+    $('.accordion > '+url).next().slideDown("slow");
+}

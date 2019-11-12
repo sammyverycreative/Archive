@@ -1,0 +1,26 @@
+=HTML
+<div style="display: none;">
+	<audio id="audio1" src="[...]"></audio>
+</div>
+<a id="play1"><i class="far fa-play-circle"></i></a> (<div id="duration1"></div>)
+
+=JS
+jQuery(document).ready(function($) {
+
+	function getDuration(src, cb) {
+	    var audio = new Audio();
+	    $(audio).on("loadedmetadata", function(){
+	        cb(audio.duration);
+	    });
+	    audio.src = src;
+	}
+	getDuration("[...]", function(length) {
+		var time = parseInt(length, 10);
+		var hours = Math.floor(time / 3600);
+		var minutes = Math.floor(time / 60);
+		var seconds = time - minutes * 60;
+		time = time - hours * 3600;
+	    document.getElementById("duration1").textContent = minutes + ":" + seconds;
+	});
+
+});

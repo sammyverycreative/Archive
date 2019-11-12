@@ -1,0 +1,72 @@
+=HTML
+<div class="switch-lang"> 
+    <div class="current-lang"><img class="lang-flag" src="images/flag-en.png"/> <i class="fas fa-angle-down"></i></div>
+    <div class="lang-dropdown">
+        <div class="selecting-lang"><a href="#"><img class="lang-flag" src="images/flag-nl.png"/></a></div>
+    </div>
+</div>
+
+=SCSS
+.switch-lang {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    cursor: pointer;
+    @include tablet {
+        margin-top: -3px;
+        margin-right: 5px;
+    }
+    &:hover {
+        .lang-dropdown {
+            display: block;
+        }
+    }
+    .current-lang {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+        border-radius: 2px;
+        background: #fff;
+        padding: 17px;
+        @include tablet {
+            padding: 3px;
+        }
+        i {
+            color: #888;
+            font-size: 15px;
+            margin-left: 13px;
+            @include tablet {
+                margin: 0 0 0 3px;
+            }
+        }
+    }
+    .lang-flag {
+        display: inline-block;
+        width: 20px;
+    }
+    .lang-dropdown {
+        position: absolute;
+        z-index: 9;
+        display: none;
+        width: 100%;
+        border-radius: 0 0 2px 2px;
+        background: #fff;
+        padding: 17px 17px 12px;
+        margin-top: -2px;
+        @include tablet {
+            padding: 3px 3px 0;
+        }
+        a {
+            padding: 0 !important;
+            margin-bottom: 5px;
+            &:hover {
+                background-color: transparent !important;
+            }
+        }
+    }
+    .selecting-lang {
+        padding: 0;
+        cursor: pointer;
+    }
+}

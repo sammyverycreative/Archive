@@ -1,0 +1,229 @@
+=HTML
+<!-- popup -->
+<div class="popup-wrap">
+	<div class="dialog-wrapper">
+		<div class="dialog-wrap">
+			<div class="dialog">
+				<a href="#" class="close-btn close-box"><img src="/images/popup_close-btn.png" alt="popup close"></a>
+				<div class="div">
+					[...]
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /popup -->
+
+=CSS
+/* fadeIn */
+@-webkit-keyframes fadeIn {
+  0%   {
+  	opacity: 0;
+	visibility: hidden;
+	z-index: -1;
+  }
+  100% {
+  	opacity: 1;
+	visibility: visible;
+	z-index: 9999;
+  }
+}
+@-moz-keyframes fadeIn {
+  0%   {
+  	opacity: 0;
+	visibility: hidden;
+	z-index: -1;
+  }
+  100% {
+  	opacity: 1;
+	visibility: visible;
+	z-index: 9999;
+  }
+}
+@-o-keyframes fadeIn {
+  0%   {
+  	opacity: 0;
+	visibility: hidden;
+	z-index: -1;
+  }
+  100% {
+  	opacity: 1;
+	visibility: visible;
+	z-index: 9999;
+  }
+}
+@keyframes fadeIn {
+  0%   {
+  	opacity: 0;
+	visibility: hidden;
+	z-index: -1;
+  }
+  100% {
+  	opacity: 1;
+	visibility: visible;
+	z-index: 9999;
+  }
+}
+
+/* fadeOut */
+@-webkit-keyframes fadeOut {
+  0%   {
+  	opacity: 0;
+	visibility: hidden;
+	z-index: -1;
+  }
+  100% {
+  	opacity: 0;
+	visibility: hidden;
+	z-index: -1;
+  }
+}
+@-moz-keyframes fadeOut {
+  0%   {
+  	opacity: 0;
+	visibility: hidden;
+	z-index: -1;
+  }
+  100% {
+  	opacity: 0;
+	visibility: hidden;
+	z-index: -1;
+  }
+}
+@-o-keyframes fadeOut {
+  0%   {
+  	opacity: 0;
+	visibility: hidden;
+	z-index: -1;
+  }
+  100% {
+  	opacity: 0;
+	visibility: hidden;
+	z-index: -1;
+  }
+}
+@keyframes fadeOut {
+  0%   {
+  	opacity: 0;
+	visibility: hidden;
+	z-index: -1;
+  }
+  100% {
+  	opacity: 0;
+	visibility: hidden;
+	z-index: -1;
+  }
+}
+
+.popup-wrap {
+	background-color: rgba(0,0,0,.8);
+	opacity: 0;
+	visibility: hidden;
+	position: fixed;
+	overflow-y: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: -1;
+	animation-name: fadeOut;
+	animation-duration: .2s;
+	animation-timing-function: ease-out;
+	animation-fill-mode: forwards;
+	transition: all .2s ease; /* IE */
+	-webkit-transition: all .2s ease; /* Google Chrome/Safari */
+	-moz-transition: all .2s ease; /* Mozilla Firefox */
+	-o-transition: all .2s ease; /* Opera */
+}
+.popup-open .popup-wrap {
+	padding: 20px;
+	animation-name: fadeIn;
+	animation-duration: .2s; /* or: Xms */
+	/*animation-iteration-count: 10;*/
+	/*animation-direction: alternate;*/ /* or: normal */
+	animation-timing-function: ease-in; /* or: ease, ease-in, ease-in-out, linear, cubic-bezier(x1, y1, x2, y2) */
+	animation-fill-mode: forwards; /* or: backwards, both, none */
+	animation-delay: 2s; /* or: Xms */
+}
+.dialog-wrapper {
+	display: table;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+}
+.dialog-wrap {
+	position: relative;
+	display: table-cell;
+	vertical-align: middle;
+}
+.dialog-wrap .close-btn {
+	position: absolute;
+	top: -29px;
+	right: -29px;
+}
+.dialog {
+    position: relative;
+    display: block;
+    background: #fff;
+    max-width: 800px;
+    padding: 20px 50px 40px;
+    margin: 0 auto;
+}
+@media (max-width: 1024px) {
+	.dialog-wrapper {
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		/*max-width: 800px;*/
+	}
+	.dialog-wrap {
+		position: relative;
+		display: block;
+		/*vertical-align: middle;*/
+	}
+	.dialog {
+	    max-width: auto;
+	    width: 100%;
+	}
+}
+@media (max-width: 875px) {
+	.dialog {
+	    padding: 20px;
+	}
+}
+@media (max-width: 768px) {
+	
+}
+@media (max-width: 600px) {
+	.dialog-wrap .close-btn img { width: 35px; }
+	.dialog-wrap .close-btn {
+	    top: -17.5px;
+	    right: -17.5px;
+	}
+}
+@media (max-width: 475px) {
+	.dialog-wrap .close-btn { right: 0; }
+}
+
+=JS
+jQuery(window).load(function(){
+    $('body').delay(3000).addClass('popup-open');
+});
+
+jQuery(document).ready(function($){
+	$('.dialog-wrap .close-box').click(function(e) {
+		$('body').toggleClass('popup-open');
+	});
+});
+
+jQuery(document).keydown(function(e) {
+    if (e.keyCode == 27) {
+        $('body').toggleClass('popup-open');
+    }
+});
+
+jQuery(document).click(function(event) {
+  if (!$(event.target).closest(".dialog").length) {
+    $('body').toggleClass('popup-open');
+  }
+});

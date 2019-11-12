@@ -1,0 +1,4 @@
+//don't handle clicks for empty anchors
+$('a[href=""],a[href="#"]').on('click',function(e){
+	e.preventDefault();
+});

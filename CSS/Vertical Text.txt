@@ -1,0 +1,26 @@
+writing-mode: vertical-rl;
+text-orientation: mixed;
+
+writing-mode: vertical-rl;
+
+text-orientation: upright;
+
+/* Keyword values */
+text-orientation: mixed;
+text-orientation: upright;
+text-orientation: sideways-right;
+text-orientation: sideways;
+text-orientation: use-glyph-orientation;
+
+/* Global values */
+text-orientation: inherit;
+text-orientation: initial;
+text-orientation: unset;
+
+-or-
+writing-mode: tb-rl;
+filter: flipv fliph;
+
+-or-
+transform: rotate(-90deg)
+cursor: vertical-text;

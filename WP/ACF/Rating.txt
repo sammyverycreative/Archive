@@ -1,0 +1,12 @@
+<?php $rating = $box1['rating']; ?>
+<?php if($rating){ ?>
+	<div class="ratting">
+		<?php $rating_left = 5 - intval($rating); ?>
+		<?php for($i = 0; $i<intval($rating); $i++){ ?>
+			<i class="fa fa-star" aria-hidden="true"></i>
+		<?php } ?>
+		<?php for($i = 0; $i<$rating_left; $i++){ ?>
+			<i class="fa fa-star-o" aria-hidden="true"></i>
+		<?php } ?>
+	</div>
+<?php } ?>

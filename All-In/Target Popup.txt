@@ -1,0 +1,7 @@
+<a href="https://www.google.com" 
+
+  target="popup" 
+  onclick="window.open('https://www.google.com','popup','width=600,height=600'); return false;">
+
+    Open Link in Popup
+</a>

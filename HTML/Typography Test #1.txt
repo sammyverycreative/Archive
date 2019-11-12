@@ -1,0 +1,37 @@
+<h1><strong>TITLE (H1)</strong>: Lorem ipsum</h1>
+<h2><strong>TITLE (H2)</strong>: Suspendisse vulputate</h2>
+<h3><strong>TITLE (H3)</strong>: Etiam fermentum</h3>
+<h4><strong>TITLE (H4)</strong>: Mauris malesuada</h4>
+<h5><strong>TITLE (H5)</strong>: Aliquam fringilla</h5>
+<h6><strong>TITLE (H6)</strong>: Nunc vulputate</h6>
+
+<hr>
+
+<p><strong>PARAGRAPH</strong>: <a href="#">Lorem ipsum <strong>(LINK)</strong></a> <del>dolor <strong>(DELETE)</strong></del> sit <ins>amet <strong>(INSERT)</strong></ins>, <strong>consectetur (BOLD)</strong> <em>adipiscing <strong>(ITALIC)</strong></em> <u>elit <strong>(UNDERLINE)</strong></u>. Proin fermentum convallis mi nec faucibus. Mauris at nibh quis purus dignissim tincidunt. Nullam nec ullamcorper est. Vestibulum facilisis ligula vitae velit tincidunt dictum ut vel mauris. Nunc varius eros sed diam commodo, quis varius turpis dignissim. Maecenas congue imperdiet neque, nec consequat massa. Duis eget lorem lectus.</p>
+
+<img class="alignleft" src="http://placehold.it/600x300" alt="Alt" />
+<img class="aligncenter" src="http://placehold.it/600x300" alt="Alt" />
+<img class="alignright" src="http://placehold.it/600x300" alt="Alt" />
+
+<blockquote><strong>BLOCKQUOTE</strong>: Mauris a augue pulvinar, gravida nunc at, vulputate dolor. Curabitur convallis molestie nulla, a vestibulum elit volutpat et. Nullam semper accumsan tortor, eget sagittis libero euismod sit amet. Quisque sollicitudin, est vitae mollis luctus, sapien diam tincidunt mi, id congue eros ante ac sapien.</blockquote>
+
+<code><strong>CODE</strong>: <p><a href="#">Lorem ipsum dolor sit amet</a></p></code>
+
+<h4><strong>UNORDERED LIST</strong></h4>
+<ul>
+   <li>Duis molestie nisi eget dictum hendrerit.</li>
+   <li>Fusce eu dui porttitor, sodales mauris nec, ornare tortor.</li>
+   <li>Vestibulum sit amet odio ac velit pharetra efficitur.</li>
+</ul>
+
+&nbsp;
+
+<h4><strong>ORDERED LIST</strong></h4>
+<ol>
+   <li>Morbi vulputate mauris non quam luctus interdum.</li>
+   <li>Curabitur vel nisl quis dolor feugiat dapibus.</li>
+   <li>Vestibulum at odio interdum eros pretium porttitor.</li>
+</ol>
+
+=LINK
+https://codex.wordpress.org/Theme_Unit_Test

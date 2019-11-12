@@ -1,0 +1,19 @@
+word-break: normal|break-all|keep-all|break-word|initial|inherit;
+
+normal: Default value. Uses default line break rules
+break-all: To prevent overflow, word may be broken at any character
+keep-all: Word breaks should not be used for Chinese/Japanese/Korean (CJK) text. Non-CJK text behavior is the same as value "normal"
+break-word: To prevent overflow, word may be broken at arbitrary points
+initial: Sets this property to its default value. Read about initial
+inherit: Inherits this property from its parent element. Read about inherit
+=https://www.w3schools.com/cssref/css3_pr_word-break.asp
+
+
+hyphens: none|manual|auto|initial|inherit;
+
+none: Words are not hyphenated
+manual: Default. Words are only hyphenated at &hyphen; or &shy; (if needed)
+auto: Words are hyphenated where the algorithm is deciding (if needed)
+initial: Sets this property to its default value. Read about initial
+inherit: Inherits this property from its parent element. Read about inherit
+=https://www.w3schools.com/cssref/css3_pr_hyphens.asp

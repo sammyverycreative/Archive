@@ -1,0 +1,25 @@
+.simple-btn {
+	margin: 0 5px;
+	background: #05f1ff;
+	background: -moz-linear-gradient(left, #05f1ff 0%, #01fe89 100%);
+	background: -webkit-linear-gradient(left, #05f1ff 0%,#01fe89 100%);
+	background: linear-gradient(to right, #05f1ff 0%,#01fe89 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#05f1ff', endColorstr='#01fe89',GradientType=1 );
+	padding: 1px;
+}
+.simple-btn span {
+	display: inline-block;
+	color: #000;
+	background-color: #fff;
+	font-size: 11px;
+	text-transform: uppercase;
+	padding: 20px 25px;
+	transition: all .2s ease; /* IE */
+	-webkit-transition: all .2s ease; /* Google Chrome/Safari */
+	-moz-transition: all .2s ease; /* Mozilla Firefox */
+	-o-transition: all .2s ease; /* Opera */
+}
+.simple-btn:hover span {
+	color: #fff;
+	background-color: transparent;
+}

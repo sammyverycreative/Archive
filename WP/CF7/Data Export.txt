@@ -1,0 +1,79 @@
+==
+@OLD Version
+--
+
+* Plugin/Additional *
+on_sent_ok: "var yourname = $('.wpcf7 input[name=your-name]').val();var youremail = $('.wpcf7 input[name=your-email]').val();var cf7favorite = $('.wpcf7 input[name=cf7-favorite]:checked').val();location = '/thank-you/?yourname='+yourname+'&youremail='+youremail+'&cf7favorite='+cf7favorite;"
+
+/* Functions */
+// custom output based on the form data
+add_action( 'genesis_before_post_content', 'vc_genesis_custom_thankyou' );
+function vc_genesis_custom_thankyou()
+{
+    if(is_page('thank-you')){
+        $yourname = htmlspecialchars($_GET["yourname"]);
+        $youremail = htmlspecialchars($_GET["youremail"]);
+        $cf7favorite = htmlspecialchars($_GET["cf7favorite"]);
+        //echo your custom output using the query vars here
+    }
+}
+
+* File/Template *
+<?php
+$yourname = htmlspecialchars($_GET["yourname"]);
+$youremail = htmlspecialchars($_GET["youremail"]);
+$cf7favorite = htmlspecialchars($_GET["cf7favorite"]);
+?>
+
+Source: http://www.vincoding.com/passing-contact-form-7-data-thank-page
+
+==
+@NEW Version
+--
+/* Functions */
+/* DOM event method for passing demo CF7 data */
+function vc_dom_event_footer() {
+?>
+<script type="text/javascript">
+document.addEventListener( 'wpcf7mailsent', function( event ) {
+ if ( '944' == event.detail.contactFormId ) {
+  var inputs = event.detail.inputs;
+  for ( var i = 0; i < inputs.length; i++ ) {
+   if ( 'your-name' == inputs[i].name ) {
+    var yourname = inputs[i].value;
+   }
+   if ( 'your-email' == inputs[i].name ) {
+    var youremail = inputs[i].value;
+   }
+   if ( 'cf7-oldmethod' == inputs[i].name ) {
+    var cf7oldmethod = inputs[i].value;
+   }
+ }
+ window.location.href = '/cf7-thank-you/?yourname='+yourname+'&youremail='+youremail+'&cf7oldmethod='+cf7oldmethod;
+}
+}, false );
+</script>
+<?php
+}
+add_action( 'wp_footer', 'vc_dom_event_footer' );
+
+// custom output based on the form data
+add_action( 'genesis_before_post_content', 'vc_genesis_custom_thankyou' );
+function vc_genesis_custom_thankyou()
+{
+    if(is_page('cf7-thank-you')){
+        $yourname = htmlspecialchars($_GET["yourname"]);
+        $youremail = htmlspecialchars($_GET["youremail"]);
+        $cf7oldmethod = htmlspecialchars($_GET["cf7oldmethod"]);
+        //echo your ouput as desired here using the url variables that were passed through
+    }
+}
+
+/* File/Template */
+<?php
+$yourname = htmlspecialchars($_GET["yourname"]);
+$youremail = htmlspecialchars($_GET["youremail"]);
+$cf7oldmethod = htmlspecialchars($_GET["cf7oldmethod"]);
+?>
+
+Source: http://www.vincoding.com/dom-events-method-passing-cf7-data

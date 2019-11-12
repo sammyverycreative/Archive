@@ -1,0 +1,30 @@
+=JS
+function IsEmail(email) {
+	var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	return regex.test(email);
+}
+$('#subscribeform').on('submit', function(e) {
+  e.preventDefault();
+  var valid = true;
+  $(this).find('input[type="text"]:visible,input[type="email"]:visible').each(function(){
+    if ($(this).val() == '') {
+      //$(this).parent().find('.wpcf7-not-valid-tip:first').show();
+      valid = false;
+    } else if ($(this).attr('type') == 'email' && !IsEmail($(this).val())) {
+      //$(this).parent().find('.wpcf7-not-valid-tip.email:first').show();
+      valid = false;
+    } else {
+      //$(this).parent().find('.wpcf7-not-valid-tip').hide();
+    }
+  });
+  if (valid == true) {
+    e.preventDefault();
+    $.post('http://www.website.domain/phplistfolder/?p=subscribe&id=1',$(this).serialize()).always(function(){
+      //$('#subscribeform').slideUp();
+      //$('.newsletter-wrapper h4').text('Thank You!').css('margin',0);
+      //$('.thankyou').removeClass('hidden').fadeIn();
+    });
+  } else {
+    return false;
+  }
+});

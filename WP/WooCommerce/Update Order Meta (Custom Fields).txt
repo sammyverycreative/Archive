@@ -1,0 +1,26 @@
+/**
+ * Update the order meta with field value
+ */
+add_action( 'woocommerce_checkout_update_order_meta', 'my_custom_checkout_field_update_order_meta' );
+function my_custom_checkout_field_update_order_meta( $order_id ) {
+    if ( ! empty( $_POST['my_field_name'] ) ) {
+        update_post_meta( $order_id, 'My Field', sanitize_text_field( $_POST['my_field_name'] ) );
+    }
+}
+
+e.g.:
+function vc_update_order_meta( $order_id )
+{
+    $fields = array( 'field1', 'field2', 'field3' );
+    update_post_meta( $order_id, 'vc_order_type', vc_get_cart_type( ) );
+    foreach( $fields as $field ) {
+        if( !isset( $_POST[$field] ) ) {
+            continue;
+        }
+        update_post_meta( $order_id, $field, $_POST[$field] );
+    }
+    if( isset( $_POST['checkout_next_step'] ) && $_POST['checkout_next_step'] != 'thank_you' ) {
+        update_post_meta( $order_id, 'show_thank_you', 1 );
+    }
+}
+add_action( 'woocommerce_checkout_update_order_meta', 'vc_update_order_meta' );

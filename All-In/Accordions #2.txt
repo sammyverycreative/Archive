@@ -1,0 +1,52 @@
+=HTML
+<div class="panel panel-info">
+	<div class="panel-heading wow fadeIn" data-wow-delay="0.1s" data-toggle="collapse" data-parent=".accordion1" href="#a1-a1">
+		<span class="panel-title">Question <i class="fa fa-chevron-up pull-right"></i></span>
+	</div>
+	<div id="a1-a1" class="panel-collapse collapse">
+		<div class="panel-body">
+			<p>Answer</p>
+		</div>
+	</div>
+</div>
+
+or
+
+<div class="panel panel-info">
+	<div class="panel-heading wow fadeIn" data-wow-delay="0.1s" data-toggle="collapse" data-parent=".accordion2" href="#a2-a1">
+		<span class="panel-title">Question <i class="fa fa-plus pull-right"></i></span>
+	</div>
+	<div id="a2-a1" class="panel-collapse collapse">
+		<div class="panel-body">
+			<p>Answer</p>
+		</div>
+	</div>
+</div>
+
+=CSS
+.accordion1 .panel-heading,
+.accordion2 .panel-heading { cursor: pointer; }
+
+=JS
+$(function () {
+  // Smooth Scroll
+  $('a[href*=#]').bind('click', function(e){
+    var anchor = $(this);
+    $('html, body').stop().animate({
+      scrollTop: $(anchor.attr('href')).offset().top
+    }, 1000);
+    e.preventDefault();
+  });
+});
+$('.accordion1').on('show.bs.collapse', function(n){
+  $(n.target).siblings('.panel-heading').find('.panel-title i').toggleClass('fa-chevron-down fa-chevron-up');
+});
+$('.accordion1').on('hide.bs.collapse', function(n){
+  $(n.target).siblings('.panel-heading').find('.panel-title i').toggleClass('fa-chevron-up fa-chevron-down');
+});
+$('.accordion2').on('show.bs.collapse', function(n){
+  $(n.target).siblings('.panel-heading').find('.panel-title i').toggleClass('fa-minus fa-plus');
+});
+$('.accordion2').on('hide.bs.collapse', function(n){
+  $(n.target).siblings('.panel-heading').find('.panel-title i').toggleClass('fa-plus fa-minus');
+});

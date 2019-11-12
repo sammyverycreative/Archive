@@ -1,0 +1,6 @@
+$args = array('hide_empty' => FALSE);
+wp_list_categories($args);
+
+or
+
+get_categories( array('hide_empty' => 0/1/*, 'parent' => 0/1*/) );

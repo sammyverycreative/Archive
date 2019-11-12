@@ -1,0 +1,5 @@
+=FUNCTIONS
+function project_admin_loginlogo() {  
+    echo '<style type="text/css">body { background-color: #000 !important; } .login #backtoblog a, .login #nav a { color: #fff !important; } h1 a { background-image:url('.get_stylesheet_directory_uri().'/images/admin-logo.png)  !important; width: 320px !important;height: 56px !important;background-size: 320px 56px !important; }</style>';  
+}  
+add_action('login_head',  'project_admin_loginlogo');

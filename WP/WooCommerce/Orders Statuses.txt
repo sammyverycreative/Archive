@@ -1,0 +1,39 @@
+function wc_get_order_statuses() {
+  $order_statuses = array(
+    'wc-pending'    => _x( 'Pending payment', 'Order status', 'woocommerce' ),
+    'wc-processing' => _x( 'Processing', 'Order status', 'woocommerce' ),
+    'wc-on-hold'    => _x( 'On hold', 'Order status', 'woocommerce' ),
+    'wc-completed'  => _x( 'Completed', 'Order status', 'woocommerce' ),
+    'wc-cancelled'  => _x( 'Cancelled', 'Order status', 'woocommerce' ),
+    'wc-refunded'   => _x( 'Refunded', 'Order status', 'woocommerce' ),
+    'wc-failed'     => _x( 'Failed', 'Order status', 'woocommerce' ),
+  );
+  return apply_filters( 'wc_order_statuses', $order_statuses );
+}
+
+-or-
+
+function vc_order_statuses($order_statuses)
+{
+    foreach( $order_statuses as $key => &$label ) {
+        switch( $key ) {
+            case 'wc-on-hold':
+                $label = 'In asteptare';
+                break;
+            case 'wc-pending':
+                $label = 'In asteptarea platii';
+                break;
+            case 'wc-processing':
+                $label = 'In curs';
+                break;
+            case 'wc-completed':
+                $label = 'Finalizat';
+                break;
+            case 'wc-cancelled':
+                $label = 'Anulat';
+                break;
+        }
+    }
+    return $order_statuses;
+}
+add_filter( 'wc_order_statuses', 'vc_order_statuses' );

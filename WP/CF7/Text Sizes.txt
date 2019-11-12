@@ -1,0 +1,8 @@
+[text* your-name size:30 maxlength:60]
+
+e.g.:
+minlength:10
+maxlength:90
+size:100
+
+Source: https://contactform7.com/text-fields

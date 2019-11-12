@@ -1,0 +1,83 @@
+=HTML
+<form action="<?php echo esc_url(get_permalink()); ?>" method="post" id="ajaxform">
+	<input type="text" placeholder="Full Name" name="fullname">
+	<input type="e-mail" placeholder="E-mail Address" name="e-mail">
+	<input type="hidden" name="new_message" value="1"/>
+	<input type="submit" value="Subscribe">
+</form>
+<div class="errors" id="results"></div>
+
+=FUNCTIONS
+// Ajax
+function add_localize_script()  {
+?>
+<script type="text/javascript">
+    var jsHomeUrl = '<?php echo home_url(); ?>';
+    var ajaxUrl = "<?php echo admin_url( 'admin-ajax.php' ) ?>";
+</script>
+<?php
+}
+add_action('wp_head', 'add_localize_script', 999);
+
+// Form
+function process_form() {
+    $form = $_POST['form'];
+    $params = array();
+    parse_str($form, $params);
+    $res = array();
+
+    if (isset($params['new_message']) && $params['new_message'] == '1') {
+
+        $email_to = 'your@e-mail.address';
+        $email_subject = 'Newsletter Subscription';
+
+        $email_exp = '/^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/';
+
+        $fullname = $params['fullname'];
+        $email = $params['e-mail'];
+
+
+        if ($fullname != '' && $email != '') {
+            $email_message .= "Name: ".$fullname."\n";
+            $email_message .= "E-mail address: ".$email."\n";
+            
+            $headers = "From:" . $email;
+            mail($email_to,$email_subject,$email_message,$headers);
+
+            $res['success'] = '<span class="green">You had successfully subscribed. Thank you!</span>';
+
+        } else if (!preg_match($email_exp,$email)) {
+            $res['success'] = '<span class="red">The e-mail address is not valid. Please check and retry.</span>';
+        } else {
+            $res['success'] = '<span class="red">Fill all required fields and retry.</span>';
+        }
+    }
+
+    echo json_encode($res);
+    die();
+    
+}
+add_action( 'wp_ajax_process_form', 'process_form' );
+add_action( 'wp_ajax_nopriv_process_form', 'process_form' );
+
+=JS
+jQuery('#ajaxform').submit(ajaxSubmit);
+
+function ajaxSubmit(){
+    var ajaxform = jQuery(this).serialize();
+    jQuery("#results").html('<span>Loading...</span>');
+    jQuery.ajax({
+        
+        type: "POST",
+        dataType: "json",
+        url: ajaxUrl,
+        data: {
+        	action: 'process_form',
+        	form: ajaxform
+        },
+        success: function(data){
+            jQuery("#results").html(data.success);
+        }
+    });
+    return false;
+}

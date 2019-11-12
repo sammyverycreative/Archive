@@ -1,0 +1,5 @@
+define ('WPCF7_LOAD_JS', false); // Added to disable JS loading
+define ('WPCF7_LOAD_CSS', false); // Added to disable CSS loading
+
+=SOURCE
+https://www.contactform7.com/controlling-behavior-by-setting-constants

@@ -1,0 +1,14 @@
+<?php 
+$theDate = '...';
+echo date('d/m/Y \a\t H:i', strtotime($theDate));
+?>
+
+-and/or (for multiple hours)-
+
+<?php
+$theDate = '...';
+if (!empty($theDate) && ($temp = explode('+', $theDate)) && is_array($temp) && count($temp) == 2): 
+    $datetime = date('d/m/Y', strtotime($temp[0])).' '.$temp[1];
+    echo $datetime;
+endif;
+?>

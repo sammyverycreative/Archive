@@ -1,0 +1,16 @@
+=JS
+$(window).scroll(function(){
+    var footer = $('#footer').offset().top;
+    var footerHeight = $('#footer').height();
+    var btnPos = $('.top-btn').offset().top;
+    var btnHeight = $('.top-btn').height();
+    var scroll = $(window).scrollTop();
+    if (btnPos > footer && btnPos < (footer + footerHeight)) {
+    	$('.top-btn').addClass('white');
+    } else {
+    	$('.top-btn').removeClass('white');
+    }
+});
+
+=SOURCE
+https://www.jsfiddle.net/atqkuwhs

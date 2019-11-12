@@ -1,0 +1,7 @@
+function fontawesome_dashboard() {
+   wp_enqueue_style('fontawesome', '//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css', '', '4.0.3', 'all'); 
+}
+add_action('admin_init', 'fontawesome_dashboard');
+
+--
+FontAwesome v5.5.0 CDN: //use.fontawesome.com/releases/v5.5.0/css/all.css

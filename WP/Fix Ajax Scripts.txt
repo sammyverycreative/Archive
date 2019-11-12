@@ -1,0 +1,4 @@
+wp_register_script('customJs', get_template_directory_uri().'/js/custom.js', '', false, true);
+wp_enqueue_script('customJs', array('jquery'), true);
+
+wp_localize_script( 'customJS', 'ajax_object', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );

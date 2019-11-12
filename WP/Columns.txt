@@ -1,0 +1,49 @@
+function my_page_columns($columns)
+{
+  $columns = array(
+    'cb'  => '<input type="checkbox" />',
+    'title'   => 'Title',
+    'column1'   => 'Column1',
+    'column2'   => 'Column2',
+    'date'   => 'Date'
+  );
+  return $columns;
+}
+ 
+function my_custom_columns($column) {
+  global $post;
+  if ($column == 'column1') {
+    //echo or do something
+  }
+  elseif ($column == 'column2') {
+    //echo or do something
+  }
+  elseif($column == 'date') {
+     $date = DateTime::createFromFormat('Ymd');
+     if( empty( $date ) ) :
+       echo 'No Date';
+     else:
+       echo $date->format('d/M/Y');
+     endif;
+  }
+}
+add_action("manage_POST-TYPE_posts_custom_column", "my_custom_columns");
+add_filter("manage_edit-POST-TYPE_columns", "my_page_columns");
+
+// sort
+add_action( 'pre_get_posts', 'custom_column_orderby' );  
+function custom_column_orderby( $query ) {  
+    if (!is_admin())  
+        return;  
+    $orderby = $query->get( 'orderby');  
+    if ('column1' == $orderby ) {  
+        $query->set('meta_key','acf_field');  
+        $query->set('orderby','meta_value_num');  
+    }  
+}
+
+function custom_column_sortable( $columns ) {
+  $columns['column1'] = 'acf_field';
+  return $columns;
+}
+add_filter("manage_edit-POST-TYPE_sortable_columns", "custom_column_sortable" );

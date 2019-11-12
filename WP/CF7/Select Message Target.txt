@@ -1,0 +1,50 @@
+=WP
+#*** @IMPORTANT: Change "TO" field to [location] ***#
+
+[select* location include_blank "Location #1|e-mail1@address.domain" "Location #2|e-mail2@address.domain"]
+
+=FUNCTION
+function location_form_handler($formData) //use a different function name for each form
+{
+    $formName = 'FORM NAME HERE'; //change this to your form's name
+    $fieldName = 'location'; //change this to your field's name
+    $newFieldName = $fieldName . '_email';
+    return form_with_pipes_handler($formName, $fieldName, $newFieldName, $formData);
+}
+add_filter('cfdb_form_data', 'location_form_handler'); //ensure 2nd param matches above function name
+
+function form_with_pipes_handler($formName, $fieldName, $newFieldName, &$formData)
+{
+    if ($formData &&
+            $formName == $formData->title &&
+            property_exists($formData, 'WPCF7_ContactForm') &&
+            method_exists($formData->WPCF7_ContactForm, 'form_scan_shortcode')) {
+ 
+        $scanned_form_tags = $formData->WPCF7_ContactForm->form_scan_shortcode();
+        $emailSelected = $formData->posted_data[$fieldName];
+        if (is_array($emailSelected) && count($emailSelected) == 1) {
+            $emailSelected = $emailSelected[0];
+        }
+        $valueSelected = null;
+        foreach ($scanned_form_tags as $tag) {
+            if ($tag['name'] == $fieldName) {
+                foreach ($tag['raw_values'] as $rawValue) {
+                    // value|email
+                    $valuesArray = explode('|', $rawValue);
+                    if (count($valuesArray) == 2 && $valuesArray[1] == $emailSelected) {
+                        $valueSelected = $valuesArray[0];
+                        break;
+                    }
+                }
+            }
+            if ($valueSelected != null) {
+                break;
+            }
+        }
+        if ($valueSelected != null) {
+            $formData->posted_data[$fieldName] = $valueSelected;
+            $formData->posted_data[$newFieldName] = $emailSelected;
+        }
+    }
+    return $formData;
+}

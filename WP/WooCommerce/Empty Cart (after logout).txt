@@ -1,0 +1,7 @@
+=FUNCTIONS
+function emptyCart() {
+    if( function_exists('WC') ){
+        WC()->cart->empty_cart();
+    }
+}
+add_action('wp_logout', 'emptyCart');

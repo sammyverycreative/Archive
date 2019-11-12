@@ -1,0 +1,24 @@
+=FUNCTIONS
+function project_admin_style() {
+  echo '<style>
+  #adminmenu,
+  #adminmenu .wp-submenu,
+  #adminmenuback,
+  #adminmenuwrap,
+  #wpadminbar { background-color: #000; }
+
+  #adminmenu .wp-has-current-submenu .wp-submenu,
+  #adminmenu .wp-has-current-submenu .wp-submenu.sub-open,
+  #adminmenu .wp-has-current-submenu.opensub .wp-submenu,
+  #adminmenu a.wp-has-current-submenu:focus+.wp-submenu,
+  .no-js li.wp-has-current-submenu:hover .wp-submenu,
+  #adminmenu .wp-has-current-submenu .wp-submenu .wp-submenu-head,
+  #adminmenu .wp-menu-arrow,
+  #adminmenu .wp-menu-arrow div,
+  #adminmenu li.current a.menu-top,
+  #adminmenu li.wp-has-current-submenu a.wp-has-current-submenu,
+  .folded #adminmenu li.current.menu-top,
+  .folded #adminmenu li.wp-has-current-submenu { background-color: #000; }
+  </style>';
+}
+add_action('admin_head', 'project_admin_style');

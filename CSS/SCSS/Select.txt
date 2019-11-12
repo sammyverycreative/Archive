@@ -1,0 +1,217 @@
+===
+$('.custom-select').selectric({
+     arrowButtonMarkup: '<span class="select-button"></span>',
+     labelBuilder: '{text}',
+     forceRenderBelow: true,
+     multiple: {
+         separator: '',
+         maxLabelEntries: 1
+     }
+});
+===
+
+.select-block-styled {
+    position: relative;
+
+    .selectric-wrapper {
+        border: 0;
+
+        .selectric {
+            position: relative;
+            z-index: 1;
+            box-shadow: none;
+            background: $yellow-color;
+
+            @include rounded(18px);
+
+            span.label {
+                height: 36px;
+                line-height: 36px;
+                padding: 0 15px;
+                padding-right: 15px;
+                font-weight: 400;
+                font-size: 1.4rem;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                color: $grey-color;
+                font-family: $main-font;
+                border: 0px solid $border-color;
+
+                @include rounded(0px);
+            }
+
+            .select-button {
+                position: absolute;
+                width: 22px;
+                height: 22px;
+                top: 50%;
+                right: 15px;
+                z-index: 10;
+                margin-top: -11px;
+                background-image: url(images/plus-icon.svg);
+                background-size: 100% auto;
+                background-repeat: no-repeat;
+                background-position: center center;
+
+                @include transition(all, 0.4s);
+                @include transform-origin(50%, 50%);
+            }
+        }
+
+        .selectric-items {
+            background: $grey_bg;
+            z-index: 0;
+            border: 0;
+            max-width: 90%;
+            left: 5%;
+            padding-top: 40px;
+            top: calc(100% - 30px);
+            display: block;
+            opacity: 0;
+
+            //transform: translate(0, -100%);
+            overflow: hidden;
+            max-height: 0;
+
+            @include transition(all, 0.4s);
+
+            ul {
+                li {
+                    padding: 7px 20px;
+                    color: $grey-color;
+                    font-size: 1.4rem;
+                    margin: 0;
+                    font-weight: 400;
+                    border: 0;
+                    letter-spacing: 0.01em;
+                    text-transform: uppercase;
+
+                    &:before {
+                        display: none;
+                    }
+
+                    &.highlighted, &:hover {
+                        background: $grey_bg;
+                        color: $main-text-color;
+                    }
+                }
+            }
+        }
+
+        &.white-select {
+            border: 0;
+        }
+
+        &.selectric-open {
+            .selectric {
+                .select-button {
+                    @include rotate(135);
+                }
+            }
+
+            .selectric-items {
+                //transform: translate(0, 0);
+                opacity: 1;
+                max-height: 400px;
+            }
+        }
+    }
+}
+
+-or-
+
+.select-block {
+    position: relative;
+
+    .selectric-wrapper {
+        background: #fff;
+
+        .selectric {
+            span.label {
+                height: 44px;
+                line-height: 44px;
+                padding: 0 20px;
+                padding-right: 30px;
+                font-weight: 500;
+                font-size: 1.5rem;
+                text-transform: normal;
+                color: $main-text-color;
+                font-family: $main-font;
+                border: 1px solid $border-color;
+                letter-spacing: normal;
+
+                @include rounded(3px);
+
+                @include mobile {
+                    font-size: 1.4rem;
+                }
+            }
+
+            .select-button {
+                position: absolute;
+                width: 10px;
+                height: 6px;
+                top: 14px;
+                right: 12px;
+                z-index: 10;
+                font-family: Font Awesome\ 5 Free;
+                font-size: 1.6rem;
+                color: $main-text-color;
+                font-weight: 900;
+                line-height: normal;
+                pointer-events: none;
+
+                &:before {
+                    content: "\f107";
+                    line-height: normal;
+                }
+            }
+        }
+
+        .selectric-items {
+            background: $background_bg;
+
+            ul {
+                li {
+                    padding: 7px 20px;
+                    color: $main-text-color;
+                    font-size: 1.3rem;
+                    margin: 0;
+                    font-weight: 400;
+                    border: 0;
+                    border-top: 1px solid $grey_bg;
+
+                    &:before {
+                        display: none;
+                    }
+
+                    &.highlighted, &:hover {
+                        background: $grey_bg;
+                        color: $main-text-color;
+                    }
+                }
+            }
+        }
+
+        &.white-select {
+            border: 0;
+        }
+    }
+
+    &.grey {
+        .selectric-wrapper {
+            background: $grey_bg;
+
+            .selectric {
+                span.label {}
+
+                .select-button {}
+            }
+        }
+    }
+
+    &.auto-width {
+        display: inline-block;
+        width: auto;
+    }
+}

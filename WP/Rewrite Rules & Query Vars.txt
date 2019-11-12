@@ -1,0 +1,52 @@
+=HTML/PAGE (redirected page)
+<?php
+$location = get_query_var('location');
+$destination = get_query_var('destination');
+$time = get_query_var('time');
+?>
+
+<form method="get" action="<?php echo esc_url(site_url()); ?>/customUrlHERE" class="search-filters">
+	<div class="site-url" data-href="<?php echo site_url(); ?>"></div>
+	[...]
+</form>
+
+=FUNCTIONS
+function myplugin_register_query_vars( $vars ) {
+    $vars[] = 'location';
+    $vars[] = 'destination';
+    $vars[] = 'time';
+    return $vars;
+}
+add_filter( 'query_vars', 'myplugin_register_query_vars' );
+
+function myplugin_rewrite_tag_rule() {
+    add_rewrite_rule( '^customUrlHERE/([^/]*)-([^/]*)-([^/]*)/?', 'index.php?page_id=00000(id_here)&location=$matches[1]&destination=$matches[2]&time=$matches[3]','top' );
+}
+add_action('init', 'myplugin_rewrite_tag_rule', 10, 0);
+
+=JS
+$(function() {
+  $('.search-filters').on("submit", function(e) {
+    e.preventDefault();
+    var loc = $('input[name=location]').val();
+    //var location = loc.replace(" ", "_");
+    var location = loc.toLowerCase();
+    var l = encodeURI(location);
+    var dest = $('input[name=destination]').val();
+    //var destination = dest.replace(" ", "_");
+    var destination = dest.toLowerCase();
+    var d = encodeURI(destination);
+    var t = $('input[name=time_submit]').val();
+    if (l != '' && d != '' && t != '') {
+        if (l != d) {
+            //var rTime = timeInput.replace(',', '');
+            //var time = rTime.split('%20');
+            //var timp = new Date(time[2], time[1], time[0]);
+            website = $('.site-url').attr('data-href');
+            var url = website+'/customUrlHERE/'+l+'-'+d+'-'+t;
+            window.location.replace(url);
+            //window.open(url, '_blank');
+        }
+    }
+  });
+});

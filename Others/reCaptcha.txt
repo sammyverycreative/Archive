@@ -1,0 +1,68 @@
+######
+# V2 #
+######
+
+Site key: 6Le_akcUAAAAAPZi6Jr7j2uklnshLwgaMyz5o6EZ
+Secret key: 6Le_akcUAAAAABVBBlHbj1Tss-bhAK4U1P8Ul_My
+
+Step #1:
+Paste this snippet before the closing </head> tag on your HTML template:
+<script src='https://www.google.com/recaptcha/api.js'></script>
+Paste this snippet at the end of the <form> where you want the reCAPTCHA widget to appear:
+<div class="g-recaptcha" data-sitekey="6Le_akcUAAAAAPZi6Jr7j2uklnshLwgaMyz5o6EZ"></div>
+
+Step #2:
+When your users submit the form where you integrated reCAPTCHA, you'll get as part of the payload a string with the name "g-recaptcha-response". In order to check whether Google has verified that user, send a POST request with these parameters:
+URL: https://www.google.com/recaptcha/api/siteverify
+
+secret (required): 6Le_akcUAAAAABVBBlHbj1Tss-bhAK4U1P8Ul_My
+response (required): The value of 'g-recaptcha-response'.
+remoteip: The end user's ip address.
+
+=HTML
+<div class="grecaptha">...</div>
+
+=CSS
+.grecaptha { overflow: hidden; }
+
+=Url
+https://www.google.com/recaptcha/admin#site/340224703?setup
+
+######
+# V3 #
+######
+
+Site key: 6Lc4KY4UAAAAACAwWwUtOqh8iuhZPglABTjaQ9oD
+Secret key: 6Lc4KY4UAAAAAJDZNx4HGfc00EwFqTVe3-uSGpau
+
+Step #1:
+Paste this snippet before the closing </head> tag on your HTML template:
+<script src='https://www.google.com/recaptcha/api.js?render=6Lc4KY4UAAAAACAwWwUtOqh8iuhZPglABTjaQ9oD'></script>
+Paste this snippet in the JavaScript callback for an action on your website.
+<script>
+grecaptcha.ready(function() {
+grecaptcha.execute('6Lc4KY4UAAAAACAwWwUtOqh8iuhZPglABTjaQ9oD', {action: 'action_name'})
+.then(function(token) {
+// Verify the token on the server.
+});
+});
+</script>
+
+Step #2:
+URL: https://www.google.com/recaptcha/api/siteverify
+secret (required): 6Lc4KY4UAAAAAJDZNx4HGfc00EwFqTVe3-uSGpau
+response (required): The value of 'g-recaptcha-response'.
+remoteip: The end user's ip address.
+
+=HTML
+<small>This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank">Terms of Service</a> apply.</small>
+
+=CSS
+.grecaptcha-badge {
+   /*display: none !important;*/
+   opacity: 0 !important;
+   visibility: hidden !important;
+}
+
+=Url
+https://www.google.com/recaptcha/admin#site/344860984?setup

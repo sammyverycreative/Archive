@@ -1,0 +1,3 @@
+<p class="copyright"><?php $vc->copyright(get_field('copyright_year','options'),get_field('copyright_text','options'),true); ?></p>
+
+NOTE: Use VeryCreative Framework for $vc functions.

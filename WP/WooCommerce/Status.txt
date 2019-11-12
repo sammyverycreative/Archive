@@ -1,0 +1,24 @@
+function vc_order_statuses(  $order_statuses )
+{
+    foreach( $order_statuses as $key => &$label ) {
+        switch( $key ) {
+            case 'wc-pending':
+                $label = 'In asteptarea platii';
+                break;
+            case 'wc-processing':
+                $label = 'In curs';
+                break;
+            case 'wc-on-hold':
+                $label = 'In asteptare';
+                break;
+            case 'wc-completed':
+                $label = 'Finalizat';
+                break;
+            case 'wc-cancelled':
+                $label = 'Anulat';
+                break;
+        }
+    }
+    return $order_statuses;
+}
+add_filter( 'wc_order_statuses', 'vc_order_statuses' );

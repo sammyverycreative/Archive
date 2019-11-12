@@ -1,0 +1,50 @@
+=HTML
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.css"/>
+<script src="https://www.amcharts.com/lib/3/ammap.js"></script>
+<script src="https://www.amcharts.com/lib/3/maps/js/worldLow.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+<div id="chartdiv"></div>													
+
+=CSS
+#chartdiv {
+  width: 100%;
+  height: 500px;
+}
+
+=JS
+var map = AmCharts.makeChart("chartdiv", {
+  "type": "map",
+  "dataProvider": {
+    "map": "worldLow",
+    "areas": [{
+      "id": "US",
+      "modalUrl": "https://en.wikipedia.org/wiki/United_States",
+      "selectable": true
+    }, {
+      "id": "FR",
+      "modalUrl": "https://en.wikipedia.org/wiki/France",
+      "selectable": true
+    }, {
+      "id": "CN",
+      "modalUrl": "https://en.wikipedia.org/wiki/China",
+      "selectable": true
+    }]
+  },
+  "areasSettings": {
+    "selectedColor": "#CC0000"
+  },
+  "listeners": [{
+    "event": "clickMapObject",
+    "method": function(event) {
+      $.fancybox({
+        "href": event.mapObject.modalUrl,
+        "title": event.mapObject.title,
+        "type": "iframe"
+      });
+    }
+  }]
+});
+
+=SOURCE
+https://www.codepen.io/team/amcharts/pen/VLNyjZ

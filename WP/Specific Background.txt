@@ -1,0 +1,21 @@
+<?php 
+	$page_id = get_the_ID();
+	$template_file = get_post_meta($page_id, '_wp_page_template', true);
+?>
+<?php if($template_file == 'pages/page-home.php'){ ?>
+	style="background: url(<?php $vc->img->the_img(get_field('background1', 'options')); ?>) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;"
+<?php } else ?>
+<?php if($template_file == 'pages/page-about.php'){ ?>
+	style="background: url(<?php $vc->img->the_img(get_field('background2', 'options')); ?>) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;"
+<?php } else ?>
+<?php if($template_file == 'pages/page-contact.php'){ ?>
+	style="background: url(<?php $vc->img->the_img(get_field('background3', 'options')); ?>) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;"
+<?php } else ?>
+<?php if($template_file == 'pages/404.php'){ ?>
+	style="background: url(<?php $vc->img->the_img(get_field('background4', 'options')); ?>) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;"
+<?php } else ?>
+<?php if(is_home()){ ?>
+	style="background: url(<?php $vc->img->the_img(get_field('background5', 'options')); ?>) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;"
+<?php } else { ?>
+	style="background: url(<?php $vc->img->the_img(get_field('background0', 'options')); ?>) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;"
+<?php } ?>

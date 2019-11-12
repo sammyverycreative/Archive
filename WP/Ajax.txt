@@ -1,0 +1,33 @@
+=FUNCTIONS
+// Ajax
+function add_localize_script()  {
+?>
+<script type="text/javascript">
+    var jsHomeUrl = '<?php echo home_url(); ?>';
+    var ajaxUrl = "<?php echo admin_url( 'admin-ajax.php' ) ?>";
+</script>
+<?php
+}
+add_action('wp_head', 'add_localize_script', 999);
+
+function functionHere() { 
+  
+}
+add_action( 'wp_ajax_functionHere', 'functionHere' );
+add_action( 'wp_ajax_nopriv_functionHere', 'functionHere' );
+
+=SCRIPTS
+jQuery.ajax({
+	type: 'POST',
+	dataType: 'json', 
+	url: ajaxUrl,
+	data: formData,
+	processData: false,
+	contentType: false,
+	success: function(data) { 
+		
+	},
+	error: function(data) {
+		
+	}
+});

@@ -1,0 +1,7 @@
+$args = array (
+	'orderby' => title/meta_value_num,
+	'order' => asc/dsc,
+	//'meta_key' => '_price',
+	'post_type' => 'product',
+	'posts_per_page' => -1
+);

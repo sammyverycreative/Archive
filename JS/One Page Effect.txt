@@ -1,0 +1,57 @@
+=GO TO: SECTION
+-Version 1:
+*HTML
+<a href="#section; ?>" class="scrolll">...</a>
+[...]
+<div id="section">...</div>
+
+*JS
+jQuery(document).ready(function($){
+	$('a.scroll').click(function(e){
+		var name = $(this).attr('href').substr(1);
+		var pos = $('a[id='+name+']').offset();
+		//$('body').animate({ scrollTop: pos.top });
+		$('html, body').animate({ scrollTop: pos.top }, 500); 
+		e.preventDefault();
+	});
+});
+
+-Version 2:
+*JS
+jQuery(document).ready(function($){
+	$('a.scroll').click(function(e){
+		e.preventDefault();
+		var pos = $($(this).attr('href')).offset();
+		//$('body').animate({ scrollTop: pos.top });
+		$('html, body').animate({ scrollTop: pos.top }, 500);
+	});
+});
+
+-Version 3:
+*JS
+jQuery(document).ready(function($){
+  $(document).on('click', '.scrolll a', function(e) {
+    // target element id
+    var id = $(this).attr('href');
+    // target element
+    var $id = $(id);
+    if ($id.length === 0) {
+      return;
+    }
+    e.preventDefault();
+    var pos = $id.offset().top;
+    $('body, html').animate({scrollTop: pos});
+  });
+});
+
+=GO TO: TOP
+*HTML
+<a class="goto" href="#">...</a>
+
+*JS
+jQuery(document).ready(function($){
+	$('.goto').click(function(){
+		$('html, body').animate({scrollTop : 0},800);
+		return false;
+	});
+});

@@ -1,0 +1,12 @@
+=OLD
+.class {
+  font-family: "FontAwesome";
+  content: "\f...";
+}
+
+=NEW
+.class {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f...";
+}

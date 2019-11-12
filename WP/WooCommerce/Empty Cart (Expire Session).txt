@@ -1,0 +1,4 @@
+function so_26545001_filter_session_expired($seconds) {
+    return 60 * 60 * 24; // 24 hours
+}
+add_filter('wc_session_expiration', 'so_26545001_filter_session_expired' );

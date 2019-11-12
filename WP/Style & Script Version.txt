@@ -1,0 +1,14 @@
+// Style
+wp_enqueue_style('stylesheet', get_template_directory_uri().'/style.css', false, date('dmYHisu'));
+
+or
+
+wp_enqueue_style('stylesheet', THEME_URI.'/style.css', null, time());
+
+// Script
+wp_register_script('scripts', get_template_directory_uri().'/script.js', array('jquery'), date('YmdHGis'), false);
+wp_enqueue_script('scripts', array('jquery'), true);
+
+or
+
+wp_enqueue_script('scripts', THEME_URI.'/script.js?time='.time(), array( 'jquery'), null, true);

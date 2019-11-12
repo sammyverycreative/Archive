@@ -1,0 +1,5 @@
+=PHP
+$args['paged'] = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
+
+=HTML
+<div class="navigation"><?php wp_pagenavi(array( 'query' => $loop )); ?></div>

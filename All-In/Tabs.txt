@@ -1,0 +1,214 @@
+=HTML
+-1-
+<div class="tab">
+	<ul>
+		<li><a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'tab1')" id="defaultOpen">Tab1</li>
+		<li><a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'tab2')">Tab2</li>
+		<li><a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'tab3')">Tab3</li>
+	</ul>
+</div>
+
+-2-
+<div class="tabsjquery tab">
+	<ul>
+		<li><a href="#" class="tablinks active" data-value="tab1">Tab1</a></li>
+		<li><a href="#" class="tablinks" data-value="tab2">Tab2</a></li>
+		<li><a href="#" class="tablinks" data-value="tab3">Tab3</a></li>
+	</ul>
+</div>
+
+<div id="tab1" class="tabcontent active">
+
+</div>
+<div id="tab2" class="tabcontent">
+
+</div>
+<div id="tab3" class="tabcontent">
+
+</div>
+
+-3-
+<div id="tabs-menu" <?php //class="active" ?>>
+	<div class="tabsjquery tab">
+		<ul>
+			<li><a href="#" class="tablinks active">Tab1</a></li>
+			<li><a href="#" class="tablinks">Tab2</a></li>
+			<li><a href="#" class="tablinks">Tab3</a></li>
+		</ul>
+	</div>
+</div>
+
+<div id="tabs-content" <?php //class="active" ?>>
+	<div class="tabcontent active">
+		<div class="tab-content">
+			<div class="title">
+				<h1>Title1</h1>
+			</div>
+			<div class="content">
+			    <p>...</p>
+				<?php /*<a class="goback"><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back</a>*/ ?>
+			</div>
+		</div>
+	</div>
+	<div class="tabcontent">
+		<div class="tab-content">
+			<div class="title">
+				<h1>Title2</h1>
+			</div>
+			<div class="content">
+			    <p>...</p>
+				<?php /*<a class="goback"><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back</a>*/ ?>
+			</div>
+		</div>
+	</div>
+	<div class="tabcontent">
+		<div class="tab-content">
+			<div class="title">
+				<h1>Title3</h1>
+			</div>
+			<div class="content">
+			    <p>...</p>
+				<?php /*<a class="goback"><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back</a>*/ ?>
+			</div>
+		</div>
+	</div>
+</div>
+
+-4 (hover)-
+<div class="tab-wrap">    
+	<ul class="tab-titles">        
+		<li class="active"><a href="#tab1">Tab #1</a></li>
+		<li><a href="#tab2">Tab #2</a></li>
+		<li><a href="#tab3">Tab #3</a></li>    
+	</ul>    
+	<div class="container">        
+		<div id="tab1" class="tab-content" style="display: block;">
+			<p>Text #1</p>
+		</div>
+		<div id="tab2" class="tab-content">                                                                        
+			<p>Text #2</p>
+		</div>
+		<div id="tab3" class="tab-content">
+			<p>Text #3</p>
+		</div>    
+	
+	</div>
+</div>
+
+=CSS
+-1-
+div.tab {
+    overflow: hidden;
+}
+div.tab a {
+    /*display: block;*/
+    transition: 0.3s;
+}
+div.tab a:hover,
+div.tab a:focus,
+div.tab a.active {
+
+}
+.tabcontent {
+    display: none;
+}
+
+-2-
+.tabcontent {
+    display: none;
+}
+
+.tabcontent.active {
+    display: block;
+}
+
+-3-
+/*#tabs-menu,
+#tabs-content { display: none; }*/
+/*#tabs-menu.active,
+#tabs-content.active { display: block; }*/
+.tabcontent {
+	display: none;
+}
+.tabcontent.active {
+	display: block;
+}
+
+-4 (hover)-
+.tab-content{
+    display: none;
+}
+
+=JS
+-1-
+function openTab(evt, tabName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the link that opened the tab
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+document.getElementById("defaultOpen").click();
+
+-2-
+$('.tabsjquery .tablinks').on('click',function(e){
+	e.preventDefault();
+	var tab = $(this).attr('data-value'); 
+	jQuery('.tabsjquery .tablinks').removeClass('active');
+	jQuery(this).addClass('active');
+
+	jQuery('.tabcontent').removeClass('active');
+	jQuery('#'+tab).addClass('active');
+
+		/*setTimeout(function() {
+			bx1.redrawSlider();
+	        	bx2.redrawSlider();
+	    	}, 0);*/
+});
+
+-3-
+$('.tablinks').on('click',function(){
+ $('.tablinks').removeClass('active');
+ /*if ($('#'+tab).hasClass('active')) {
+	$(this).removeClass('active');
+	$('#'+tab).removeClass('active');
+ } else {*/
+	//$('#tabs-menu').removeClass('active');
+	$(this).addClass('active');
+	$('.tabcontent').removeClass('active');
+	//$('#tabs-content').addClass('active');
+	$('.tabcontent').eq($(this).parent().index()).addClass('active');
+	return false;
+ /*}*/
+});
+
+/*$('.goback').on('click',function(){
+ $('#tabs-menu').addClass('active');
+ $('#tabs-content').removeClass('active');
+ return false;
+});*/
+
+-4 (hover)-
+jQuery(document).ready(function($) {
+	$(".tab-titles li").hover(function() {
+		$(".tab-content").hide(0);
+		$(".tab-titles li").removeClass('active');					
+		$(this).addClass("active");					
+		var selected_tab = $(this).find("a").attr("href");
+		$(selected_tab).stop().fadeIn();
+		return false;
+	});
+});

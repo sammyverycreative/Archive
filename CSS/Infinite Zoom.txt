@@ -1,0 +1,3 @@
+-webkit-animation: scale 1s linear infinite;
+-moz-animation: scale 40s linear infinite;
+animation: scale 40s linear infinite;

@@ -1,0 +1,33 @@
+<?php
+/**
+ * Plugin Name: Cron
+ * Plugin URI: http://www.website.domain
+ * Description: The Description
+ * Version: 1.0.0
+ * Author: VeryCreative
+ * Author URI: http://verycreative.ro
+ * License: Comercial
+ */
+
+function my_add_halfyear( $schedules ) {
+	// add a 'weekly' schedule to the existing set
+	$schedules['halfyear'] = array(
+		'interval' => 15811200,
+		'display' => __('Once in 6 months')
+	);
+	return $schedules;
+}
+add_filter( 'cron_schedules', 'my_add_halfyear' );
+
+if ( ! wp_next_scheduled( 'my_task_hook' ) ) {
+  wp_schedule_event( time(), 'halfyear', 'my_task_hook' );
+}
+add_action( 'my_task_hook', 'my_task_function' ); 
+
+function my_task_function() {
+  $mail = get_field('cron_e-mail', 'options');
+  $subject = get_field('e-mail_subject', 'options');
+  $message = get_field('e-mail_message', 'options');
+  wp_mail( $mail, $subject, $message);
+}
+?>

@@ -1,0 +1,5 @@
+=FUNCTIONS
+<?php define('THEME_TEXT_DOMAIN', 'theme_slug'); ?>
+
+=USE
+<?php _e('Retry your search using other filters.', THEME_TEXT_DOMAIN); ?>

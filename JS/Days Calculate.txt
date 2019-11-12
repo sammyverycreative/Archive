@@ -1,0 +1,13 @@
+$(".book_to").change(function(){
+   var nights = 0;
+	if( $('.book_from').val() !== '' && $('.book_to').val() !== '' ){
+		var a = new Date( $('.book_from').val() );
+		var b = new Date( $('.book_to').val() );
+
+		var utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+		var utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+		nights = Math.floor( (utc2 - utc1) / ( 1000 * 60 * 60 * 24 ) );
+	}
+   $('#nights').val(nights);
+});

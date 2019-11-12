@@ -1,0 +1,28 @@
+function help4cms_wpcf7_form_elements($html)
+	{
+		function help4cms_replace_include_blank($name, $text, &$html)
+			{
+				$matches = false;
+				preg_match('/<select name="' . $name . '"[^>]*>(.*)<\/select>/iU', $html, $matches);
+				if ($matches)
+					{
+						$select = str_replace('<option value="">---</option>', '<option value="">' . $text . '</option>', $matches[0]);
+						$html = preg_replace('/<select name="' . $name . '"[^>]*>(.*)<\/select>/iU', $select, $html);
+					}
+			}
+ 
+		help4cms_replace_include_blank('select_here', 'Placeholder_Here', $html); // Change here your dropdown menu ID
+	
+		return $html;
+	}
+ 
+add_filter('wpcf7_form_elements', 'help4cms_wpcf7_form_elements');
+
+OR
+
+function my_wpcf7_dropdown_form($html) {
+  $text = 'Select Option';
+  $html = str_replace('---', '' . $text . '', $html);
+  return $html;
+}
+add_filter('wpcf7_form_elements', 'my_wpcf7_dropdown_form');

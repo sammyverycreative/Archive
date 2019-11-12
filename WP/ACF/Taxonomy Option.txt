@@ -1,0 +1,3 @@
+$catID = get_cat_ID();
+$cat = get_term_by('id', $catID, 'category');
+$var = get_field('field_here', $cat);

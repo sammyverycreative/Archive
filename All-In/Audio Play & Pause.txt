@@ -1,0 +1,27 @@
+=HTML
+<div style="display: none;">
+	<audio id="audio1" src="[...]"></audio>
+</div>
+<a id="play1"><i class="far fa-play-circle"></i></a>
+
+=JS
+jQuery(document).ready(function($) {
+
+	var myAudio = $('#audio1')[0];
+	var isPlaying = false;
+	$('#play1').click(function() {
+		if (isPlaying) {
+			myAudio.pause();
+			$(this).html('<i class="far fa-play-circle"></i>');
+			isPlaying = false;
+		} else {
+			myAudio.play();
+			$(this).html('<i class="far fa-pause-circle"></i>');
+			isPlaying = true;
+		}
+	});
+	myAudio.onended = function() {
+	    $('#play1').html('<i class="far fa-play-circle"></i>');
+	};
+
+});

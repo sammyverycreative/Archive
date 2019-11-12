@@ -1,0 +1,6 @@
+function action_woocommerce_thankyou_cod($order_id)
+{
+    $order = wc_get_order($order_id);
+    $order->update_status('wc-processing');
+}
+add_action('woocommerce_thankyou_cod', 'action_woocommerce_thankyou_cod', 10, 1);

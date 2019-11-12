@@ -1,0 +1,11 @@
+<?php
+	$tag = get_queried_object();
+	$tag_name = $tag->name;
+	$tag_id = $tag->term_id;
+
+//args
+$args = array(
+		'tag_id' => $tag_id,
+		...
+	);
+?>

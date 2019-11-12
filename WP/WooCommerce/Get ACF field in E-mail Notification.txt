@@ -1,0 +1,15 @@
+function custom_order_item_name( $item_name, $item ) {
+    // Targeting email notifications only
+    if( is_wc_endpoint_url() ) 
+        return $item_name;
+
+    // Get the WC_Product object (from order item)
+    $product = $item->get_product();
+
+    if ( $minPrice = get_field('range_min-price', $product->get_id()) && $maxPrice = get_field('range_max-price', $product->get_id()) ) {
+        $item_name .= '<br><p class="range-price" style="margin:12px 0 0;">
+        <strong>' . __( 'Range price', 'woocommerce' ) . ': </strong>' . $minPrice . '-' . $maxPrice . '&euro;</p>';
+    }
+    return $item_name;
+}
+add_filter( 'woocommerce_order_item_name', 'custom_order_item_name', 10, 2 );

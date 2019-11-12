@@ -1,0 +1,64 @@
+=LINK (optional)
+https://www.w3schools.com/cssref/css3_pr_column-rule.asp
+
+=HTML
+<div>
+    <ul class="columns" data-columns="2">
+        <li>A</li>
+        <li>B</li>
+        <li>C</li>
+        <li>D</li>
+        <li>E</li>
+        <li>F</li>
+        <li>G</li>
+    </ul>
+</div>
+
+=CSS
+.columns{
+    float: left;
+    position: relative;
+    margin-right: 20px;
+}
+
+=JS
+(function($){
+    var initialContainer = $('.columns'),
+        columnItems = $('.columns li'),
+        columns = null,
+        column = 1; // account for initial column
+    function updateColumns(){
+        column = 0;
+        columnItems.each(function(idx, el){
+            if (idx !== 0 && idx > (columnItems.length / columns.length) + (column * idx)){
+                column += 1;
+            }
+            $(columns.get(column)).append(el);
+        });
+    }
+    function setupColumns(){
+        columnItems.detach();
+        while (column++ < initialContainer.data('columns')){
+            initialContainer.clone().insertBefore(initialContainer);
+            column++;
+        }
+        columns = $('.columns');
+    }
+
+    $(function(){
+        setupColumns();
+        updateColumns();
+    });
+})(jQuery);
+
+-ADDITIONAL-
+function updateColumns(){
+    column = 0;
+    columnItems.each(function(idx, el){
+        if (column > columns.length){
+            column = 0;
+        }
+        $(columns.get(column)).append(el);
+        column += 1;
+    });
+}

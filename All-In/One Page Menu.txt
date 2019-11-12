@@ -1,0 +1,77 @@
+=HTML
+<div class="menu">
+	<ul>
+		<li class="active" data-value="section1"><a href="#section1"> <span>Section #1</span></li>
+		<li data-value="section2"><a href="#section2"> <span>Section #2</span></li>
+		<li data-value="section3"><a href="#section3"> <span>Section #3</span></li>
+	</ul>
+</div>
+<div class="wrapper">
+	<div id="section1" class="section">
+		[...]
+	</div>
+	<div id="section2" class="section">
+		[...]
+	</div>
+	<div id="section3" class="section">
+		[...]
+	</div>
+</div>
+
+=CSS
+.menu ul li {
+	display: block;
+        text-align: right;
+        overflow: hidden;
+        margin-bottom: 15px;
+}
+.menu ul li.active a {
+	background-color: #000;
+}
+.menu ul li.active span {
+	display: inline-block;
+}
+.menu ul li a {
+	display: inline-block;
+	float: right;
+	width: 12px;
+	height: 12px;
+	/*content: "";*/
+	border: 2px solid #000;
+	border-radius: 500px;
+	margin-top: 12px;
+}
+.menu ul li span {
+	display: none;
+	color: #fff;
+	font-size: 12px;
+	background-color: #6EABDC;
+	border-radius: 4px;
+	padding: 10px;
+	margin-right: 25px;
+}
+
+=JS
+$('.menu a').click(function(e){
+	e.preventDefault();
+	var pos = $($(this).attr('href')).offset();
+	//$('body').animate({ scrollTop: pos.top });
+	$('html, body').animate({ scrollTop: pos.top }, 500);
+});
+
+$(window).on('scroll',function() {
+	function elementScrolled(elem)
+    {
+        var docViewTop = $(window).scrollTop();
+        var docViewBottom = docViewTop + $(window).height();
+        var elemTop = $(elem).offset().top;
+        return ((elemTop <= docViewBottom) && (elemTop >= docViewTop));
+    }
+	$('.wrapper .section').each(function() {
+		if (elementScrolled($(this))){
+			let index = $(this).index();
+			$('.menu li').removeClass('active');
+			$('.menu li:eq('+index+')').addClass('active');
+		}
+	});
+});

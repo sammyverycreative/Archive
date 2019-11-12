@@ -1,0 +1,10 @@
+var intervalID = window.setInterval(alternantingTabs, 5000);
+function alternantingTabs() {
+ var tab1 = $('.tabs-wrap .tab-selector.tab1');
+ var tab2 = $('.tabs-wrap .tab-selector.tab2');
+ if (tab1.hasClass('active')) {
+  tab2.click();
+ } else {
+  tab1.click();
+ }
+}

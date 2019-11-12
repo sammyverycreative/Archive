@@ -1,0 +1,31 @@
+add_filter ( 'woocommerce_account_menu_items', 'remove_my_account_links' );
+function remove_my_account_links( $menu_links ){
+ 
+    unset( $menu_links['dashboard'] ); // Remove Dashboard
+    //unset( $menu_links['payment-methods'] ); // Remove Payment Methods
+    //unset( $menu_links['orders'] ); // Remove Orders
+    //unset( $menu_links['downloads'] ); // Disable Downloads
+    //unset( $menu_links['edit-address'] ); // Addresses
+    //unset( $menu_links['edit-account'] ); // Remove Account details tab
+    //unset( $menu_links['customer-logout'] ); // Remove Logout link
+
+    //unset($_links['account']); /* Account Info */     
+    //unset($_links['account_edit']); /* Account Info */            
+    //unset($_links['tags']); /* My Tags */
+    //unset($_links['invitations']); /* My Invitations */
+    //unset($_links['reviews']);  /* Reviews */
+    //unset($_links['wishlist']); /* Wishlist */
+    //unset($_links['newsletter']); /* Newsletter */
+    //unset($_links['orders']); /* My Orders */
+    //unset($_links['address_book']); /* Address */
+    //unset($_links['enterprise_customerbalance']); /* Store Credit */
+    //unset($_links['OAuth Customer Tokens']); /* My Applications */
+    //unset($_links['enterprise_reward']); /* Reward Points */
+    //unset($_links['giftregistry']); /* Gift Registry */
+    //unset($_links['downloadable_products']); /* My Downloadable Products */
+    //unset($_links['recurring_profiles']); /* Recurring Profiles */
+    //unset($_links['billing_agreements']); /* Billing Agreements */
+    //unset($_links['enterprise_giftcardaccount']); /* Gift Card Link */
+ 
+    return $menu_links;
+}

@@ -1,0 +1,143 @@
+=header
+<?php
+function ts_email_header( $email_heading, $email ) { 
+	echo "<p>Thanks for shopping with us. Here is your invoice</p>";
+}
+add_action( 'woocommerce_email_header', 'ts_email_header', 10, 2 );
+?>
+
+=order-details
+<?php
+function ts_email_order_details( $order, $sent_to_admin, $plain_text, $email ) {
+	echo '<p>Hey '.$order->get_billing_first_name().', We hope you had fun shopping with us.';
+}
+add_action( 'woocommerce_email_order_details', 'ts_email_order_details', 10, 4 );
+?>
+
+=before-order-table
+<?php
+function ts_email_before_order_table( $order, $sent_to_admin, $plain_text, $email ) {
+	echo "We hope to see you soon";
+}
+add_action( 'woocommerce_email_before_order_table', 'ts_email_before_order_table', 10, 4 );
+?>
+
+=order-meta-start
+<?php
+function ts_order_item_meta_start( $item_id, $item, $order, $plain_text ){
+	echo '<p> Seller: Tyche</p>';
+}
+add_action( 'woocommerce_order_item_meta_start', 'ts_order_item_meta_start', 10, 4 );
+?>
+
+=after-order-table
+<?php
+function ts_email_after_order_table( $order, $sent_to_admin, $plain_text, $email ) { 
+	if ( $order->has_status( 'completed' ) ) : ?>
+	<p><?php printf( __( 'Hey %1$s. Thanks for shopping with us. As a way of saying thanks, here is your coupon code for your next purchase : %2$s' ), $order->get_billing_first_name(), '<strong>FLAT50</strong>' ); ?></p>
+	<?php endif; 
+}
+add_action( 'woocommerce_email_after_order_table', 'ts_email_after_order_table', 10, 4 );
+?>
+
+e.g.:
+<?php
+function ts_email( $order, $sent_to_admin, $plain_text, $email ) {
+	$items = $order->get_items(); 
+    foreach ($items as $key => $item) {
+        $product_name = $item['name'];
+        $product_id = $item['product_id'];
+        $terms = get_the_terms( $product_id, 'product_cat' );
+		$args = array(
+			'post_type'      => 'product',
+			'posts_per_page' => 10,
+			'product_cat'    => $terms[0]->slug
+		);
+	
+		$loop = new WP_Query( $args );
+		echo 'Here are few more products based on your recent purchase';
+	
+		while ( $loop->have_posts() ) : $loop->the_post();
+			global $product;
+			echo '<br><a href="'.get_permalink().'">' . get_the_title().'</a>';
+		endwhile;
+	
+		wp_reset_query();
+	}
+}
+add_action( 'woocommerce_email_order_meta', 'ts_email', 10, 4 );
+?>
+
+=footer
+<?php
+function ts_email_footer( $email ) { ?>
+	<p><?php printf( __( 'Thank you for buying from %1$s. Shop for more items using this link: %2$s', 'woocommerce' ), get_bloginfo( 'name', 'display' ), '<a href="' . get_permalink( wc_get_page_id( 'shop' ) ) . '">' . __( 'Shop', 'woocommerce' ) . '</a>' ); ?></p>
+
+<?php
+}
+add_action( 'woocommerce_email_footer', 'ts_email_footer', 10, 1 );
+?>
+
+=SOURCE: https://www.tychesoftwares.com/how-to-customize-woocommerce-order-emails
+
+
+
+
+
+e.g. (custom fields):
+// Save fields
+function vc_update_order_meta( $order_id )
+{
+    $fields = array( 'field1', 'field2' );
+    update_post_meta( $order_id, 'vc_order_type', vc_get_cart_type( ) );
+    foreach( $fields as $field ) {
+        if( !isset( $_POST[$field] ) ) {
+            continue;
+        }
+        update_post_meta( $order_id, $field, $_POST[$field] );
+    }
+    if( isset( $_POST['checkout_next_step'] ) && $_POST['checkout_next_step'] != 'thank_you' ) {
+        update_post_meta( $order_id, 'show_thank_you', 1 );
+    }
+}
+add_action( 'woocommerce_checkout_update_order_meta', 'vc_update_order_meta' );
+
+// Display in e-mail template
+function ts_email_after_order_table( $order, $sent_to_admin ) {
+    $field1 = get_post_meta( $order->get_order_number(), 'field1', true );
+    $field2 = get_post_meta( $order->get_order_number(), 'field2', true );
+    ?>
+        <table style="border: 2px solid #E5E5E5;">
+            <tr>
+                <th>
+                    Other Information:
+                </th>
+            </tr>
+            <tbody style="border-top: 2px solid #E5E5E5; border: 2px solid #E5E5E5;">
+                <?php if ($field1) { ?>
+                <tr>
+                    <td style="border-top: 2px solid #E5E5E5; border-right: 2px solid #E5E5E5;">La position actuelle de votre Chauffe-Eau?</td>
+                    <td><?php echo $field1; ?></td>
+                </tr>
+                <?php } ?>
+                <?php if ($field2) { ?>
+                <tr>
+                    <td style="border-top: 2px solid #E5E5E5; border-right: 2px solid #E5E5E5;">Attachement(s)</td>
+                    <td>
+                        <?php $images = $upload_images;
+                        if ($images) { ?>
+                                <?php $i = 1; ?>
+                                <?php foreach ($images as $image) { ?>
+                                    <a href="<?php echo wp_get_attachment_url( $image ); ?>" target="_blank">Image<?php echo $i; ?></a><br />
+                                    <?php $i++; ?>
+                                <?php } ?>
+                        <?php } ?>
+                    </td>
+                </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    <?php
+}
+add_action( 'woocommerce_email_after_order_table', 'ts_email_after_order_table', 10, 4 );
+?>

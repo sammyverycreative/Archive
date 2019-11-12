@@ -1,0 +1,29 @@
+ul {
+    list-style-type: "disc|circle|square|decimal|lower-roman|upper-roman|lower-alpha|upper-alpha|none";
+    list-style-image: url('tick.gif')
+}
+
+ul li:before {
+    display: inline-block;
+    font-family: 'FontAwesome';
+    content: "\f111";
+    color: #000000;
+    font-size: 7px;
+    width: 1em;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+ol {
+    list-style-type: none;
+    padding-right: 0;
+    margin-left: 0;
+}
+ol li {
+    counter-increment: step-counter;
+}
+ol li:before {
+    color: #000000;
+    content: counter(step-counter)".";
+    margin-right: 5px;
+}

@@ -1,0 +1,22 @@
+=FUNCTIONS
+function array_random($arr, $num = 1) {
+    shuffle($arr);
+    
+    $r = array();
+    for ($i = 0; $i < $num; $i++) {
+        $r[] = $arr[$i];
+    }
+    return $num == 1 ? $r[0] : $r;
+}
+
+=HTML
+<?php
+	$videosUrls = array();
+	$videos = get_field('videos');
+	if ($videos) {
+		foreach ($videos as $video) {
+			$videosUrls[] = $video['video'];
+		}
+	}
+	echo '<iframe width="500" height="385" src="'.array_random($videosUrls).'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+?>

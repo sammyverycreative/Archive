@@ -1,0 +1,58 @@
+=HTML
+<p class="love">Made with <span><i class="fas fa-heart"></i></span> by VeryCreative</p>
+
+=CSS
+@keyframes pulse {
+  0% {
+    zoom: 1; /* IE */
+	-moz-transform: scale(1); /* Firefox */
+	-moz-transform-origin: 0 0;
+	-o-transform: scale(1); /* Opera */
+	-o-transform-origin: 0 0;
+	-webkit-transform: scale(1); /* Safari And Chrome */
+	-webkit-transform-origin: 0 0;
+	transform: scale(1); /* Standard Property */
+	transform-origin: 0 0;  /* Standard Property */
+  }
+  100% {
+    zoom: 1.1; /* IE */
+	-moz-transform: scale(1.1); /* Firefox */
+	-moz-transform-origin: 0 0;
+	-o-transform: scale(1.1); /* Opera */
+	-o-transform-origin: 0 0;
+	-webkit-transform: scale(1.1); /* Safari And Chrome */
+	-webkit-transform-origin: 0 0;
+	transform: scale(1.1); /* Standard Property */
+	transform-origin: 0 0;  /* Standard Property */
+  }
+  0% {
+    zoom: 1; /* IE */
+	-moz-transform: scale(1); /* Firefox */
+	-moz-transform-origin: 0 0;
+	-o-transform: scale(1); /* Opera */
+	-o-transform-origin: 0 0;
+	-webkit-transform: scale(1); /* Safari And Chrome */
+	-webkit-transform-origin: 0 0;
+	transform: scale(1); /* Standard Property */
+	transform-origin: 0 0;  /* Standard Property */
+  }
+}
+.bottom-footer p.love {
+    /*color: #fff;*/
+}
+.bottom-footer p.love span {
+    display: inline-block;
+    /*overflow: hidden;*/
+    width: 18px;
+    height: 18px;
+    color: red;
+    line-height: 15px;
+    margin: 0 5px;
+}
+.bottom-footer p.love span i {
+    transition: all .3s ease; /* IE */
+    -webkit-transition: all .3s ease; /* Google Chrome/Safari */
+    -moz-transition: all .3s ease; /* Mozilla Firefox */
+    -o-transition: all .3s ease; /* Opera */
+    animation: pulse .5s infinite;
+}

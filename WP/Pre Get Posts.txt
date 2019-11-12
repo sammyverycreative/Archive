@@ -1,0 +1,8 @@
+function pre_get( $query ){
+    //if( $query->is_tax('news') && $query->has_term('news')):
+    if ($query->is_category()) {
+        $query->set('posts_per_page', 9);
+        return;
+    endif;
+}
+add_action('pre_get_posts', 'pre_get');

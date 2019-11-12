@@ -1,0 +1,37 @@
+-1-
+<?php get_template_part( 'content', get_post_format() ); ?>
+
+-2-
+add_action('template_include', 'load_single_template');
+function load_single_template($template) {
+  $new_template = '';
+
+  // single post template
+  if( is_single() ) {
+    global $post;
+
+    // template for post with video format
+    if ( has_post_format( 'video' )) {
+      // use template file single-video.php for video format
+      $new_template = locate_template(array('single-video.php' ));
+    }
+
+  }
+  return ('' != $new_template) ? $new_template : $template;
+}
+
+-3-
+function use_post_format_templates_27425( $template ) {
+    if ( is_single() && has_post_format() ) {
+        $post_format_template = locate_template( 'single-' . get_post_format() . '.php' );
+        if ( $post_format_template ) {
+            $template = $post_format_template;
+        }
+    }
+
+    return $template;
+}   
+add_filter( 'template_include', 'use_post_format_templates_27425' );
+
+=URL
+https://trickspanda.com/use-custom-template-post-formats-wordpress

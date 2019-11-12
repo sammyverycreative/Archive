@@ -1,0 +1,6 @@
+<?php 
+  $page_id = get_the_ID();
+  $template_file = get_post_meta($page_id, '_wp_page_template', true);
+  if ($template_file == 'templates/page-tour.php') { ?>
+  <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+<?php } ?>

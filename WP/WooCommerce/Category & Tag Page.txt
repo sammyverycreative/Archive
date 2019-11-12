@@ -1,0 +1,17 @@
+=archive-product.php
+
+$term = get_queried_object();
+$slug = $term-slug;
+
+if (is_product_category()) {
+	$args = array (
+		...,
+		'product_cat' => $slug,
+	);
+}
+if (is_product_tag()) {
+	$args = array (
+		...,
+		'product_tag' => $slug,
+	);
+}
