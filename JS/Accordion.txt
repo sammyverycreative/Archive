@@ -1,0 +1,37 @@
+$(".set > a").on("click", function (e) {
+	e.preventDefault();
+	let status = 0;
+
+	if ($(this).hasClass("active")) {
+		status = 1;
+	} else {
+		status = 0;
+	}
+	$('.set > a')
+		.find("i")
+		.removeClass("fa-minus")
+		.addClass("fa-plus");
+
+	if (status == 1) {
+		$(this).removeClass("active");
+		$(this)
+			.siblings(".content")
+			.slideUp(200);
+		$(this)
+			.find("i")
+			.removeClass("fa-minus")
+			.addClass("fa-plus");
+
+	} else {
+		$(this)
+			.find("i")
+			.removeClass("fa-plus")
+			.addClass("fa-minus");
+		$(".set > a").removeClass("active");
+		$(this).addClass("active");
+		$(".content").slideUp(200);
+		$(this)
+			.siblings(".content")
+			.slideDown(200);
+	}
+});
