@@ -5,3 +5,19 @@
 
 =JS
 $('.slider').show();
+
+-or-
+=SCSS
+.not-init_slick {
+    .ni-item,
+    .ni-item-dots {
+        &:not(:first-of-type) {
+            display: none;
+        }
+    }
+}
+
+=JS
+$(window).on('load', function () {
+    $('body').find('not-init_slick).removeClass("not-init_slick");
+});
