@@ -19,5 +19,5 @@ $('.slider').show();
 
 =JS
 $(window).on('load', function () {
-    $('body').find('not-init_slick).removeClass("not-init_slick");
+    $('.not-init_slick').removeClass('not-init_slick');
 });
