@@ -1,0 +1,80 @@
+####################################
+# @Replace: website.domain & BRAND #
+####################################
+
+-RO-
+# 
+--
+Site-ul www.website.domain foloseste identificatori de tip Cookie. Ai mai jos Politica noastra de Cookie si iti poti exercita dreptul de a dezactiva Cookies:
+
+Aceasta politica se refera la utilizarea cookie-urilor pe site-ul <a href="http://www.website.domain/">www.website.domain</a> operat de BRAND
+
+<strong>Ce sunt cookie-urile?</strong>
+
+Cookie-ul este un fisier de mici dimensiuni, format din litere si numere, care va fi stocat pe computerul, terminalul mobil sau alte echipamente ale unui utilizator de pe care se acceseaza internetul. Cookie-ul este instalat prin solicitarea emisa de catre un web-server unui browser si este complet “pasiv” (nu contine programe software, virusi sau spyware si nu poate accesa informatiile de pe hard driverul utilizatorului).
+
+<strong>La ce sunt folosite cookie-urile?</strong>
+
+Aceste fisiere fac posibila recunoasterea terminalului utilizatorului si prezentarea continutului intr-un mod relevant, adaptat preferintelor utilizatorului. Cookie-urile asigura utilizatorilor o experienta placuta de navigare si sustin eforturile noastre pentru a oferi servicii comfortabile utilizatorilor (ex. preferintele in materie de confidentialitate online, cosul de cumparaturi sau publicitate relevant) sau sunt utilizate in pregatirea unor statistici anonime agregate care ne ajuta sa intelegem cum un utilizator interactioneaza cu pagina noastra web, permitandu-ne imbunatatirea structurii si continutului lor, excluzand indentificarea personala a utilizatorului.
+
+<strong>Ce cookie-uri folosim?</strong>
+
+Folosim doua tipuri de Cookie-uri: temporare (limitate per sesiune) si persistente.
+
+Cookie-urile temporare sunt stocate pana la inchiderea site-ului sau browserului iar cookie-urile persistente sunt fisiere ce raman pe terminalul utilizatorului pe o perioada nelimitata de timp pana cand sunt sterse manual de utilizator.
+
+<strong> </strong>
+
+<strong>Cum sunt folosite cookie-urile de catre www.website.domain</strong>
+
+BRAND foloseşte cookie-uri in urmatoarele scopuri:
+<ul>
+ 	<li>Cookie-uri de performanta a site-ului, load-balancing</li>
+ 	<li>Cookie-uri de analiza a vizitatorilor, inregistrare, marketing, geo-targetare</li>
+ 	<li>Cookie-uri third party ale diversilor furnizori de servicii de marketing sau alte tipuri</li>
+</ul>
+<strong>Securitate si probleme legate de confidentialitate</strong>
+
+Cookieurile NU sunt virusi! Ele folosesc formate tip plain text. Nu sunt alcatuite din bucati de cod, asa ca nu pot fi executate nici nu pot auto-rula. In consecinta, nu se pot duplica sau replica pe alte retele pentru a se rula sau replica din nou. Deoarece nu pot indeplini aceste functii, nu pot fi considerate virusi.
+
+Cookie-urile pot fi totusi folosite pentru scopuri negative. Deoarece stocheaza informatii despre preferintele si istoricul de navigare al utilizatorilor, atat pe un anume site cat si pe mai multe alte siteuri, cookieurile pot fi folosite ca o forma de Spyware. In general browserele au integrate setari de confidentialitate care furnizeaza diferite nivele de acceptare a cookieurilor, perioada de valabilitate si stergere automata dupa ce utilizatorul a vizitat un anumit site.
+
+<strong>Stergerea cookie-urilor </strong>
+
+In general, o aplicatie folosita pentru accesarea paginilor web, permite salvarea Cookie-urilor pe terminal in mod implicit. Aceste setari pot fi schimbate in asa fel incat administrarea automata a Cookie-urilor sa fie blocata de browser-ul web, sau utilizatorul sa fie informat de fiecare data cand Cookie-uri sunt trimise catre terminalul sau. Informatii detaliate despre posibilitatile si modurile de administrare a Cookie-urilor pot fi gasite in zona de setari a aplicatiei (browser-ului web). Limitarea folosirii Cookie-urilor poate afecta anumite functionalitati ale paginii web.
+
+<strong>Detalii despre cookie-urile folosite</strong>
+
+<strong>Cookie-urile necesare</strong> ajuta la a face un site utilizabil prin activarea funcţiilor de baza, precum navigarea in pagina şi accesul la zonele securizate de pe site. Site-ul nu poate funcţiona corespunzator fara aceste cookie-uri.
+
+<strong>Cookie-urile de statistica</strong> ii ajuta pe proprietarii unui site sa inţeleaga modul in care vizitatorii interacţioneaza cu site-urile prin colectarea şi raportarea informaţiilor in mod anonim.
+
+<strong>Cookie-urile de marketing</strong> sunt utilizate pentru a-i urmari pe utilizatori de la un site la altul. Intenţia este de a afişa anunţuri relevante şi antrenante pentru utilizatorii individuali, aşadar ele sunt mai valoroase pentru agenţiile de publicitate şi parţile terţe care se ocupa de publicitate.
+
+<strong>Datorita posibilelor modificari ale legislatiei, o modificare a acestor notificari privind protectia datelor poate deveni necesara. In acest caz, te vom informa despre astfel de modificari. In masura in care modificarile afecteaza o prelucrare care se bazeaza pe consimtamantul tau, iti vom solicita un nou consimtamant, daca este necesar. </strong>
+
+<strong>Prin bifarea casutei de acceptare iti exprimi acordul pentru prelucrarea datelor tale cu caracter personal in scopurile prezentate mai sus, sens in care vom utiliza, de asemenea, datele tale personale pentru a-ti furniza informatiile noastre prin e-mail, SMS, scrisoare, telefon sau fax.</strong>
+
+
+
+-EN-
+# This website uses cookies to ensure you get the best experience on our website. Please accept the cookies or change your settings.
+--
+<h2>Who we are</h2>
+Our website address is: http://www.website.domain.
+<h2>COOKIES</h2>
+To make this site work properly, we sometimes place small data files called cookies on your device. Most big websites do this too.
+<h3>What are cookies?</h3>
+A cookie is a small text file that a website saves on your computer or mobile device when you visit the site. It enables the website to remember your actions and preferences (such as login, language, font size and other display preferences) over a period of time, so you don’t have to keep re-entering them whenever you come back to the site or browse from one page to another.
+<h3>How do we use cookies?</h3>
+<em>Adjust this part of the page according to your needs. Explain which cookies you usein plain, jargon-free language. In particular:</em>
+<ul>
+ 	<li><em>their purpose and the reason why they are being used, (e.g. to remember users’ actions, to identify the user, for online behavioural advertising)</em></li>
+ 	<li><em>if they are essential for the website or a given functionality to work or if they aim to enhance the performance of the website</em></li>
+ 	<li><em>the types of cookies used (e.g. session or permanent, first or third-party)</em></li>
+ 	<li><em>who controls/accesses the cookie-related information (website or third party)</em></li>
+ 	<li><em>that the cookie will not be used for any purpose other than the one stated</em></li>
+ 	<li><em>how consent can be withdrawn.</em></li>
+</ul>
+<h3>How to control cookies</h3>
+You can control and/or delete cookies as you wish – for details, see <a href="http://www.aboutcookies.org/">aboutcookies.org</a>. You can delete all cookies that are already on your computer and you can set most browsers to prevent them from being placed. If you do this, however, you may have to manually adjust some preferences every time you visit a site and some services and functionalities may not work.
