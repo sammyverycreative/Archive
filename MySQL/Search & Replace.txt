@@ -1,0 +1,1 @@
+UPDATE  `MySQL_Table` SET  `MySQL_Table_Column` = REPLACE(`MySQL_Table_Column`, 'oldString', 'newString') WHERE  `MySQL_Table_Column` LIKE 'oldString%';
