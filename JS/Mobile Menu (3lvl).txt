@@ -1,0 +1,15 @@
+$('.mobile-menu ul li.menu-item-has-children').on('click',function(e){
+    const firstLevel = $(this).find('ul');
+
+    if(firstLevel.length){
+        e.preventDefault();
+        e.stopPropagation();
+
+        $(this).toggleClass('active');
+
+    }
+});
+
+$('.mobile-menu ul li.menu-item-has-children ul li:not(.menu-item-has-children)').on('click',function(e){
+    e.stopPropagation();
+});
