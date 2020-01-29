@@ -1,0 +1,2 @@
+$imgID = attachment_url_to_postid(MEDIA_URL);
+echo $imgID;
