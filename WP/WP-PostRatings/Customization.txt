@@ -1,0 +1,67 @@
+=CSS
+.post-ratings {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $main-color !important;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px !important;
+}
+.post-ratings > img {
+  z-index: 2;
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0;
+  visibility: hidden;
+}
+.post-ratings > span {
+  margin: 0 1.5px;
+}
+.post-ratings > span.post-ratings-text:after {
+  display: none;
+}
+.post-ratings > span:after {
+  position: relative;
+  z-index: 1;
+  color: #ADB5BD !important;
+  font-size: 16px !important;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f1b0";
+}
+.post-ratings > img[src*="rating_on"] + span:after {
+  content: "\f1b0";
+  color: #F7B733 !important;
+}
+.post-ratings > img[src*="rating_half"] + span:after {
+  content: "\f1b0";
+  background: -webkit-linear-gradient(#F7B733, #ADB5BD);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.post-ratings > img[src*="rating_over"] + span:after {
+  content: "\f1b0";
+  color: #ADB5BD !important;
+}
+
+=JS
+if (typeof(rate_post_success) === 'function') {
+	jQuery('.post-ratings').find('img').after('<span/>');
+	//override default function - to add span on success rating set
+	window.rate_post_success = function (data) {
+		jQuery('#post-ratings-' + post_id).html(data);
+		if(ratingsL10n.show_loading) {
+			jQuery('#post-ratings-' + post_id + '-loading').hide();
+		}
+		if(ratingsL10n.show_fading) {
+			jQuery('#post-ratings-' + post_id).fadeTo('def', 1, function () {
+				set_is_being_rated(false);
+			});
+		} else {
+			set_is_being_rated(false);
+		}
+		jQuery('.post-ratings').find('img').after('<span/>');
+		jQuery('.details__rating').find('img').after('<span/>');
+	}
+}
