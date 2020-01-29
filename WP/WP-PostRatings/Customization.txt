@@ -62,6 +62,5 @@ if (typeof(rate_post_success) === 'function') {
 			set_is_being_rated(false);
 		}
 		jQuery('.post-ratings').find('img').after('<span/>');
-		jQuery('.details__rating').find('img').after('<span/>');
 	}
 }
