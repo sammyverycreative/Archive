@@ -1,0 +1,83 @@
+=CSS (Stars)
+.comment-respond .selectric-wrapper {
+  margin-bottom: 15px;
+}
+
+.comment-respond .stars.selected span a:before {
+  color: yellow;
+}
+.comment-respond .stars.selected span a.active~a:before {
+  color: gray;
+}
+.comment-respond .stars span {
+  display: inline-flex;
+  flex-direction: row;
+}
+.comment-respond .stars span a {
+  font-size: 0;
+  padding-right: 5px;
+}
+.comment-respond .stars span a:before {
+  font-size: 18px;
+  display: inline-block;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f005";
+  color: gray;
+}
+.comment-respond .stars span:hover a:before {
+  color: yellow;
+}
+.comment-respond .stars span a:hover~a:before {
+  color: gray;
+}
+
+=PHP
+-fix comments-
+$comments = get_comments(array(
+	'post_id' => get_the_ID(),
+	'status' => 'all',
+	'order' => 'ASC'
+));
+<?php if ( $comments ) : ?>
+	<?php foreach ($comments as $comment): ?>
+		<div class="single-comment">
+			<p><strong><?php echo $comment->comment_author; ?> - <?php comment_date('j M Y, H:i', $comment->comment_ID); //echo $comment->comment_date; ?></strong></p>
+			<p><?php echo $comment->comment_content; ?></p>
+		</div>
+	<?php endforeach; ?>
+<?php else : ?>
+	<p class="woocommerce-noreviews"><?php esc_html_e( 'There are no reviews yet.', 'woocommerce' ); ?></p>
+<?php endif; ?>
+
+=OBJECTS
+$product=wc_get_product(get_the_ID());
+
+$review_count = $product->get_review_count();
+$rating_count = $product->get_rating_count();
+$average      = $product->get_average_rating();
+
+=SNIPPET
+<?php
+$rating_count = $product->get_rating_count();
+$review_count = $product->get_review_count();
+$average      = $product->get_average_rating();
+if ( intval($average) >= 1 ) {
+?>
+<div class="box__rating">
+	<ul>
+		<?php for ( $i=0;$i<intval($average);$i++; ) { ?>
+		<li>
+			<i class="fas fa-star"></i>
+		</li>
+		<?php } ?>
+		<?php for ( $i=intval($average);$i<5;$i++; ) { ?>
+		<li>
+			<i class="far fa-star"></i>
+		</li>
+		<?php } ?>
+	</ul>
+	<span class="rating-average"><?php echo $average; ?></span>
+	<span class="rating-count">(<?php echo $review_count; ?>)</span>
+</div>
+<?php } ?>
