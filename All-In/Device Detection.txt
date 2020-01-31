@@ -1,0 +1,59 @@
+<?php 
+//$iPod    = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
+//$iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
+//$iPad    = stripos($_SERVER['HTTP_USER_AGENT'],"iPad");
+//$Android = stripos($_SERVER['HTTP_USER_AGENT'],"Android");
+//$webOS   = stripos($_SERVER['HTTP_USER_AGENT'],"webOS");
+
+$appleUrl = get_field('apple_url');
+$androidUrl = get_field('android_url');
+
+//if( $iPod === true || $iPhone === true || $iPad === true) {
+//   if ($appleUrl) {
+//     wp_redirect(  $appleUrl );
+//     exit;
+//   } else {
+//     wp_redirect( esc_url(site_url()) );
+//     exit;
+//   }
+//} else if($Android === true) {
+//   if ($androidUrl) {
+//     wp_redirect(  $androidUrl );
+//     exit;
+//   } else {
+//     wp_redirect( esc_url(site_url()) );
+//     exit;
+//   }
+//} else {
+//   wp_redirect( esc_url(site_url()) );
+//   exit;
+//} ?>
+
+<script>
+var isMobile = {
+    Android: function() {
+        return navigator.userAgent.match(/Android/i);
+    },
+    BlackBerry: function() {
+        return navigator.userAgent.match(/BlackBerry/i);
+    },
+    iOS: function() {
+        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+    },
+    Opera: function() {
+        return navigator.userAgent.match(/Opera Mini/i);
+    },
+    Windows: function() {
+        return navigator.userAgent.match(/IEMobile/i);
+    },
+    any: function() {
+        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+    }
+};
+if(isMobile.Android()){
+  window.location.replace("<?php echo $androidUrl; ?>")
+};
+if(isMobile.iOS()){
+  window.location.replace("<?php echo $appleUrl; ?>")
+};
+</script>
