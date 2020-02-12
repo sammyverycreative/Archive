@@ -75,9 +75,10 @@ $theArgs = array(
 	/*'count' => true*/ //return only the count
 );
 ?>
-<?php foreach (get_comments($theArgs) as $comment): ?>
+<?php $comments = get_comments($theArgs); ?>
+<?php foreach ($comments as $comment): ?>
 	<div class="single-comment">
-		<?php //var_dump($comment); ?>
+		<?php get_avatar($comment->comment_author); ?>
 		<p><strong><?php echo $comment->comment_author; ?> - <?php comment_date('j M Y, H:i', $comment->comment_ID); //echo $comment->comment_date; ?></strong></p>
 		<p><?php echo $comment->comment_content; ?></p>
 	</div>
