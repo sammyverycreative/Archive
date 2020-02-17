@@ -146,7 +146,8 @@ wp_list_comments( $args, $comments );
 <?php
 $theArgs = array(
 	'post_id' => get_the_ID(),
-	/*'count' => true*/ //return only the count
+	/*'count' => true,*/ //return only the count
+	'status'  => 'approve'
 );
 ?>
 <?php $comments = get_comments($theArgs); ?>
