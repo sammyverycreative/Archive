@@ -45,3 +45,37 @@ function posts_custom_column_views($column_name, $id){
         echo getPostViews(get_the_ID());
     }
 }
+
+--For external urls (Ajax)--
+=FUNCTIONS
+// Ajax Post Views
+function vc_views_external() {
+  $res=array();
+  $post_id=$_POST['id'];
+  setPostViews($post_id);
+  $res['success']=$post_id;
+  echo json_encode($res);
+  die();
+}
+add_action('wp_ajax_vc-views-external', 'vc_views_external');
+add_action('wp_ajax_nopriv_vc-views-external', 'vc_views_external');
+
+=JS
+// Ajax Post Views
+$('.countClick').on('click',function(){
+	var id=$(this).attr('data-id');
+	if (id) {
+		$.ajax({
+			type: "post",
+			dataType: "json",
+			url: ajaxUrl,
+			data: {
+				action: 'vc-views-external',
+				id: id,
+			},
+			success: function ( response ) {
+				//console.log(response.success);
+			}
+		});
+	}
+});
