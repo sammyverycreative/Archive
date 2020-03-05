@@ -1,0 +1,16 @@
+<?php
+$ads = get_field('ads', 'options');
+$initial = (isset($_SESSION['ads_position'])) ? intval($_SESSION['ads_position']) : 0;
+$max = count($ads);
+$ad = $ads[$initial];
+
+$url = $ad['url'];
+$image  = $ad['image'];
+
+$initial = $initial + 1;
+$_SESSION['ads_position'] = ($initial == $max) ? 0 : $initial;
+?>
+
+<a href="<?php echo $url;?>" target="_blank">
+  <img src="<?php echo $image['sizes']['banner']; ?>" alt="<?php $image['alt']; ?>">
+</a>
