@@ -1,0 +1,21 @@
+=JS
+const containerLength = $('.ad_space2').length ;
+// Random ad
+const currentPosition = (typeof(Cookies.get('adPosition')) !== "undefined")?parseInt(Cookies.get('adPosition')):0;
+$('.hidden-ads:nth-of-type(' + (currentPosition + 1) + ')').show();
+Cookies.set('adPosition', (currentPosition >= containerLength)?0:currentPosition + 1);
+
+=HTML/PHP
+<?php $ads = get_field('ads', 'options');
+if ($ads) { ?>
+  <?php foreach ($ads as $ad) { ?>
+    <a href="<?php echo $ad['link'];?>" target="_blank" class="hidden-ads">
+      <img src="<?php echo $ad['image']['sizes']['ad_header']; ?>" alt="<?php echo $ad['link']; ?>">
+    </a>
+  <?php } ?>
+<?php } ?>
+
+=CSS
+.hidden-ads {
+	display: none;
+}
