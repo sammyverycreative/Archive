@@ -1,0 +1,14 @@
+=JS
+document.addEventListener( 'wpcf7submit', function( event ) {
+		//$('select.wpcf7-not-valid').parent().parent().find('.selectric').addClass('has-errors');
+		if ($('select').hasClass('wpcf7-not-valid')) {
+			$('select.wpcf7-not-valid').parent().parent().find('.selectric').addClass('has-errors');
+		} else {
+			$('select').parent().parent().find('.selectric').removeClass('has-errors');
+		}
+});
+
+=CSS
+.selectric.has-errors {
+	border: 1px solid red !important;
+}
