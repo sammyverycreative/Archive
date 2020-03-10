@@ -1,0 +1,3 @@
+<!--[if IE]>
+<script>alert("Sorry, IE is not supported, Please download Google Chrome");</script>
+<![endif]-->
