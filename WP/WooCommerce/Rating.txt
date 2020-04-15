@@ -81,3 +81,16 @@ if ( intval($average) >= 1 ) {
 	<span class="rating-count">(<?php echo $review_count; ?>)</span>
 </div>
 <?php } ?>
+
+-single rating-
+<?php $comment_rating = get_comment_meta($comment->comment_ID,'rating',true); ?>
+<div class="rating-stars-info">
+	<ul>
+		<?php for ( $i=0;$i<intval($comment_rating);$i++ ) { ?>
+			<li class="rated"><i class="fas fa-star"></i></li>
+		<?php } ?>
+		<?php for ( $i=intval($comment_rating);$i<5;$i++ ) { ?>
+			<li class="not-rated"><i class="far fa-star"></i></li>
+		<?php } ?>
+	</ul>
+</div>

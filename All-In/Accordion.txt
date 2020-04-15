@@ -1,0 +1,100 @@
+=HTML
+<div class="accordion-container">
+  <h2>jQuery Accordion</h2>
+  <div class="set">
+    <a href="#">
+      Vestibulum 
+      <i class="fa fa-plus"></i>
+    </a>
+    <div class="content">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
+    </div>
+  </div>
+  <div class="set">
+    <a href="#">
+      Phasellus 
+      <i class="fa fa-plus"></i>
+    </a>
+    <div class="content">
+      <p> Aliquam cursus vitae nulla non rhoncus. Nunc condimentum erat nec dictum tempus. Suspendisse aliquam erat hendrerit vehicula vestibulum.</p>
+    </div>
+  </div>
+  <div class="set">
+    <a href="#">
+      Praesent 
+      <i class="fa fa-plus"></i>
+    </a>
+    <div class="content">
+      <p>Pellentesque aliquam ligula libero, vitae imperdiet diam porta vitae. sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
+    </div>
+  </div>
+  <div class="set">
+    <a href="#">
+      Curabitur 
+      <i class="fa fa-plus"></i> 
+    </a>
+    <div class="content">
+      <p> Donec tincidunt consectetur orci at dignissim. Proin auctor aliquam justo, vitae luctus odio pretium scelerisque. </p>
+    </div>
+  </div>
+</div>
+
+=CSS
+.set {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+.set > a {
+  display: block;
+  transition: all 0.2s linear;
+}
+.set > a i {
+  float: right;
+  margin-top: 2px;
+}
+.set > a.active {
+  
+}
+.set .content {
+  display: none;
+}
+
+=JS
+$(".set > a").on("click", function (e) {
+	e.preventDefault();
+	let status = 0;
+
+	if ($(this).hasClass("active")) {
+		status = 1;
+	} else {
+		status = 0;
+	}
+	$('.set > a')
+		.find("i")
+		.removeClass("fa-minus")
+		.addClass("fa-plus");
+
+	if (status == 1) {
+		$(this).removeClass("active");
+		$(this)
+			.siblings(".content")
+			.slideUp(200);
+		$(this)
+			.find("i")
+			.removeClass("fa-minus")
+			.addClass("fa-plus");
+
+	} else {
+		$(this)
+			.find("i")
+			.removeClass("fa-plus")
+			.addClass("fa-minus");
+		$(".set > a").removeClass("active");
+		$(this).addClass("active");
+		$(".content").slideUp(200);
+		$(this)
+			.siblings(".content")
+			.slideDown(200);
+	}
+});
